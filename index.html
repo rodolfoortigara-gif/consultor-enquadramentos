@@ -235,6 +235,7 @@
   #inst p{font-size:calc(16px*var(--fs,1));line-height:1.45}
   #inst ol{text-align:left;font-size:calc(16.5px*var(--fs,1));line-height:1.8;background:var(--soft);border-radius:14px;padding:12px 14px 12px 34px;margin:16px 0 4px}
   #inst .bt{flex-direction:column-reverse;gap:8px;margin-top:20px}
+  #inst .nav{margin-top:14px;font-size:calc(15px*var(--fs,1));color:var(--ink)}
   #inst .bt button{padding:16px;font-size:calc(17px*var(--fs,1))}
   #inst .bt button#instNo{border:0;background:none;color:var(--muted);padding:10px;font-weight:500}
 
@@ -840,8 +841,8 @@ window.__ENQ=ENQ; // inspeção/depuração
 /* ---------- convite para instalar na tela inicial ----------
    Android/Chrome/Edge/Samsung: usa o pedido nativo (beforeinstallprompt).
    iPhone/iPad: o iOS não deixa o site instalar sozinho — mostramos o passo a passo
-   (Compartilhar → Adicionar à Tela de Início). Aparece só no 1º acesso; depois fica
-   o link "Instalar no celular" no rodapé. Nunca aparece se já estiver instalado. */
+   (Compartilhar → Adicionar à Tela de Início). Passo a passo por navegador. Aparece a cada
+   acesso (inclusive por link direto) até instalar; "Agora não" vale até fechar o navegador. */
 (function(){
   const ua=navigator.userAgent||'';
   const isIOS=/iPad|iPhone|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
@@ -850,16 +851,39 @@ window.__ENQ=ENQ; // inspeção/depuração
   const web=/^https?:$/.test(location.protocol);
   if(standalone||!web||!isMobile) return;
   let deferred=null;
-  const iosSafari=isIOS&&!/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
-  const share='<span class="k"><svg width="14" height="16" viewBox="0 0 14 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V1M3.5 4.5 7 1l3.5 3.5"/><path d="M4.5 7H2v10h10V7H9.5"/></svg>Compartilhar</span>';
+  const K=s=>`<span class="k">${s}</span>`;
+  const SHARE=K('<svg width="14" height="16" viewBox="0 0 14 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V1M3.5 4.5 7 1l3.5 3.5"/><path d="M4.5 7H2v10h10V7H9.5"/></svg>Compartilhar');
+  /* Navegador de dentro de app (WhatsApp, Teams, Instagram, Facebook, LinkedIn, Gmail…):
+     não permite instalar — primeiro é preciso abrir no navegador de verdade. */
+  const inApp = /FBAN|FBAV|FB_IAB|Instagram|LinkedInApp|Line\/|Teams|TeamsMobile|Snapchat|Pinterest|; wv\)/i.test(ua)
+             || (isIOS && !/Safari\//.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua));
+  /* Passo a passo por navegador (rótulos em português; podem variar um pouco por versão). */
+  function guia(){
+    if(inApp) return isIOS
+      ? {nome:'navegador de dentro de um app', passos:[`Toque em ${K('•••')} ou no ícone de bússola, no canto da tela`, `Escolha ${K('Abrir no Safari')} (ou ${K('Abrir no navegador')})`, 'No Safari, este aviso aparece de novo com o passo a passo'], app:true}
+      : {nome:'navegador de dentro de um app', passos:[`Toque no menu ${K('⋮')} no canto superior da tela`, `Escolha ${K('Abrir no navegador')} (ou ${K('Abrir no Chrome')})`, 'No navegador, este aviso aparece de novo com o passo a passo'], app:true};
+    if(isIOS){
+      if(/EdgiOS/.test(ua))  return {nome:'Microsoft Edge', passos:[`Toque no menu ${K('•••')} na barra de baixo`, `Toque em ${SHARE}`, `Toque em ${K('Adicionar à Tela de Início')}`, `Toque em ${K('Adicionar')}`]};
+      if(/CriOS/.test(ua))   return {nome:'Google Chrome', passos:[`Toque em ${SHARE} na barra de endereço (canto superior direito)`, `Toque em ${K('Adicionar à Tela de Início')}`, `Toque em ${K('Adicionar')}`]};
+      if(/FxiOS/.test(ua))   return {nome:'Firefox', passos:[`Toque no menu ${K('☰')}`, `Toque em ${SHARE}`, `Toque em ${K('Adicionar à Tela de Início')}`, `Toque em ${K('Adicionar')}`]};
+      return {nome:'Safari', passos:[`Toque em ${SHARE} na barra do Safari (se não aparecer, toque antes em ${K('•••')})`, `Role a lista e toque em ${K('Adicionar à Tela de Início')}`, `Toque em ${K('Adicionar')}`]};
+    }
+    if(/EdgA\//.test(ua))          return {nome:'Microsoft Edge', passos:[`Toque no menu ${K('•••')} na barra de baixo`, `Toque em ${K('Adicionar ao telefone')}`, `Confirme em ${K('Adicionar')} (ou ${K('Instalar')})`]};
+    if(/SamsungBrowser/.test(ua))  return {nome:'Samsung Internet', passos:[`Toque no menu ${K('☰')} na barra de baixo (à direita)`, `Toque em ${K('Adicionar página a')}`, `Escolha ${K('Tela inicial')} e confirme em ${K('Adicionar')}`]};
+    if(/Firefox\//.test(ua))       return {nome:'Firefox', passos:[`Toque no menu ${K('⋮')}`, `Toque em ${K('Adicionar à tela inicial')} (ou ${K('Instalar')})`, `Confirme em ${K('Adicionar')}`]};
+    if(/OPR\/|OPT\//.test(ua))     return {nome:'Opera', passos:[`Toque no menu ${K('⋮')}`, `Toque em ${K('Tela inicial')} (ou ${K('Adicionar à tela inicial')})`, `Confirme em ${K('Adicionar')}`]};
+    return {nome:'Google Chrome', passos:[`Toque no menu ${K('⋮')} no canto superior direito`, `Toque em ${K('Adicionar à tela inicial')} (ou ${K('Instalar app')})`, `Confirme em ${K('Instalar')} (ou ${K('Adicionar')})`]};
+  }
   function body(){
     if(deferred) return '';
-    if(isIOS) return `<ol><li>Toque em ${share} ${iosSafari?'na barra do Safari':'(no menu ••• ou na barra de endereço)'}</li><li>Role e toque em <span class="k">Adicionar à Tela de Início</span></li><li>Toque em <span class="k">Adicionar</span></li></ol>`;
-    return `<ol><li>Toque no menu <span class="k">⋮</span> do navegador</li><li>Toque em <span class="k">Instalar app</span> ou <span class="k">Adicionar à tela inicial</span></li></ol>`;
+    const g=guia();
+    return `<div class="nav">${g.app?'Você abriu o link <b>dentro de um app</b>. Para instalar, abra no navegador:':'No <b>'+esc(g.nome)+'</b>:'}</div><ol>${g.passos.map(s=>'<li>'+s+'</li>').join('')}</ol>`;
   }
   function show(){
     $('#instBody').innerHTML=body();
-    $('#instGo').textContent=deferred?'Instalar':'Entendi';
+    const g=guia();
+    $('#instGo').textContent=deferred?'Instalar':(g.app?'Copiar link':'Entendi');
+    $('#instGo').dataset.copy=(!deferred&&g.app)?'1':'';
     $('#inst').classList.add('on');
   }
   function hide(){ $('#inst').classList.remove('on'); try{ sessionStorage.setItem('consultorEnq.instAgoraNao','1'); }catch(_){} }
@@ -867,6 +891,7 @@ window.__ENQ=ENQ; // inspeção/depuração
   $('#instNo').onclick=hide;
   $('#inst').addEventListener('click',ev=>{ if(ev.target.id==='inst') hide(); });
   $('#instGo').onclick=async()=>{
+    if($('#instGo').dataset.copy){ copy(location.href,'Link copiado — cole no navegador'); return; }
     if(deferred){ deferred.prompt(); try{ const c=await deferred.userChoice; if(c&&c.outcome==='accepted') marcaInstalado(); }catch(_){} deferred=null; }
     hide();
   };
