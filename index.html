@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1E3A8A">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Enquadramentos">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="Rodolfo Ortigara">
+<meta name="description" content="Consulta de enquadramentos de pós-registro ANVISA (RDC 73/2016, 443/2020 e 359/2020): documentos, rota de implementação e condições. By: Rodolfo Ortigara.">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" href="data:image/png;base64,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">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Consultor de Enquadramentos — Pós-registro</title>
+<style>
+  /* ===== Tema. Sem web-font: tudo offline. ===== */
+  :root{
+    --navy:#1E3A8A; --navy2:#172E6E; --ink:#141414; --muted:#6F6F6F;
+    --line:#E1E1E1; --bg:#F5F6FA; --card:#FFFFFF; --soft:#F0F2FB;
+    --green:#14864A; --green-bg:#E3F3E9; --green-line:#9FD5B4;
+    --yellow:#8A6D00; --yellow-bg:#FDF4DE; --yellow-line:#EAD68E;
+    --orange:#B5471F; --orange-bg:#FBE7DC; --orange-line:#F0B79C;
+    --gray:#585858; --gray-bg:#EBEBEB;
+    --shadow:0 4px 4px rgba(20,20,20,.06),0 1px 2px rgba(20,20,20,.06);
+    --shadow-lg:0 12px 32px rgba(10,19,182,.12),0 2px 6px rgba(20,20,20,.08);
+    --font:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    --mono:ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);font-size:calc(14px*var(--fs,1));line-height:1.45;-webkit-font-smoothing:antialiased}
+  button{font-family:inherit;cursor:pointer}
+  mark{background:#FFE58A;color:inherit;border-radius:3px;padding:0 1px}
+
+  /* ---------- topo ---------- */
+  header.top{position:sticky;top:0;z-index:30;background:var(--navy);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+  .top-in{max-width:1400px;margin:0 auto;padding:12px 20px 14px}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .brand img{height:38px;width:38px;border-radius:9px;box-shadow:0 0 0 1px rgba(255,255,255,.3)}
+  .brand .by{font-size:calc(11px*var(--fs,1));opacity:.75;font-style:italic;margin-top:1px}
+  .brand h1{font-size:calc(17px*var(--fs,1));margin:0;font-weight:700;letter-spacing:.2px}
+  .brand .sub{font-size:calc(12px*var(--fs,1));opacity:.8}
+  .brand .stats{margin-left:12px;font-size:calc(12px*var(--fs,1));opacity:.85;text-align:right}
+  .search{position:relative}
+  .search input{width:100%;font-size:max(16px,calc(17px*var(--fs,1)));padding:13px 44px 13px 46px;border-radius:14px;border:0;outline:none;font-family:inherit;color:var(--ink);box-shadow:inset 0 0 0 2px transparent}
+  .search input:focus{box-shadow:inset 0 0 0 2px #60A5FA}
+  .search .ico{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+  .search .clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;font-size:calc(20px*var(--fs,1));color:var(--muted);padding:4px 10px;display:none}
+  .search .kbd{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:calc(11px*var(--fs,1));color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-family:var(--mono)}
+  .examples{margin-top:8px;font-size:calc(12px*var(--fs,1));display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .examples span{opacity:.8}
+  .examples button{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:2px 10px;font-size:calc(12px*var(--fs,1))}
+  .examples button:hover{background:rgba(255,255,255,.25)}
+
+  /* ---------- filtros ---------- */
+  .filters{background:#fff;border-bottom:1px solid var(--line)}
+  .filters-in{max-width:1400px;margin:0 auto;padding:10px 20px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+  .fgroup{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .fgroup > b{font-size:calc(11px*var(--fs,1));text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-right:2px}
+  .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 11px;font-size:calc(12.5px*var(--fs,1));color:var(--ink);display:inline-flex;gap:6px;align-items:center;white-space:nowrap}
+  .chip:hover{border-color:var(--navy)}
+  .chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+  .chip .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .chip .n{font-size:calc(11px*var(--fs,1));opacity:.65}
+  .chip.reset{border-style:dashed;color:var(--muted)}
+
+  /* ---------- layout ---------- */
+  .wrap{max-width:1400px;margin:0 auto;padding:16px 20px 120px;display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+  .wrap.has-detail{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
+  .disclaimer{background:#fff;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;padding:8px 12px;font-size:calc(12.5px*var(--fs,1));color:var(--gray);margin-bottom:12px}
+  .resinfo{font-size:calc(12.5px*var(--fs,1));color:var(--muted);margin:2px 2px 10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .resinfo .warn{color:var(--orange)}
+
+  /* grupos (navegação sem busca) */
+  .grp{margin:0 0 16px}
+  .grp-h{display:flex;align-items:baseline;gap:8px;margin:0 2px 8px;cursor:pointer;user-select:none}
+  .grp-h h3{margin:0;font-size:calc(13.5px*var(--fs,1));color:var(--navy)}
+  .grp-h .meta{font-size:calc(12px*var(--fs,1));color:var(--muted)}
+  .grp-h .tg{font-size:calc(11px*var(--fs,1));color:var(--muted);width:12px}
+  .grp.closed .cards{display:none}
+  .sec-h{font-size:calc(12px*var(--fs,1));text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin:18px 2px 8px;font-weight:700}
+
+  /* ---------- cards ---------- */
+  .cards{display:grid;gap:8px}
+  .card{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--gray-bg);border-radius:12px;padding:10px 12px;box-shadow:var(--shadow);cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:4px 10px;transition:transform .08s,box-shadow .12s}
+  .card:hover{box-shadow:var(--shadow-lg)}
+  .card.sel{outline:2px solid var(--navy);outline-offset:-1px}
+  .card.r-hmp{border-left-color:var(--green)} .card.r-imediata{border-left-color:#D4A90F} .card.r-aguarda{border-left-color:var(--orange)}
+  .card .code{font-family:var(--mono);font-size:calc(11.5px*var(--fs,1));color:var(--navy);font-weight:700}
+  .card .code .nm{color:var(--muted);font-weight:400;font-family:var(--font)}
+  .card .ttl{grid-column:1/2;font-weight:600;font-size:calc(14px*var(--fs,1))}
+  .card .ttl .parent{font-weight:400;color:var(--muted);font-size:calc(12.5px*var(--fs,1));display:block}
+  .card .side{grid-row:1/3;grid-column:2;display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+  .card .tags{grid-column:1/3;display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:2px}
+  .card .snip{grid-column:1/3;font-size:calc(12px*var(--fs,1));color:var(--gray)}
+  .star{border:0;background:transparent;font-size:calc(18px*var(--fs,1));line-height:1;color:#C9C9C9;padding:0 2px}
+  .star.on{color:#E8A800}
+  .cmpbox{font-size:calc(11px*var(--fs,1));color:var(--muted);display:flex;align-items:center;gap:3px;cursor:pointer}
+
+  .pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 9px;font-size:calc(11.5px*var(--fs,1));font-weight:600;border:1px solid transparent;white-space:nowrap}
+  .pill.hmp{background:var(--green-bg);color:var(--green);border-color:var(--green-line)}
+  .pill.imediata{background:var(--yellow-bg);color:var(--yellow);border-color:var(--yellow-line)}
+  .pill.aguarda{background:var(--orange-bg);color:var(--orange);border-color:var(--orange-line)}
+  .pill.varia{background:var(--gray-bg);color:var(--gray)}
+  .pill.lite{background:#fff;color:var(--gray);border-color:var(--line);font-weight:500}
+  .pill.pd{background:#F3E8FF;color:#6B21A8;border-color:#DDC4F5}
+  .pill.of{background:#E5F0FA;color:#0B5A93;border-color:#B6D6F0}
+  .dot.hmp{background:var(--green)} .dot.imediata{background:#D4A90F} .dot.aguarda{background:var(--orange)}
+
+  /* ---------- painel de detalhe ---------- */
+  .detail{position:sticky;top:var(--hdr,150px);align-self:start;max-height:calc(100vh - var(--hdr,150px) - 16px);overflow:auto;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lg);display:none}
+  .has-detail .detail{display:block}
+  .d-head{padding:16px 18px 12px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:2}
+  .d-head .code{font-family:var(--mono);font-size:calc(12.5px*var(--fs,1));color:var(--navy);font-weight:700}
+  .d-head h2{font-size:calc(18px*var(--fs,1));margin:4px 0 2px;line-height:1.3}
+  .d-head .parent{font-size:calc(13px*var(--fs,1));color:var(--muted)}
+  .d-close{position:absolute;right:10px;top:10px;border:0;background:var(--soft);border-radius:50%;width:32px;height:32px;font-size:calc(18px*var(--fs,1));color:var(--navy)}
+  .d-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+  .btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;font-size:calc(12.5px*var(--fs,1));color:var(--ink);display:inline-flex;gap:5px;align-items:center}
+  .btn:hover{border-color:var(--navy);color:var(--navy)}
+  .btn.pri{background:var(--navy);border-color:var(--navy);color:#fff}
+  .btn.pri:hover{background:var(--navy2);color:#fff}
+  .d-body{padding:14px 18px 22px}
+  .rota-box{border-radius:12px;padding:12px 14px;margin-bottom:14px;border:1px solid}
+  .rota-box.hmp{background:var(--green-bg);border-color:var(--green-line)}
+  .rota-box.imediata{background:var(--yellow-bg);border-color:var(--yellow-line)}
+  .rota-box.aguarda{background:var(--orange-bg);border-color:var(--orange-line)}
+  .rota-box.varia{background:var(--gray-bg);border-color:var(--line)}
+  .rota-box .big{font-size:calc(16px*var(--fs,1));font-weight:700}
+  .rota-box.hmp .big{color:var(--green)} .rota-box.imediata .big{color:var(--yellow)} .rota-box.aguarda .big{color:var(--orange)}
+  .rota-box .what{font-size:calc(12.5px*var(--fs,1));color:var(--gray);margin-top:2px}
+  .rota-box .desc{margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,.08);font-size:calc(13.5px*var(--fs,1));line-height:1.5;color:var(--ink)}
+  .blk{margin:0 0 16px}
+  .blk h4{margin:0 0 6px;font-size:calc(12px*var(--fs,1));text-transform:uppercase;letter-spacing:.6px;color:var(--navy);display:flex;align-items:center;gap:8px}
+  .blk h4 .cnt{background:var(--soft);color:var(--navy);border-radius:999px;padding:0 7px;font-size:calc(11px*var(--fs,1))}
+  .blk h4 .act{margin-left:auto;text-transform:none;letter-spacing:0}
+  ul.chk{list-style:none;margin:0;padding:0}
+  ul.chk li{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;border-radius:8px}
+  ul.chk li:hover{background:var(--soft)}
+  ul.chk input{margin-top:3px;accent-color:var(--navy)}
+  ul.chk li.done span{color:var(--muted);text-decoration:line-through}
+  ol.docs{margin:0;padding:0;list-style:none;counter-reset:d}
+  ol.docs li{counter-increment:d;display:flex;gap:10px;padding:7px 8px;border-bottom:1px dashed var(--line)}
+  ol.docs li:last-child{border-bottom:0}
+  ol.docs li::before{content:counter(d);flex:none;width:22px;height:22px;border-radius:50%;background:var(--soft);color:var(--navy);font-weight:700;font-size:calc(11.5px*var(--fs,1));display:flex;align-items:center;justify-content:center}
+  .note{background:#FAFAFA;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:calc(13px*var(--fs,1));white-space:pre-wrap}
+  .note.concom{background:#EEF4FF;border-color:#C9D8FB}
+  .note.condic{background:#FFF6E5;border-color:#F3D9A4}
+  .empty-docs{font-size:calc(12.5px*var(--fs,1));color:var(--orange);background:var(--orange-bg);border-radius:8px;padding:8px 10px}
+  .sibs{display:grid;gap:6px}
+  .sib{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:6px 10px;cursor:pointer;font-size:calc(13px*var(--fs,1));background:#fff}
+  .sib:hover{border-color:var(--navy)}
+  .sib.cur{background:var(--soft);border-color:var(--navy)}
+  .sib .l{font-family:var(--mono);font-weight:700;color:var(--navy);width:28px}
+  .sib .t{flex:1}
+  .d-foot{font-size:calc(11.5px*var(--fs,1));color:var(--muted);border-top:1px solid var(--line);padding-top:10px;margin-top:6px}
+
+  /* ---------- painel inicial (sem detalhe) ---------- */
+  .home{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-bottom:14px}
+  .tile{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+  .tile h5{margin:0 0 6px;font-size:calc(12px*var(--fs,1));text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+  .tile .lnk{display:block;font-size:calc(13px*var(--fs,1));color:var(--navy);cursor:pointer;padding:3px 0;border:0;background:none;text-align:left;width:100%}
+  .tile .lnk:hover{text-decoration:underline}
+  .tile .none{font-size:calc(12.5px*var(--fs,1));color:var(--muted)}
+
+  /* ---------- bandeja de comparação ---------- */
+  .tray{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:14px;padding:8px 10px 8px 14px;display:none;gap:10px;align-items:center;z-index:40;box-shadow:var(--shadow-lg);max-width:calc(100vw - 24px)}
+  .tray.on{display:flex}
+  .tray .its{display:flex;gap:6px;flex-wrap:wrap}
+  .tray .it{background:rgba(255,255,255,.12);border-radius:8px;padding:2px 8px;font-size:calc(12px*var(--fs,1));font-family:var(--mono)}
+  .tray .it button{background:none;border:0;color:#fff;opacity:.6;padding:0 0 0 4px}
+  .tray .btn{background:#fff}
+  .overlay{position:fixed;inset:0;background:rgba(10,15,40,.45);z-index:60;display:none;align-items:flex-start;justify-content:center;padding:30px 14px;overflow:auto}
+  .overlay.on{display:flex}
+  .modal{background:#fff;border-radius:16px;max-width:1300px;width:100%;box-shadow:var(--shadow-lg)}
+  .modal-h{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+  .modal-h h2{margin:0;font-size:calc(16px*var(--fs,1))}
+  .modal-h .sp{flex:1}
+  .cmp{overflow:auto;padding:0 0 10px}
+  table.cmpt{border-collapse:collapse;width:100%;font-size:calc(13px*var(--fs,1))}
+  table.cmpt th,table.cmpt td{border-bottom:1px solid var(--line);padding:9px 12px;vertical-align:top;text-align:left;min-width:240px}
+  table.cmpt th:first-child{min-width:120px;width:120px;position:sticky;left:0;background:#FAFAFA;color:var(--muted);font-size:calc(11.5px*var(--fs,1));text-transform:uppercase;letter-spacing:.5px}
+  table.cmpt ul{margin:0;padding-left:18px}
+  table.cmpt li.common{color:var(--muted)}
+  table.cmpt li.diff{font-weight:600}
+  .legend{font-size:calc(12px*var(--fs,1));color:var(--muted);padding:8px 18px}
+
+  .toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 14px;border-radius:10px;font-size:calc(13px*var(--fs,1));z-index:90;opacity:0;transition:opacity .2s;pointer-events:none}
+  .toast.on{opacity:1}
+  footer.ft{max-width:1400px;margin:0 auto;padding:0 20px 30px;font-size:calc(11.5px*var(--fs,1));color:var(--muted)}
+  footer.ft .inst{border:0;background:none;color:var(--navy);text-decoration:underline;font-size:inherit;padding:0}
+  /* ---------- convite para instalar (1º acesso no celular) ---------- */
+  .install{position:fixed;inset:0;z-index:80;background:rgba(10,15,40,.5);display:none;align-items:flex-end;justify-content:center}
+  .install.on{display:flex}
+  .rep{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;border-radius:999px;padding:6px 12px;font-size:calc(12.5px*var(--fs,1));font-weight:600}
+  .rep:hover{background:rgba(255,255,255,.22)}
+  .rep-ctx{background:var(--soft);border-radius:10px;padding:8px 10px;font-size:calc(13px*var(--fs,1));margin:4px 0 12px}
+  .rep-ctx b{font-family:var(--mono);color:var(--navy)}
+  .rep-tipos{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+  .rep-tipos .chip{padding:7px 12px}
+  .install textarea,.install input.nm{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-family:inherit;font-size:max(16px,calc(16px*var(--fs,1)));resize:vertical}
+  .install textarea{min-height:110px}
+  .install input.nm{margin-top:8px}
+  .install .bt.col{flex-direction:column}
+  .install .hint{font-size:calc(12px*var(--fs,1));color:var(--muted);margin-top:10px}
+  .install .x{position:absolute;right:14px;top:14px;border:0;background:var(--soft);border-radius:50%;width:32px;height:32px;font-size:calc(18px*var(--fs,1));color:var(--navy)}
+  .install .sheet{position:relative;max-height:92vh;overflow:auto}
+  .install .sheet{background:#fff;width:100%;max-width:480px;border-radius:20px 20px 0 0;padding:22px 20px calc(20px + env(safe-area-inset-bottom));box-shadow:var(--shadow-lg);animation:slideUp .22s ease-out}
+  .install .hd{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+  .install .hd img{width:60px;height:60px;border-radius:14px}
+  .install h3{margin:0;font-size:calc(18px*var(--fs,1))}
+  .install p{margin:6px 0 0;color:var(--gray);font-size:calc(14px*var(--fs,1))}
+  .install ol{margin:12px 0 4px;padding-left:22px;font-size:calc(15px*var(--fs,1));line-height:1.7}
+  .install .k{display:inline-flex;align-items:center;gap:3px;background:var(--soft);border-radius:6px;padding:0 6px;font-weight:600;color:var(--navy)}
+  .install .bt{display:flex;gap:10px;margin-top:16px}
+  .install .bt button{flex:1;border-radius:12px;padding:13px;font-size:calc(15px*var(--fs,1));font-weight:600;border:1px solid var(--line);background:#fff;color:var(--ink)}
+  .install .bt button.pri{background:var(--navy);border-color:var(--navy);color:#fff}
+
+  /* ---------- toque (iOS/Android) ---------- */
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  body{-webkit-tap-highlight-color:transparent;overscroll-behavior-y:none}
+  .ftoggle{display:none}
+  .d-back{display:none}
+  @media (hover:none){ .search .kbd{display:none} .card:hover{box-shadow:var(--shadow)} }
+  @media (pointer:coarse){
+    .chip{padding:8px 14px;font-size:calc(13.5px*var(--fs,1))}
+    .btn{padding:9px 14px;font-size:calc(13.5px*var(--fs,1))}
+    .star{font-size:calc(24px*var(--fs,1));padding:6px}
+    .cmpbox{padding:6px 2px;font-size:calc(12px*var(--fs,1))}
+    .cmpbox input{width:20px;height:20px}
+    ul.chk li{padding:10px 8px}
+    ul.chk input{width:20px;height:20px}
+    .sib{padding:10px 12px}
+    .tile .lnk{padding:8px 0}
+  }
+
+  /* ---------- responsivo ---------- */
+  @media (max-width:1000px){
+    .wrap.has-detail{grid-template-columns:minmax(0,1fr)}
+    .detail{position:fixed;inset:0;max-height:none;border-radius:0;z-index:50;top:0;border:0;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;animation:slideUp .18s ease-out}
+    .d-head{padding-top:calc(12px + env(safe-area-inset-top))}
+    .d-body{padding-bottom:calc(40px + env(safe-area-inset-bottom))}
+    .d-close{display:none}
+    .d-back{display:inline-flex;align-items:center;gap:4px;border:0;background:none;color:var(--navy);font-size:calc(16px*var(--fs,1));font-weight:600;padding:6px 0;margin:0 0 4px -2px}
+    body.lock{overflow:hidden}
+    .brand .stats{display:none}
+    .rep{padding:7px 11px;font-size:calc(12px*var(--fs,1))}
+    .brand > div:nth-child(2){min-width:0}
+  }
+  @media (max-width:420px){
+    .rep span{display:none}
+    .rep::after{content:"Erro"}
+  }
+  @keyframes slideUp{from{transform:translateY(24px);opacity:.4}to{transform:none;opacity:1}}
+  @media (max-width:700px){
+    body{font-size:calc(15px*var(--fs,1))}
+    .top-in{padding:calc(8px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) 10px calc(12px + env(safe-area-inset-left))}
+    .filters-in,.wrap{padding-left:calc(12px + env(safe-area-inset-left));padding-right:calc(12px + env(safe-area-inset-right))}
+    .brand{margin-bottom:8px;gap:9px}
+    .brand img{height:28px}
+    .brand h1{font-size:calc(15.5px*var(--fs,1))}
+    .brand .sub{display:none}
+    .brand .by{font-size:calc(11px*var(--fs,1))}
+    .search{display:flex;gap:8px}
+    .search input{font-size:max(16px,calc(16px*var(--fs,1)));padding:12px 38px 12px 42px;border-radius:12px}  /* 16px evita zoom do iOS */
+    .search .clear{right:96px}
+    .ftoggle{display:inline-flex;align-items:center;gap:6px;flex:none;border:0;border-radius:12px;background:rgba(255,255,255,.16);color:#fff;font-size:calc(14px*var(--fs,1));font-weight:600;padding:0 12px;min-height:46px}
+    .ftoggle .b{background:#fff;color:var(--navy);border-radius:999px;font-size:calc(11px*var(--fs,1));padding:0 6px;min-width:18px;text-align:center}
+    .examples{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-right:-12px;padding-right:12px}
+    .examples::-webkit-scrollbar{display:none}
+    .examples button{flex:none;padding:6px 12px;font-size:calc(12.5px*var(--fs,1))}
+    header.top.typing .examples{display:none}
+    .filters{display:none}
+    .filters.open{display:block}
+    .filters-in{flex-direction:column;align-items:stretch;gap:12px;padding-top:12px;padding-bottom:14px}
+    .fgroup{gap:7px}
+    .fgroup > b{width:100%}
+    .wrap{padding-top:12px;padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+    .disclaimer{font-size:calc(12px*var(--fs,1))}
+    .card{padding:12px;border-radius:14px}
+    .card .ttl{font-size:calc(15px*var(--fs,1))}
+    .home{grid-template-columns:1fr}
+    .tray{bottom:calc(10px + env(safe-area-inset-bottom));left:10px;right:10px;transform:none;flex-wrap:wrap;max-width:none}
+    .tray .its{flex:1 1 100%}
+    .overlay{padding:0}
+    .modal{border-radius:0;min-height:100%}
+    .modal-h{position:sticky;top:0;background:#fff;z-index:2;padding-top:calc(12px + env(safe-area-inset-top))}
+    table.cmpt th,table.cmpt td{min-width:200px}
+    table.cmpt th:first-child{min-width:92px;width:92px}
+    .d-actions{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-right:-18px;padding-right:18px}
+    .d-actions::-webkit-scrollbar{display:none}
+    .d-actions .btn{flex:none}
+    .d-head h2{font-size:calc(17px*var(--fs,1))}
+    footer.ft{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+  }
+  /* ---------- impressão: só o detalhe ---------- */
+  @media print{
+    header.top,.filters,.list,.tray,.d-actions,.d-close,footer.ft,.overlay{display:none!important}
+    .wrap,.wrap.has-detail{display:block;padding:0}
+    .detail{display:block;position:static;max-height:none;box-shadow:none;border:0}
+    .d-head{position:static}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+
+<header class="top" id="hdr">
+  <div class="top-in">
+    <div class="brand">
+      <img src="data:image/png;base64,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" alt="">
+      <div>
+        <h1>Consultor de Enquadramentos</h1>
+        <div class="sub">Pós-registro ANVISA · RDC 73/2016 · RDC 443/2020 · RDC 359/2020</div>
+        <div class="by">By: Rodolfo Ortigara</div>
+      </div>
+      <button class="rep" id="repTop" aria-label="Reportar erro ou divergência">⚑ <span>Reportar erro</span></button>
+      <div class="stats" id="stats"></div>
+    </div>
+    <div class="search">
+      <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="O que mudou? Ex.: método de doseamento, fabricante do IFA com CADIFA, prazo de validade…">
+      <span class="kbd" id="kbd">/</span>
+      <button class="clear" id="clr" title="Limpar busca" aria-label="Limpar busca">×</button>
+      <button class="ftoggle" id="ftog" aria-expanded="false" aria-controls="filtersBox">Filtros <span class="b" id="fcount" hidden></span></button>
+    </div>
+    <div class="examples"><span>Experimente:</span>
+      <button data-ex="método">método</button>
+      <button data-ex="fabricante IFA CADIFA">fabricante do IFA com CADIFA</button>
+      <button data-ex="prazo de validade">prazo de validade</button>
+      <button data-ex="embalagem primária">embalagem primária</button>
+      <button data-ex="tamanho de lote">tamanho de lote</button>
+      <button data-ex="excipiente">excipiente</button>
+    </div>
+  </div>
+</header>
+
+<div class="filters" id="filtersBox"><div class="filters-in" id="filters"></div></div>
+
+<div class="wrap" id="wrap">
+  <div class="list">
+    <div class="disclaimer"><b>Ferramenta de orientação.</b> Orienta o enquadramento; a decisão regulatória é do analista. Confira sempre a norma vigente e a redação oficial. Resumo <b>não oficial</b> das RDC 73/2016, 443/2020 e 359/2020.</div>
+    <div id="home"></div>
+    <div class="resinfo" id="resinfo"></div>
+    <div id="results"></div>
+  </div>
+  <aside class="detail" id="detail" aria-live="polite"></aside>
+</div>
+
+<footer class="ft">Consultor de Enquadramentos · <b>By: Rodolfo Ortigara</b> · base: <span id="baseinfo"></span>. Não substitui a leitura da RDC. <button class="inst" id="instLink" hidden>Instalar no celular</button> Itens marcados como “porte” foram derivados da classificação indicada na matriz (Menor/Maior/HMP/notificação).</footer>
+
+<div class="tray" id="tray"><b style="font-size:calc(12px*var(--fs,1))">Comparar:</b><div class="its" id="trayIts"></div><button class="btn pri" id="cmpGo">Comparar lado a lado</button><button class="btn" id="cmpClr">Limpar</button></div>
+<div class="overlay" id="ovl"><div class="modal"><div class="modal-h"><h2>Comparação de enquadramentos</h2><span class="sp"></span><button class="btn" onclick="window.print()">Imprimir</button><button class="btn pri" id="ovlClose">Fechar</button></div><div class="legend">Nos documentos, <b>negrito</b> = exclusivo daquele enquadramento; cinza = comum a todos os comparados.</div><div class="cmp" id="cmpBody"></div></div></div>
+<div class="toast" id="toast"></div>
+<div class="install" id="rep" role="dialog" aria-modal="true" aria-labelledby="repT"><div class="sheet">
+  <button class="x" id="repX" aria-label="Fechar">×</button>
+  <h3 id="repT">Reportar erro ou divergência</h3>
+  <div class="rep-ctx" id="repCtx"></div>
+  <div class="rep-tipos" id="repTipos"></div>
+  <textarea id="repTxt" placeholder="Descreva o que está errado e, se possível, o trecho correto da norma (artigo/anexo)."></textarea>
+  <input class="nm" id="repNome" placeholder="Seu nome ou contato (opcional)" autocomplete="name">
+  <div class="bt col">
+    <button class="pri" id="repMail" hidden>Enviar por e-mail</button>
+    <button id="repGh">Enviar pelo GitHub</button>
+    <button id="repCopy">Copiar texto do relato</button>
+  </div>
+  <div class="hint">Nada é enviado automaticamente: o botão abre seu app de e-mail (ou o GitHub) com o texto preenchido para você revisar.</div>
+</div></div>
+<div class="install" id="inst" role="dialog" aria-modal="true" aria-labelledby="instT"><div class="sheet">
+  <div class="hd"><img src="data:image/png;base64,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" alt=""><div><h3 id="instT">Instale no seu celular</h3><p>Abra o Consultor direto da tela inicial, como um app — e consulte mesmo sem internet.</p></div></div>
+  <div id="instBody"></div>
+  <div class="bt"><button id="instNo">Agora não</button><button class="pri" id="instGo">Instalar</button></div>
+</div></div>
+
+<script>
+/* Base de dados: resumo das RDC 73/2016, 443/2020 e 359/2020. */
+const MATRIZ_ENQ = [{"id":"443a","grupo":"Métodos, testes e limites (RDC 443)","cod":"a","desc":"Inclusão NÃO crítica de testes ou métodos","norma":"RDC 443/2020 · a","cond":["A inclusão não é crítica (avaliação de risco)"],"provas":[{"n":"Cópia do método analítico proposto"},{"n":"Resultados de análise de 1 lote na condição proposta (produto aprovado)"},{"n":"Relatório de validação do método (só do teste/método incluído ou modificado)"},{"n":"Descrição dos testes, limites e/ou método propostos"},{"n":"Dados de avaliação de risco (inclusão/exclusão não é crítica)"},{"n":"Relatório do desenvolvimento do método de dissolução (quando muda condição/inclui dissolução)"}],"rota":"hmp","tipoTxt":"Implementação imediata · não requer protocolo · HMP"},{"id":"443b","grupo":"Métodos, testes e limites (RDC 443)","cod":"b","desc":"Exclusão NÃO crítica de testes ou métodos","norma":"RDC 443/2020 · b","cond":["A exclusão não é crítica (avaliação de risco)"],"provas":[{"n":"Descrição dos testes, limites e/ou método propostos"},{"n":"Dados de avaliação de risco (inclusão/exclusão não é crítica)"}],"rota":"imediata","tipoTxt":"Implementação imediata · requer protocolo individual"},{"id":"443c","grupo":"Métodos, testes e limites (RDC 443)","cod":"c","desc":"Mudança de limites DENTRO dos aprovados","norma":"RDC 443/2020 · c","cond":["Novos limites contidos nos já aprovados"],"provas":[{"n":"Resultados de análise de 1 lote na condição proposta (produto aprovado)"},{"n":"Descrição dos testes, limites e/ou método propostos"}],"rota":"hmp","tipoTxt":"Implementação imediata · não requer protocolo · HMP"},{"id":"443d","grupo":"Métodos, testes e limites (RDC 443)","cod":"d","desc":"Mudança de limites FORA dos aprovados","norma":"RDC 443/2020 · d","cond":["Limites fora da faixa aprovada"],"provas":[{"n":"Descrição dos testes, limites e/ou método propostos"},{"n":"Dados de avaliação de risco (ampliação do limite sem impacto em qualidade/segurança)"},{"n":"Relatório do desenvolvimento do método de dissolução (quando muda condição/inclui dissolução)"}],"rota":"aguarda","tipoTxt":"Requer protocolo · aguarda manifestação favorável"},{"id":"443e","grupo":"Métodos, testes e limites (RDC 443)","cod":"e","desc":"Mudanças MENORES de métodos analíticos","norma":"RDC 443/2020 · e","cond":["Ajuste dentro do capítulo geral do compêndio, OU técnica não cromatográfica→não cromatográfica, OU parâmetros de cromatográfico isocrático sem mudar coluna/fase móvel"],"provas":[{"n":"Cópia do método analítico proposto"},{"n":"Resultados de análise de 1 lote na condição proposta (produto aprovado)"},{"n":"Relatório de validação do método (só do teste/método incluído ou modificado)"}],"rota":"hmp","tipoTxt":"Implementação imediata · não requer protocolo · HMP"},{"id":"443f","grupo":"Métodos, testes e limites (RDC 443)","cod":"f","desc":"Mudanças INTERMEDIÁRIAS de métodos analíticos","norma":"RDC 443/2020 · f","cond":["Técnicas semelhantes (ou qualitativo→quantitativo)","Critérios de validação do aprovado se aplicam ao proposto","Método proposto equivalente ou melhor","Não aprova lote que seria reprovado","Sem dados toxicológicos"],"provas":[{"n":"Cópia do método analítico proposto"},{"n":"Resultados de análise de 1 lote na condição proposta (produto aprovado)"},{"n":"Relatório de validação do método (só do teste/método incluído ou modificado)"},{"n":"Relatório do desenvolvimento do método de dissolução (quando muda condição/inclui dissolução)"}],"rota":"imediata","tipoTxt":"Implementação imediata · requer protocolo individual"},{"id":"443g","grupo":"Métodos, testes e limites (RDC 443)","cod":"g","desc":"Mudanças MAIORES de métodos analíticos","norma":"RDC 443/2020 · g","cond":["Não se enquadra em menor (e) nem intermediária (f)"],"provas":[{"n":"Cópia do método analítico proposto"},{"n":"Resultados de análise de 1 lote na condição proposta (produto aprovado)"},{"n":"Relatório de validação do método (só do teste/método incluído ou modificado)"},{"n":"Relatório do desenvolvimento do método de dissolução (quando muda condição/inclui dissolução)"}],"rota":"aguarda","tipoTxt":"Requer protocolo · aguarda manifestação favorável"},{"id":"443h","grupo":"Métodos, testes e limites (RDC 443)","cod":"h","desc":"Inclusão CRÍTICA de testes ou métodos","norma":"RDC 443/2020 · h","cond":["A inclusão é crítica"],"provas":[{"n":"Cópia do método analítico proposto"},{"n":"Resultados de análise de 1 lote na condição proposta (produto aprovado)"},{"n":"Relatório de validação do método (só do teste/método incluído ou modificado)"},{"n":"Descrição dos testes, limites e/ou método propostos"},{"n":"Relatório do desenvolvimento do método de dissolução (quando muda condição/inclui dissolução)"}],"rota":"imediata","tipoTxt":"Implementação imediata · requer protocolo individual"},{"id":"443i","grupo":"Métodos, testes e limites (RDC 443)","cod":"i","desc":"Exclusão CRÍTICA de testes ou métodos","norma":"RDC 443/2020 · i","cond":["A exclusão é crítica"],"provas":[{"n":"Descrição dos testes, limites e/ou método propostos"}],"rota":"aguarda","tipoTxt":"Requer protocolo · aguarda manifestação favorável"},{"id":"farmaco","grupo":"Métodos, testes e limites (RDC 443)","cod":"§13","desc":"Atualização farmacopeica pura (compêndio já usado)","norma":"RDC 443/2020 · §13","cond":["Decorre SÓ de atualização de monografia já utilizada"],"provas":[{"n":"Provas de adequabilidade (validação) disponíveis se a ANVISA solicitar (§14)"}],"rota":"hmp","tipoTxt":"NÃO é pós-registro — implementa nos prazos do compêndio (controle de mudanças + HMP)"},{"id":"ifa1.1","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Administrativas","cod":"1.1","desc":"Razão social e/ou endereço do detentor da CADIFA","norma":"RDC 359/2020","rota":"imediata","tipoTxt":"Notificação imediata","cond":["A entidade legal detentora da CADIFA deve ser mantida (exceto venda/fusão)"],"provas":[{"n":"Documento formal de órgão oficial com a nova razão social e/ou endereço"},{"n":"Declarações do art. 9, I atualizadas"}]},{"id":"ifa1.2","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Administrativas","cod":"1.2","desc":"Razão social e/ou endereço de local de fabricação ou CQ do IFA","norma":"RDC 359/2020","rota":"imediata","tipoTxt":"Notificação imediata","cond":["O local de fabricação e CQ deve permanecer o mesmo"],"provas":[{"n":"Documento formal de órgão oficial com a nova razão social e/ou endereço"},{"n":"Declarações de conformidade com DIFA/BPF e disposição a inspeção (art. 9, I) + info de fornecedores/espec. dos materiais de partida"}]},{"id":"ifa1.3","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Administrativas","cod":"1.3","desc":"Razão social e/ou endereço do fabricante do material de partida","norma":"RDC 359/2020","rota":"hmp","tipoTxt":"Notificação anual","cond":["O local de fabricação deve permanecer o mesmo"],"provas":[{"n":"Lista atualizada (razão social e endereço completos) de fabricantes de material de partida — aprovados e propostos"}]},{"id":"ifa1.4","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Administrativas","cod":"1.4","desc":"Razão social e/ou endereço do fabricante de intermediário","norma":"RDC 359/2020","rota":"imediata","tipoTxt":"Notificação imediata","cond":["O local de fabricação deve permanecer o mesmo"],"provas":[{"n":"Lista atualizada de fabricantes de intermediários — aprovados e propostos"},{"n":"Declarações de conformidade com DIFA/BPF e disposição a inspeção (art. 9, I) + info de fornecedores/espec. dos materiais de partida"}]},{"id":"ifa1.5","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Administrativas","cod":"1.5","desc":"Exclusão de local de fabricação de intermediário ou de fabricação/CQ do IFA","norma":"RDC 359/2020","rota":"imediata","tipoTxt":"Notificação imediata","cond":["Deve haver ao menos outro local/fabricante declarado para a mesma atividade do excluído"],"provas":[{"n":"Justificativa da exclusão"},{"n":"Lista atualizada dos locais (propostos e aprovados)"}]},{"id":"ifa1.6","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Administrativas","cod":"1.6","desc":"Exclusão de local de fabricação de material de partida","norma":"RDC 359/2020","rota":"hmp","tipoTxt":"Notificação anual","cond":["Idem 1.5 — deve haver outro local para a mesma atividade"],"provas":[{"n":"Justificativa"},{"n":"Lista atualizada dos locais de fabricação do material de partida"}]},{"id":"ifa1.7","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Administrativas","cod":"1.7","desc":"Mudança no código/nº de referência do IFA ou matéria-prima","norma":"RDC 359/2020","rota":"hmp","tipoTxt":"Notificação anual","cond":["A alteração não se relaciona à qualidade do IFA ou da matéria-prima"],"provas":[{"n":"Código/nº de referência aprovado e proposto"}]},{"id":"ifa2.1","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.1","desc":"Fabricante do material de partida","norma":"RDC 359/2020","rota":"varia","condLeg":["Especificação do material de partida idêntica à aprovada","O IFA não é estéril"],"docLeg":["Declaração de que a especificação do IFA não foi alterada","Declaração de que espec. e métodos do material de partida permanecem (se rota diversa, diagrama da rota do proposto)","Lista de todos os locais de fabricação (aprovados e propostos)","Análise de lotes (≥2, mín. piloto) do IFA com o material de partida aprovado e proposto"],"variantes":[{"n":"1","desc":"Proposto do mesmo grupo do aprovado","cond":[1,2],"docs":[1,2,3,4],"rota":"imediata"},{"n":"2","desc":"Proposto NÃO do mesmo grupo","cond":[1,2],"docs":[1,2,3,4],"rota":"aguarda","nota":"Menor"},{"n":"3","desc":"Rota/condições diversas com impacto na espec. do material de partida","cond":[],"docs":[1,3,4],"rota":"aguarda","nota":"Menor"},{"n":"4","desc":"Rota/condições diversas com impacto na espec. do IFA","cond":[],"docs":[],"rota":"aguarda","nota":"Maior (*) — incluir estabilidade comparativa"}]},{"id":"ifa2.2","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.2","desc":"Fabricante de intermediário","norma":"RDC 359/2020","rota":"varia","condLeg":["Especificação e rota do intermediário idênticas às aprovadas","IFA não estéril","Rota diversa só para substituição do fabricante; processo alternativo com rota diversa = novo DIFA"],"docLeg":["Declaração de que a especificação do IFA não foi alterada","Declaração de que rota/processo, espec. e métodos do intermediário não mudaram","Lista de todos os locais de fabricação (aprovados e propostos)","Análise de lotes (≥2, mín. piloto) do IFA com o intermediário aprovado e proposto","Declarações de conformidade com DIFA/BPF e disposição a inspeção (art. 9, I) + info de fornecedores/espec. dos materiais de partida"],"variantes":[{"n":"1","desc":"Proposto do mesmo grupo","cond":[1,2],"docs":[1,2,3,4,5],"rota":"imediata"},{"n":"2","desc":"Proposto NÃO do mesmo grupo","cond":[1,2],"docs":[1,2,3,4,5],"rota":"aguarda","nota":"Menor"},{"n":"3","desc":"Rota substancialmente diferente (perfil de impurezas)","cond":[3],"docs":[],"rota":"aguarda","nota":"Maior (*)"}]},{"id":"ifa2.3","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.3","desc":"Fabricante do IFA (incl. unidades de CQ)","norma":"RDC 359/2020","rota":"varia","condLeg":["Espec., processo (incl. tamanho de lote) e rota idênticos aos aprovados","IFA não estéril","Transferência de métodos concluída satisfatoriamente","Espec. de distribuição do tamanho de partículas e método iguais aos da CADIFA","Já há local de micronização aprovado na CADIFA"],"docLeg":["Lista de todos os locais de fabricação (aprovados e propostos)","Análise de lotes (≥2, mín. piloto) do IFA nos locais aprovado e proposto","Declarações de conformidade com DIFA/BPF e disposição a inspeção (art. 9, I) + info de fornecedores/espec. dos materiais de partida","Declaração de que rota/processo, espec. e métodos do IFA não mudaram","Declarações de que a esterilização é conforme DIFA/BPF e disposição a inspeção"],"variantes":[{"n":"1","desc":"Local/unidade do mesmo grupo","cond":[1,2],"docs":[1,2,3,4],"rota":"imediata"},{"n":"2","desc":"Local/unidade NÃO do mesmo grupo","cond":[1,2],"docs":[1,2,3,4],"rota":"aguarda","nota":"Menor"},{"n":"3","desc":"Inclusão/substituição de local de CQ do IFA","cond":[2,3],"docs":[1],"rota":"imediata"},{"n":"4","desc":"Inclusão/substituição de local de esterilização (método padrão farmacopeico)","cond":[1],"docs":[1,2,5],"rota":"aguarda","nota":"Menor"},{"n":"5","desc":"Inclusão de local de micronização","cond":[1,2,4,5],"docs":[1,2,3,4],"rota":"imediata"}]},{"id":"ifa2.4","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.4","desc":"Processo de fabricação de intermediário/IFA","norma":"RDC 359/2020","rota":"varia","condLeg":["Sem alteração de especificações (IFA e intermediários) nem do perfil de impurezas","Sem alteração da rota de síntese (mesmos intermediários; sem novos reagentes/catalisadores/solventes; ajustes não significativos; reprocesso; melhorias de equipamento, exceto IFA estéril)","Rota diversa só para substituição do processo; alternativo com rota diversa = novo DIFA"],"docLeg":["Análise de lotes (≥2, mín. piloto) do IFA pelos processos aprovado e proposto","Comparação direta dos processos","Declaração de que a especificação do IFA não foi alterada","Espec. do detentor para a matéria-prima do fornecedor proposto","Declaração de procedência vegetal/sintética/sem risco EET","Declaração de que não há alteração no processo e na espec. do IFA"],"variantes":[{"n":"1","desc":"Menor, sem impacto em qualidade/segurança/controle","cond":[1,2],"docs":[1,2,3],"rota":"hmp","nota":"Notif. anual"},{"n":"2","desc":"Outras alterações menores (recuperação; novo grau incl. micronização; matéria-prima c/ risco EET→vegetal/sintética)","cond":[],"docs":[1,2,4,5,6],"rota":"aguarda","nota":"Menor"},{"n":"3","desc":"Substituição substancial (perfil de impurezas; nova tecnologia)","cond":[3],"docs":[],"rota":"aguarda","nota":"Maior (*)"},{"n":"4","desc":"Etapas de esterilização de IFA estéril","cond":[],"docs":[],"rota":"aguarda","nota":"Maior (*)"},{"n":"5","desc":"Origem geográfica/produção de IFA de matéria-prima vegetal","cond":[],"docs":[],"rota":"aguarda","nota":"Maior (*)"}]},{"id":"ifa2.5","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.5","desc":"Tamanho de lote de intermediário/IFA","norma":"RDC 359/2020","rota":"varia","condLeg":["Alterações restritas às necessárias ao aumento/redução de escala","Resultados de ≥2 lotes do tamanho proposto conformes à espec.","IFA não estéril","Não afeta reprodutibilidade do processo","Não resulta de eventos inesperados/estabilidade","Sem alteração das especificações (IFA e intermediários)","O tamanho de lote atual não foi aprovado por notificação"],"docLeg":["Nº dos lotes do tamanho proposto testados","Tamanho de lote aprovado e proposto","Descrição completa e atualizada do processo (tamanho proposto)","Declaração de que as alterações restringem-se à escala, sem eventos inesperados e sem alteração de especificações","Análise de lotes (≥1 de cada tamanho aprovado e proposto)"],"variantes":[{"n":"1","desc":"Aumento até 10× do aprovado inicialmente","cond":[1,2,3,4,6,7],"docs":[1,2,3,4],"rota":"hmp","nota":"Notif. anual"},{"n":"2","desc":"Redução até 10×","cond":[1,2,3,4,5,6],"docs":[1,2,3,4],"rota":"hmp","nota":"Notif. anual"},{"n":"3","desc":"Aumento > 10×","cond":[],"docs":[2,3,5],"rota":"aguarda","nota":"Menor"}]},{"id":"ifa2.6","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.6","desc":"Testes/critérios em processo, material de partida/reagente/intermediário","norma":"RDC 359/2020","rota":"varia","condLeg":["Não resulta de eventos inesperados","Dentro do critério aprovado","Sem alteração do método (ou menores; ex. comprimento/temperatura de coluna, não o tipo)","Novo método não é metodologia não padrão nem padrão usada de forma alternativa","Novo método não é biológico (exceto microbiológicos farmacopeicos)","Parâmetro não crítico (teor, impurezas exceto solvente não usado, mutagênicas/elementares, físicas)","Validação demonstra equivalência ao aprovado"],"docLeg":["Tabela comparativa dos testes/critérios","Descrição e validação de métodos não compendiais","Justificativa/avaliação de risco (teste não relevante)","Justificativa (ICH M7)","Análise de 2 lotes de produção do IFA com todos os parâmetros"],"variantes":[{"n":"1","desc":"Restrição de critério","cond":[1,2,3],"docs":[1],"rota":"hmp","nota":"Notif. anual"},{"n":"2","desc":"Inclusão de novo teste","cond":[1,4,5,6],"docs":[1,2],"rota":"hmp","nota":"Notif. anual"},{"n":"3","desc":"Novo teste em parâmetro crítico","cond":[],"docs":[1,2],"rota":"aguarda","nota":"Maior"},{"n":"4","desc":"Exclusão de teste não relevante","cond":[1,6],"docs":[1,3],"rota":"hmp","nota":"Notif. anual"},{"n":"5","desc":"Ampliação com impacto significativo","cond":[],"docs":[],"rota":"aguarda","nota":"Maior"},{"n":"6","desc":"Exclusão de teste com impacto significativo","cond":[],"docs":[],"rota":"aguarda","nota":"Maior"},{"n":"7","desc":"Mudança/atualização menor de método","cond":[2,3,5,7],"docs":[1,2],"rota":"hmp","nota":"Notif. anual"},{"n":"8","desc":"Critério de impureza mutagênica (ICH M7)","cond":[],"docs":[1,2,4,5],"rota":"aguarda","nota":"Menor"},{"n":"9","desc":"Método biológico (subst./inclusão)","cond":[],"docs":[1,2],"rota":"aguarda","nota":"Menor"}]},{"id":"ifa2.7","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.7","desc":"Testes/critérios do IFA","norma":"RDC 359/2020","rota":"varia","condLeg":["Não resulta de eventos inesperados","Dentro do intervalo aprovado","Sem alteração do método (ou menores)","Método proposto não é técnica nova/não padronizada nem padrão usada de forma alternativa","Novo método não é biológico (exceto microbiológicos farmacopeicos)","Não relacionada a impureza mutagênica/elementar; nova impureza controlada com critério apropriado","Parâmetro não crítico (teor; impurezas exceto solvente não usado; físicas)","Sem alteração na rota de síntese do IFA"],"docLeg":["Tabela comparativa das especificações","Descrição e validação de novos métodos","Análise de 2 lotes de produção com todos os parâmetros","Justificativa (teste não significativo)","Justificativa (ICH M7)","Discussão de análise de risco/sumário de impurezas elementares","Lista de locais (aprovados/propostos) + declarações DIFA/BPF e inspeção","Declaração de que não há alteração na rota/processo, CQ e espec. do IFA (exceto distribuição do tamanho de partículas)"],"variantes":[{"n":"1","desc":"Restrição de critério","cond":[1,2,3],"docs":[1],"rota":"imediata"},{"n":"2","desc":"Inclusão de teste","cond":[1,4,5,6],"docs":[1,2,3],"rota":"imediata"},{"n":"3","desc":"Exclusão de teste não significativo (obsoleto)","cond":[1,7],"docs":[1,4],"rota":"hmp","nota":"Notif. anual"},{"n":"4","desc":"Exclusão com impacto significativo","cond":[],"docs":[],"rota":"aguarda","nota":"Maior"},{"n":"5","desc":"Ampliação conforme compêndio/ICH","cond":[],"docs":[1,2,3],"rota":"aguarda","nota":"Menor"},{"n":"6","desc":"Ampliação dos critérios aprovados","cond":[],"docs":[],"rota":"aguarda","nota":"Maior"},{"n":"7","desc":"Critério de impureza mutagênica (ICH M7)","cond":[],"docs":[1,3,5],"rota":"aguarda","nota":"Menor"},{"n":"8","desc":"Inclusão/revisão de SAR de impurezas elementares","cond":[8],"docs":[6],"rota":"aguarda","nota":"Menor"},{"n":"9","desc":"Teste de novo grau de qualidade (ex.: micronizado)","cond":[],"docs":[1,2,3,7,8],"rota":"aguarda","nota":"Menor"}]},{"id":"ifa2.8","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.8","desc":"Método analítico do IFA","norma":"RDC 359/2020","rota":"varia","condLeg":["Validação demonstra equivalência","Sem alteração do critério de impurezas totais; sem novas impurezas não qualificadas","Sem alteração do método (ou menores)","Não biológico (exceto microbiológicos farmacopeicos)","Decorre de compêndio já adotado"],"docLeg":["Descrição do método e espec. revisados","Resultados comparativos de validação (ou de análise, se justificável)","Estudos complementares, se aplicável"],"variantes":[{"n":"1","desc":"Menor","cond":[1,2,3,4],"docs":[1,2],"rota":"imediata"},{"n":"2","desc":"Método biológico (subst./inclusão)","cond":[],"docs":[1,2],"rota":"aguarda","nota":"Menor"},{"n":"3","desc":"Por atualização de compêndio já adotado","cond":[5],"docs":[3],"rota":"hmp","nota":"Notif. anual"}]},{"id":"ifa2.9","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.9","desc":"Embalagem primária do IFA","norma":"RDC 359/2020","rota":"varia","condLeg":["Material proposto ≥ equivalente ao aprovado nas propriedades relevantes","Estabilidade iniciada de ≥2 lotes piloto","IFA não estéril nem líquido"],"docLeg":["Comparação das especificações do material (aprovado/proposto)","Dados do material proposto (incl. cumprimento p/ contato com alimentos)","Declaração de estabilidade iniciada (nº lotes; dados mínimos; plano de ação p/ OOS)","Dados de ausência de interação IFA–material (lixiviação/sorção)","Relatórios de estabilidade de ≥2 lotes piloto"],"variantes":[{"n":"1","desc":"Composição","cond":[1,2,3],"docs":[1,2,3],"rota":"imediata"},{"n":"2","desc":"Composição para IFA estéril","cond":[],"docs":[],"rota":"aguarda","nota":"Maior (*)"},{"n":"3","desc":"Composição para IFA líquido não estéril","cond":[],"docs":[1,2,4,5],"rota":"aguarda","nota":"Menor"}]},{"id":"ifa2.10","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.10","desc":"Especificação/critérios da embalagem primária","norma":"RDC 359/2020","rota":"hmp","tipoTxt":"Notificação anual","cond":["Não resulta de eventos inesperados","Sem alteração do método (ou menores)","Novo método não é não padrão nem padrão alternativo"],"provas":[{"n":"Tabela comparativa das especificações/critérios (aprovado × proposto)"}]},{"id":"ifa2.11","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.11","desc":"Embalagem secundária","norma":"RDC 359/2020","rota":"varia","condLeg":["Composição do material permanece a mesma"],"docLeg":["Comparação da especificação/composição (aprovada/proposta)"],"variantes":[{"n":"1","desc":"Composição","cond":[],"docs":[1],"rota":"imediata"},{"n":"2","desc":"Especificação","cond":[1],"docs":[1],"rota":"hmp","nota":"Notif. anual"}]},{"id":"ifa2.12","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.12","desc":"Prazo de reteste / conservação do IFA","norma":"RDC 359/2020","rota":"varia","condLeg":["Não resulta de eventos inesperados","Não amplia critérios, não remove parâmetro indicativo de estabilidade e não reduz frequência de testes"],"docLeg":["Justificativa (redução/remoção do reteste ou conservação mais restritiva)","Dados atualizados de estabilidade de ≥2 lotes piloto/industrial","Justificativa das alterações"],"variantes":[{"n":"1","desc":"Redução do prazo de reteste","cond":[1],"docs":[1],"rota":"imediata"},{"n":"2","desc":"Ampliação do reteste e/ou mudança de conservação","cond":[],"docs":[2],"rota":"aguarda","nota":"Menor"},{"n":"3","desc":"Restrição dos cuidados de conservação","cond":[1],"docs":[1],"rota":"imediata"},{"n":"4","desc":"Alteração de protocolo de estabilidade aprovado","cond":[1,2],"docs":[3],"rota":"imediata"}]},{"id":"ifa2.13","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.13","desc":"Design space (novo/aplicação)","norma":"RDC 359/2020","rota":"varia","condLeg":[],"docLeg":["Desenvolvido conforme ICH; estudos de desenvolvimento (interação de parâmetros), análise de risco e estudos multivariados","Descrição do design space em tabela (variáveis e faixas)","Atualização das Seções CTD pertinentes"],"variantes":[{"n":"1","desc":"Operação unitária do processo (incl. controles/testes/métodos)","cond":[],"docs":[1,2,3],"rota":"aguarda","nota":"Maior"},{"n":"2","desc":"Testes/métodos p/ materiais de partida/reagentes/intermediários/IFA","cond":[],"docs":[1,2,3],"rota":"aguarda","nota":"Maior"}]},{"id":"ifa2.14","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.14","desc":"Inclusão de protocolo de gerenciamento de mudança","norma":"RDC 359/2020","rota":"aguarda","tipoTxt":"Maior","cond":["—"],"provas":[{"n":"Justificativa detalhada"},{"n":"Protocolo de gerenciamento de mudança"},{"n":"Atualização das Seções CTD pertinentes"}]},{"id":"ifa2.15","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.15","desc":"Exclusão de protocolo de gerenciamento de mudança","norma":"RDC 359/2020","rota":"imediata","tipoTxt":"Notificação imediata","cond":["Exclusão não resulta de eventos inesperados/OOS e não altera informações já aprovadas"],"provas":[{"n":"Justificativa"},{"n":"Atualização das Seções CTD pertinentes"}]},{"id":"ifa2.16","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.16","desc":"Alteração de protocolo de gerenciamento de mudança","norma":"RDC 359/2020","rota":"varia","condLeg":[],"docLeg":["Declaração de que as mudanças estão na faixa dos critérios aprovados"],"variantes":[{"n":"1","desc":"Alterações maiores","cond":[],"docs":[],"rota":"aguarda","nota":"Maior"},{"n":"2","desc":"Alterações menores (não afetam a estratégia de controle)","cond":[],"docs":[1],"rota":"aguarda","nota":"Menor"}]},{"id":"ifa2.17","grupo":"IFA / DIFA (RDC 359)","subgrupo":"Qualidade","cod":"2.17","desc":"Implementação de mudanças previstas em protocolo aprovado","norma":"RDC 359/2020","rota":"varia","condLeg":["Realizada conforme o protocolo aprovado"],"docLeg":["Referência ao protocolo aprovado","Declaração de conformidade + critérios cumpridos","Atualização das Seções CTD","Resultados dos estudos conforme o protocolo"],"variantes":[{"n":"1","desc":"Sem provas adicionais","cond":[1],"docs":[1,2,3],"rota":"imediata"},{"n":"2","desc":"Com provas adicionais","cond":[],"docs":[1,2,3,4],"rota":"aguarda","nota":"Menor"}]},{"id":"med1","grupo":"Medicamento (RDC 73)","subgrupo":"Item 1 — IFA (DIFA/CADIFA)","cod":"1","desc":"Mudanças no IFA (modelo DIFA/CADIFA)","norma":"RDC 73/2016 · Item 1 (RDC 361/2020)","rota":"varia","docLeg":["Carta do detentor do DIFA autorizando o uso","Declaração do RT de BPF de IFA","Nº do expediente do pedido de CBPF de IFA","Declaração de posse da parte aberta (se DIFA restrito)","Avaliação do impacto da mudança no medicamento + provas necessárias (proporcionais)","Laudos/análise de lotes do IFA pelo fabricante do IFA (1 aprovada + 1 proposta)","Idem, pelo fabricante do medicamento","Perfil comparativo de impurezas","Validação dos métodos de CQ do IFA (fabricante do medicamento)","Validação dos métodos de CQ do medicamento","Estabilidade de 1 lote do medicamento (ou protocolo do 1º industrial se sem impacto)","Documentação da mudança do DIFA conforme Anexo II da RDC do DIFA","CADIFA (ou revisada) com declaração de acesso","Declaração do RT de que o grau de qualidade é o mesmo da CADIFA"],"variantes":[{"n":"a","desc":"Inclusão/substituição de novo DIFA SEM CADIFA","docs":[1,2,3,4,5,6,7,8,9,10,11],"rota":"aguarda","nota":"Maior","expl":"São permitidas, concomitantemente, mudanças relacionadas aos testes, limites de especificações e métodos analíticos do controle de qualidade e estabilidade do IFA e do medicamento, em virtude da alteração proposta. Refere-se à: substituição ou inclusão de novo detentor de DIFA sem CADIFA; inclusão de processo de fabricação de detentor de DIFA aprovado com rota de síntese ou condições de fabricação substancialmente diferentes; inclusão de local de fabricação de intermediário ou do IFA de detentor de DIFA aprovado com rota/condições substancialmente diferentes. Se deferida, a CADIFA será emitida e o processo passa a ser vinculado à CADIFA. Deferimento condicionado a CBPF de IFA e CADIFA válidos."},{"n":"b","desc":"Mudança administrativa do DIFA sem CADIFA (1.2/1.4/1.5)","docs":[12],"rota":"imediata","expl":"Permite-se concomitantemente outras mudanças administrativas. 1. A mudança é exclusivamente administrativa. 2. Refere-se às mudanças administrativas da RDC que institui o DIFA: 1.2, 1.4 e 1.5."},{"n":"c","desc":"Mudança do DIFA sem CADIFA — HMP (admin 1.3/1.6/1.7 e qualidade; sem alterar rota/impurezas)","docs":[12],"rota":"hmp","nota":"HMP","expl":"Refere-se às mudanças administrativas da RDC do DIFA: 1.3, 1.6 e 1.7; e às mudanças de qualidade: 2.1.1-2.1.3, 2.4.1, 2.5.1-2.5.2, 2.6.1/2/4/7/9, 2.7.1/3/5, 2.8.1-2.8.3, 2.9.1/3, 2.10, 2.11.1-2.11.2, 2.12.1-2.12.4. Condições: sem alteração da rota de síntese; sem impacto no perfil de impurezas e na especificação do IFA (exceto restrição de critério); para IFA estéril, não relacionada à esterilização; não requer alteração na espec. de liberação/estabilidade do medicamento (exceto restrição de critério); sem impacto nas propriedades físicas do IFA (ou estas não são atributo relevante)."},{"n":"d","desc":"Mudança do DIFA sem CADIFA — imediata (qualidade; sem impacto salvo restrição/inclusão de teste)","docs":[2,3,5,6,7,12],"rota":"imediata","expl":"São permitidas, concomitantemente, mudanças de testes/limites/métodos do CQ e estabilidade do IFA e do medicamento. Refere-se às mudanças de qualidade da RDC do DIFA: 2.2.1-2.2.2, 2.3.1-2.3.5, 2.4.2, 2.5.3, 2.6.3/8, 2.7.2/7/8/9, 2.9.2, 2.15, 2.16.2, 2.17.1-2.17.2. Condições: sem impacto no perfil de impurezas e na especificação do IFA (exceto restrição/inclusão de teste); IFA estéril não relacionado à esterilização; não requer alteração na espec. de liberação/estabilidade do medicamento (exceto restrição de critério)."},{"n":"e","desc":"Mudança do DIFA sem CADIFA — maior","docs":[2,3,5,6,7,8,9,10,11,12],"rota":"aguarda","nota":"Maior","expl":"São permitidas, concomitantemente, mudanças de testes/limites/métodos do CQ e estabilidade. Refere-se às mudanças de qualidade da RDC do DIFA: 2.1.4, 2.2.3, 2.4.3-2.4.5, 2.6.5-2.6.6, 2.7.4/6, 2.13.1-2.13.2, 2.14 e 2.16.1. Condição: a mudança não se enquadra como 1b, 1c ou 1d. Deferimento condicionado a CBPF de IFA válido."},{"n":"f","desc":"Mudança do DIFA sem CADIFA (maior, migrando p/ CADIFA)","docs":[1,2,3,4,5,6,7,8,9,10,11],"rota":"aguarda","nota":"Maior","expl":"São permitidas, concomitantemente, mudanças de testes/limites/métodos do CQ e estabilidade. Condições: a mudança não se enquadra como 1b, 1c ou 1d; é alternativa em relação à mudança 1e. Se deferida, a CADIFA será emitida e o processo passa a ser vinculado à CADIFA. Deferimento condicionado a CBPF de IFA e CADIFA válidos."},{"n":"g","desc":"Inclusão/substituição de detentor de CADIFA — imediata (sem impacto)","docs":[2,3,4,5,6,7,13],"rota":"imediata","expl":"São permitidas, concomitantemente, mudanças de testes/limites/métodos do CQ e estabilidade. Condições: sem impacto no perfil de impurezas e na especificação do IFA (exceto restrição de critério do IFA); não requer alteração na espec. de liberação/estabilidade do medicamento (exceto restrição de critério). Implementação condicionada a CBPF de IFA e CADIFA válidos."},{"n":"h","desc":"Inclusão/substituição de detentor de CADIFA — maior","docs":[2,3,4,5,6,7,8,9,10,11,13],"rota":"aguarda","nota":"Maior","expl":"São permitidas, concomitantemente, mudanças de testes/limites/métodos do CQ e estabilidade. Condição: a mudança não se enquadra como 1g. Deferimento condicionado a CBPF de IFA e CADIFA válidos."},{"n":"i","desc":"Mudança do IFA COM CADIFA — HMP (sem alterar rota/impurezas/espec.)","docs":[13],"rota":"hmp","nota":"HMP","expl":"Condições: sem alteração da rota de síntese (materiais de partida, solventes, reagentes, intermediários, purificação/isolamento); sem impacto no perfil de impurezas e na especificação do IFA (exceto restrição de critério); não requer alteração na espec. de liberação/estabilidade do medicamento (exceto restrição de critério); sem impacto nas propriedades físicas do IFA (ou estas não são atributo relevante)."},{"n":"j","desc":"Mudança do IFA com CADIFA — imediata (sem impacto salvo restrição/inclusão)","docs":[2,3,5,6,7,13],"rota":"imediata","expl":"São permitidas, concomitantemente, mudanças de testes/limites/métodos do CQ e estabilidade. Condições: sem impacto no perfil de impurezas e na especificação do IFA (exceto restrição/inclusão de teste); não requer alteração na espec. de liberação/estabilidade do medicamento (exceto restrição de critério). Implementação condicionada a CBPF de IFA e CADIFA válidos."},{"n":"k","desc":"Mudança do IFA com CADIFA — maior","docs":[2,3,5,6,7,8,9,10,11,13],"rota":"aguarda","nota":"Maior","expl":"São permitidas, concomitantemente, mudanças de testes/limites/métodos do CQ e estabilidade. Condição: a mudança não se enquadra como 1i ou 1j. Deferimento condicionado a CBPF de IFA e CADIFA válidos."},{"n":"l","desc":"Vinculação a CADIFA (fabricante já aprovado, CADIFA válida p/ o mesmo IFA)","docs":[2,3,4,13,14],"rota":"imediata","expl":"Condições: o fabricante de IFA já aprovado no registro do medicamento tem CADIFA válida para o mesmo IFA; as condições do IFA aprovado são idênticas às da CADIFA (fabricante do IFA e intermediários, material de partida, rota de síntese, processo, especificações). Mudança facultativa. Implementação condicionada a CBPF de IFA válido."}]},{"id":"med2","grupo":"Medicamento (RDC 73)","subgrupo":"Item 2 — Testes/limites/métodos","cod":"2","desc":"Testes, limites e métodos do CQ e estabilidade (IFA e medicamento)","norma":"RDC 73/2016 · Item 2 (RDC 443/2020)","rota":"varia","tipoTxt":"idem grupo RDC 443 (a–i)","detalhe":"Mesmo conteúdo do grupo \"Métodos, testes e limites (RDC 443)\" — itens a–i. Aplica-se a mudanças do fabricante/importador do medicamento."},{"id":"med3","grupo":"Medicamento (RDC 73)","subgrupo":"Item 3 — Excipiente","cod":"3","desc":"Testes/limites/métodos do CQ do excipiente","norma":"RDC 73/2016 · Item 3","expl":"Refere-se a qualquer inclusão, alteração, substituição ou exclusão de testes, especificações e métodos analíticos para o excipiente realizadas pelo fabricante do medicamento.","rota":"hmp","tipoTxt":"Implementação imediata · não requer protocolo · HMP","cond":["Inclusão/alteração/substituição/exclusão de testes/espec./métodos do excipiente pelo fabricante do medicamento"],"provas":[{"n":"Descrição do teste/limite/método proposto + comparação/justificativa + validação"},{"n":"Laudos de CQ do excipiente (1 aprovada + 1 proposta)"},{"n":"Avaliação de risco (exclusão de teste não significante)"},{"n":"Dados de equivalência do método (não compendial)"}]},{"id":"med4","grupo":"Medicamento (RDC 73)","subgrupo":"Item 4 — Descrição e composição","cod":"4","desc":"Descrição e composição do medicamento (formato, sulco, excipientes, cor/sabor)","norma":"RDC 73/2016 · Item 4","rota":"varia","docLeg":["Especificações relacionadas (aprovada/proposta)","Discussão das diferenças de processo e impacto no desempenho","Laudos CQ físico-químico e microbiológico (1+1; soluções: viscosidade, pH, osmolaridade)","Perfil de dissolução comparativo (proposta × referência quando indicado)","Protocolo ou relatório de estabilidade de 1 lote industrial","Relatório de estabilidade de 1 lote + HMP de longa duração de 3 lotes","Fotoestabilidade","Componentes da tinta + uso farmacêutico","Escolha do excipiente + compatibilidade","Especificações de excipientes não constantes","Excipiente 1ª vez/nova via (fabricação, caracterização, segurança)","Interferência da tinta no método","Equivalência de especificações/desempenho (inteiro e partido)","Biodisponibilidade/bioequivalência (dispensável em casos)","Ordem de produção + quadro A (Anexo IV)","Protocolo de validação de processo (estéreis: relatório da esterilização)","Eficácia do conservante/antioxidante","Excipiente de origem animal (EET)","Validação dos métodos de CQ e estabilidade"],"variantes":[{"n":"a","desc":"Formato/dimensões de comprimidos/cápsulas/supositórios/óvulos","docs":[1,2,3,4,5],"rota":"hmp","nota":"HMP","expl":"Não deve haver alteração qualitativa e quantitativa da composição, do peso médio, das demais especificações e das características de desempenho do produto. É permitida, concomitantemente, a alteração menor do processo de produção e/ou alteração menor de equipamento."},{"n":"b","desc":"Marcações em alto/baixo relevo (exceto sulcos e impressão a tinta)","docs":[1,2,3,4,5],"rota":"hmp","nota":"HMP","expl":"Não deve haver alteração qualitativa e quantitativa da composição, do peso médio, das demais especificações e das características de desempenho do produto. É permitida, concomitantemente, a alteração menor do processo de produção e/ou alteração menor de equipamento."},{"n":"c","desc":"Impressão com tinta","docs":[1,2,3,5,8,10,12],"rota":"hmp","nota":"HMP","expl":"Não deve haver alteração do peso médio, das demais especificações e das características de desempenho do produto."},{"n":"d","desc":"Mudança MENOR de sulco","docs":[1,2,3,4,5,13],"rota":"hmp","nota":"HMP","expl":"Refere-se à inclusão, exclusão ou alteração de sulco. Não deve haver alteração das demais especificações e características de desempenho. Deve estar de acordo com a posologia; para genéricos e similares, condizente com o medicamento de referência. Não se aplica a ativo inferior a 2% por unidade posológica nem a comprimidos de liberação modificada. Permite-se, concomitantemente, alteração menor do processo/equipamento."},{"n":"e","desc":"Mudança MAIOR de sulco","docs":[1,2,3,4,5,13,14],"rota":"aguarda","nota":"Maior","expl":"Refere-se à inclusão, exclusão ou alteração de sulco que não se enquadra na mudança d. Permite-se, concomitantemente, alteração menor do processo/equipamento."},{"n":"f","desc":"Excipientes — menor (soluções)","docs":[2,3,5,15,16,17],"rota":"imediata","expl":"Refere-se às alterações quantitativas de excipientes dentro dos limites do Anexo III para formas em solução, sem alteração nas especificações do produto acabado e dos excipientes. Não se aplica a estéreis, a conservantes, nem a excipientes que influenciem no desempenho (absorção/solubilidade do ativo)."},{"n":"g","desc":"Excipientes — maior (soluções)","docs":[2,3,6,7,9,10,11,14,15,16,17,18,19],"rota":"aguarda","nota":"Maior","expl":"Refere-se às alterações de excipientes para formas em solução não contempladas no item f."},{"n":"h","desc":"Excipientes — menor (semissólidas)","docs":[2,3,4,5,15,16,17],"rota":"imediata","expl":"Refere-se às alterações quantitativas de excipientes dentro dos limites do Anexo III para formas semissólidas, sem alteração nas especificações do produto acabado e dos excipientes. Não se aplica a estéreis; a excipientes que influenciem no desempenho (absorção/liberação/solubilidade); a conservantes; nem a alterações que afetem a distribuição do tamanho de partícula."},{"n":"i","desc":"Excipientes — maior (semissólidas)","docs":[2,3,4,6,7,9,10,11,14,15,16,17,18,19],"rota":"aguarda","nota":"Maior","expl":"Refere-se às alterações de excipientes para formas semissólidas não contempladas na alteração menor (item h)."},{"n":"j","desc":"Excipientes — menor (sólidas)","docs":[2,3,4,5,15,16,17],"rota":"imediata","expl":"Refere-se às alterações quantitativas de excipientes dentro dos limites do Anexo III para formas sólidas, sem alteração nas especificações do produto acabado e dos excipientes. Não se aplica a excipientes que influenciem no desempenho (absorção/solubilidade do ativo)."},{"n":"k","desc":"Excipientes — maior (sólidas)","docs":[2,3,4,6,7,9,10,11,14,15,16,17,18,19],"rota":"aguarda","nota":"Maior","expl":"Refere-se às alterações de excipientes para formas sólidas não contempladas na alteração menor (item j)."},{"n":"l","desc":"Excipientes — demais formas","docs":[2,3,4,6,7,9,10,11,14,15,16,17,18,19],"rota":"aguarda","nota":"Maior","expl":"Refere-se às alterações de excipientes para formas farmacêuticas não contempladas nos demais assuntos."},{"n":"m","desc":"Excipientes de cor e sabor (exclusão/alteração)","docs":[2,3,6,7,9,10,11,15,16,18,19],"rota":"imediata","expl":"Refere-se à exclusão ou alteração quantitativa e/ou qualitativa de excipientes responsáveis exclusivamente por dar cor e/ou sabor a uma formulação já registrada, sem alteração nas especificações além das referentes à mudança. Não pode influenciar no desempenho (absorção/solubilidade do ativo)."},{"n":"n","desc":"Nova apresentação por alteração de sabor","docs":[2,3,6,7,9,10,11,15,16,18,19],"rota":"aguarda","nota":"Maior","expl":"Refere-se à inclusão de nova apresentação pela adição de excipientes responsáveis exclusivamente por dar cor e/ou sabor a uma formulação já registrada, sem alteração nas especificações além das referentes à mudança. Não pode influenciar no desempenho (absorção/solubilidade do ativo)."}]},{"id":"med5","grupo":"Medicamento (RDC 73)","subgrupo":"Item 5 — Local do processo","cod":"5","desc":"Local de etapas do processo produtivo","norma":"RDC 73/2016 · Item 5","rota":"varia","docLeg":["Declaração de alteração só de razão social","CBPF do país de origem p/ a linha","CBPF válido (Anvisa) da linha","Protocolo/relatório de estabilidade de 1 lote industrial","Morfologia/tamanho de partícula (semissólidos/líquidos c/ ativo não dissolvido)","Estabilidade de 1 lote + HMP de 3 lotes","Validação de processo (≥3 lotes industriais prospectivos no local proposto)","Protocolo de validação (estéreis: relatório da esterilização)","Ordem de produção + quadro B","Laudos CQ (1 no aprovado + 1 no proposto)","Perfil de dissolução comparativo (f/g: proposta × referência)","Validação dos métodos de CQ/estabilidade","Biodisponibilidade/bioequivalência","CBPF (Anvisa) p/ laboratório","Justificativa de ausência de bioequivalência"],"variantes":[{"n":"a","desc":"Razão social do local de fabricação","docs":[1],"rota":"imediata","expl":"Não deve haver nenhuma mudança na unidade fabril além da razão social."},{"n":"b","desc":"Inclusão/substituição de local de embalagem secundária","docs":[2],"rota":"imediata"},{"n":"c","desc":"Inclusão/substituição de local de embalagem primária (não estéril)","docs":[3,4,7],"rota":"imediata","expl":"Refere-se às mudanças relacionadas à inclusão ou substituição do local da linha de embalagem primária, com ou sem alteração de endereço. Não se aplica para medicamentos estéreis. É permitida a inclusão ou alteração concomitante de equipamentos da linha de embalagem primária. É permitida a alteração ou inclusão concomitante de local de embalagem secundária, quando se tratar do mesmo local de embalagem primária."},{"n":"d","desc":"Inclusão/substituição de local de fabricação — liberação convencional","docs":[3,4,5,7,9,10,11,12],"rota":"imediata","expl":"Refere-se à inclusão ou substituição de local de uma ou mais etapas ou a totalidade do processo de fabricação de medicamentos de liberação convencional, com ou sem alteração de endereço. Não se aplica para produtos estéreis. É permitida, concomitantemente, a alteração menor do processo de produção, a alteração de capacidade ou automatização dos equipamentos, a inclusão ou substituição de local de controle de qualidade."},{"n":"e","desc":"Inclusão/substituição menor — liberação modificada (sem mudar endereço)","docs":[3,6,7,9,10,11,12,15],"rota":"imediata","expl":"Refere-se à alteração ou à inclusão de local relacionada a uma ou mais etapas ou a totalidade do processo de fabricação de medicamentos de liberação modificada, sem alteração de endereço. Não se aplica a medicamentos estéreis de liberação modificada. Não se aplica para o caso em que seja identificada a necessidade de estudo de biodisponibilidade relativa/bioequivalência. É permitida, concomitantemente, a alteração menor do processo de produção ou a alteração menor dos equipamentos, a inclusão ou substituição de local de controle de qualidade."},{"n":"f","desc":"Inclusão/substituição maior — liberação modificada (com mudança de endereço)","docs":[3,6,8,9,10,11,12,13],"rota":"aguarda","nota":"Maior","expl":"Refere-se à alteração ou à inclusão de local relacionada a uma ou mais etapas ou a totalidade do processo de fabricação de medicamentos de liberação modificada, com alteração de endereço. Refere-se aos casos que não se enquadram na mudança item \"e\". É permitida, concomitantemente, a alteração do processo de produção ou a alteração dos equipamentos, a inclusão ou substituição de local de controle de qualidade."},{"n":"g","desc":"Inclusão/substituição de local — estéril","docs":[3,6,8,9,10,11,12,13],"rota":"aguarda","nota":"Maior (180 dias p/ 1ª manifestação)","expl":"Refere-se à alteração ou à inclusão de local relacionada a uma ou mais etapas ou a totalidade do processo de fabricação de medicamentos estéreis, com ou sem alteração de endereço. Refere-se ainda à inclusão ou substituição de local de embalagem primária de medicamentos estéreis. Não se aplica a medicamentos estéreis de liberação modificada. É permitida, concomitantemente, a alteração do processo de produção ou a alteração dos equipamentos, a inclusão ou substituição de local de controle de qualidade."},{"n":"h","desc":"Inclusão/substituição de local de CQ","docs":[10,12,14],"rota":"hmp","nota":"HMP","expl":"Refere-se à inclusão ou substituição de local da realização de um ou mais testes de controle de qualidade, para fins de liberação do lote e/ou estabilidade do medicamento, mantendo-se inalterados teste, limites de especificação e método, com ou sem alteração de endereço."}]},{"id":"med6","grupo":"Medicamento (RDC 73)","subgrupo":"Item 6 — Processo/equipamento/lote","cod":"6","desc":"Processo, equipamento e tamanho de lote","norma":"RDC 73/2016 · Item 6","rota":"varia","docLeg":["Ordem de produção + quadro B","Ordem de produção + quadros B e C","Quadro B","Laudos CQ (1+1)","Perfil de dissolução comparativo (b/g: proposta × referência)","Protocolo/relatório de estabilidade de 1 lote industrial","Estabilidade de 1 lote (b/e: HMP 3 lotes; d/f: pode ser protocolo do 1º industrial)","Validação de processo (≥3 lotes; d: estudo de similaridade de equipamentos)","Protocolo de validação (estéreis: relatório da esterilização)","Eficácia do conservante/antioxidante","Biodisponibilidade/bioequivalência (b: justificativa se sem impacto)","Morfologia/tamanho de partícula (semissólidos/líquidos c/ ativo não dissolvido)"],"variantes":[{"n":"a","desc":"Mudança MENOR do processo (não críticos; não esterilização)","docs":[1,4,5,6,8,10,12],"rota":"hmp","nota":"HMP","expl":"Considera-se alteração ou inclusão menor do processo de produção as mudanças relacionadas à alteração de parâmetros não críticos e de etapas não críticas do processo. Os parâmetros e etapas críticas ou não críticas são os definidos na validação do processo produtivo. Não se aplica a etapa ou parâmetro de esterilização."},{"n":"b","desc":"Mudança MAIOR do processo (críticos; tipo de processo; esterilização; impacto na liberação)","docs":[1,4,5,7,9,10,11],"rota":"aguarda","nota":"Maior","expl":"Considera-se alteração ou inclusão maior do processo de produção as mudanças relacionadas à alteração de parâmetros críticos e de etapas críticas do processo, alteração no tipo de processo de produção, como a mudança entre via seca, via úmida ou compressão direta, mudanças relacionadas a parâmetros de esterilização, alterações que impactem no sistema de liberação do fármaco ou que não se enquadrem em mudança menor do processo de produção. Os parâmetros e etapas críticas ou não críticas são os definidos na validação do processo produtivo. É permitida concomitantemente a mudança menor de equipamento e a inclusão menor de tamanho do lote em função da mudança maior do processo de produção."},{"n":"c","desc":"Inclusão/substituição de equipamento de embalagem primária (não estéril)","docs":[3,6,8],"rota":"hmp","nota":"HMP","expl":"Não se aplica para produtos estéreis."},{"n":"d","desc":"Mudança MENOR de equipamento","docs":[1,4,5,7,8,12],"rota":"hmp","nota":"HMP","expl":"Refere-se à substituição, inclusão ou exclusão de equipamento com mesmo ou diferente desenho e princípio de funcionamento de etapas não críticas ou com mesmo desenho e princípio de funcionamento de etapas críticas do processo produtivo. Não se aplica a alteração ou inclusão de equipamentos utilizados no processamento asséptico e em etapas que tenham potencial impacto no sistema de liberação modificada. É permitida, concomitantemente, a alteração da capacidade, a automatização do equipamento, ou alteração menor do processo de produção em função da alteração de equipamento. As etapas e equipamentos considerados críticos são os definidos na validação de processo produtivo."},{"n":"e","desc":"Mudança MAIOR de equipamento","docs":[1,4,5,7,9,12],"rota":"aguarda","nota":"Maior","expl":"Refere-se à substituição, inclusão ou exclusão de equipamento com diferente desenho e princípio de funcionamento ou de equipamento com diferente desenho e mesmo princípio de funcionamento de etapas críticas do processo produtivo. As etapas e equipamentos considerados críticos são os definidos na validação de processo produtivo. Refere-se à substituição, inclusão ou exclusão de equipamento de embalagem primária de medicamentos estéreis. É permitida, concomitantemente, a alteração menor do processo de produção em função da alteração de equipamento."},{"n":"f","desc":"Inclusão MENOR de tamanho de lote","docs":[2,4,5,7,8],"rota":"hmp","nota":"HMP","expl":"Refere-se ao aumento do tamanho de lote de formas farmacêuticas de liberação imediata, à diminuição do tamanho de lote de todas as formas farmacêuticas e ao aumento de tamanho de lote em até 10 (dez) vezes o tamanho de lote referência de medicamentos de liberação modificada e formas farmacêuticas especializadas. Lote referência é o último lote utilizado para a comprovação de segurança e eficácia demonstradas através de equivalência farmacêutica, bioequivalência e estudos clínicos, conforme o caso. Não se aplica aos medicamentos de concentração do ativo em relação à fórmula inferior a 2% (dois por cento) por unidade posológica, exceto para soluções. Não se aplica aos medicamentos sólidos orais cujo tamanho do lote referência seja inferior a 100.000 (cem mil) unidades farmacotécnicas ou 10 % (dez por cento) do tamanho do lote produzido em escala industrial, o que for maior. É permitida, concomitantemente, a alteração menor do processo de produção e alteração da capacidade e/ou automatização do equipamento, desde que essa alteração seja decorrente da inclusão de tamanho de lote."},{"n":"g","desc":"Inclusão MAIOR de tamanho de lote","docs":[2,4,5,7,9,11],"rota":"aguarda","nota":"Maior","expl":"Refere-se ao aumento de tamanho de lote não contemplado na inclusão menor de tamanho de lote. É permitida, concomitantemente, a alteração menor do processo de produção e alteração da capacidade e/ou automatização do equipamento, desde que essa alteração seja decorrente da inclusão de tamanho de lote."}]},{"id":"med7","grupo":"Medicamento (RDC 73)","subgrupo":"Item 7 — Embalagem","cod":"7","desc":"Embalagem do medicamento","norma":"RDC 73/2016 · Item 7","rota":"varia","docLeg":["Caracterização da nova emb. primária + comparação","Caracterização da emb. secundária + comparação","CQ da embalagem + compêndio (b/c dispensável se CQ inalterado)","Ausência de interação embalagem–conteúdo","Características protetoras (O₂/CO₂/umidade/luz)","Equivalência das características","Diferenças na etapa de embalagem","Estabilidade 2 lotes + HMP 3 lotes (e: protocolo se sem alterar espaço morto)","Estabilidade 1 lote (se altera espaço morto/razão superfície–volume)","Protocolo/relatório de estabilidade de 1 lote industrial","Fotoestabilidade","Layout + bula","Validação de processo (estéreis)","Validação de esterilização (estéreis)","Caracterização do material inerte","Estudos que justificam a alteração","Diluente — documentação da mudança","Diluente — documentação de registro","Diluente — escolha","Diluente — compatibilidade","Diluente — estabilidade","Diluente — justificativa de exclusão","Acessório — descrição","Acessório — compatibilidade/justificativa de exclusão","CQ da embalagem — descrição","CQ da embalagem — justificativa","CQ da embalagem — avaliação de diferenças","CQ da embalagem — laudos","CQ da embalagem — validação","CQ da embalagem — equivalência"],"variantes":[{"n":"a","desc":"Inclusão de novo tipo de embalagem primária","docs":[1,3,4,5,6,7,8,11,12,13],"rota":"aguarda","nota":"Maior","expl":"Como exemplo, blíster e frasco são considerados diferentes tipos de embalagem. Caso não exista interesse em manter a embalagem anterior, a detentora deverá solicitar o cancelamento de registro da(s) apresentação(ões) na justificativa técnica."},{"n":"b","desc":"Mudança menor de composição da emb. primária","docs":[1,3,4,5,6,10,11],"rota":"hmp","nota":"HMP","expl":"Refere-se à alteração de composição e à inclusão de embalagem primária com diferente composição qualitativa ou quantitativa de um medicamento registrado, em que haja equivalência ou melhoria do material e das características da embalagem em relação à capacidade protetora e interação com o conteúdo, sem alterar o tipo, forma e dimensões da embalagem, a quantidade/volume por embalagem e a descrição da apresentação. Não se aplica a medicamentos estéreis."},{"n":"c","desc":"Mudança maior de composição da emb. primária","docs":[1,3,4,5,6,8,11],"rota":"aguarda","nota":"Maior","expl":"Refere-se à alteração de composição e à inclusão de embalagem primária com diferente composição qualitativa ou quantitativa de um medicamento registrado, sem alterar o tipo e a quantidade/volume por embalagem. É permitida, concomitantemente, a mudança menor de forma e dimensões da embalagem primária, desde que essa mudança seja decorrente da mudança maior de composição da embalagem. Incluem-se os casos que não se enquadram como menor (item b)."},{"n":"d","desc":"Mudança menor de forma/dimensões da emb. primária","docs":[1,6,9],"rota":"hmp","nota":"HMP","expl":"Refere-se à alteração da forma e dimensões da embalagem primária de um medicamento registrado, sem alterar o tipo, composição da embalagem, a quantidade/volume por embalagem e a descrição da apresentação. Não se aplica à parte da embalagem que possa afetar a administração, uso, segurança e estabilidade do medicamento e a medicamentos estéreis."},{"n":"e","desc":"Mudança maior de forma/dimensões da emb. primária","docs":[1,4,5,6,8,14],"rota":"aguarda","nota":"Maior","expl":"Refere-se à alteração da forma e dimensões da embalagem primária de um medicamento registrado, sem alterar o tipo, composição da embalagem e a quantidade/volume por embalagem. Incluem-se os casos que não se enquadram como menor (item d)."},{"n":"f","desc":"Mudança de parte da emb. primária SEM contato","docs":[1],"rota":"hmp","nota":"HMP","expl":"Refere-se à mudança de parte da embalagem primária que não está em contato com o medicamento registrado. Não se aplica a parte da embalagem primária que possa afetar a administração, uso, segurança e estabilidade do medicamento."},{"n":"g","desc":"Mudança menor de emb. secundária/envoltório","docs":[2,12],"rota":"hmp","nota":"HMP","expl":"Refere-se à alteração, inclusão ou exclusão de embalagem secundária ou envoltório intermediário de um medicamento registrado, sem alteração da descrição da apresentação. É permitida a alteração das informações de rotulagem que não necessitam de aprovação prévia da Anvisa. Não se aplica a embalagens funcionais que possam afetar a administração, uso, segurança e estabilidade do medicamento."},{"n":"h","desc":"Mudança maior de emb. secundária/envoltório (funcionais: +5,8)","docs":[2,6,12],"rota":"aguarda","nota":"Maior","expl":"Refere-se à alteração, inclusão ou exclusão de embalagem secundária ou envoltório intermediário de um medicamento registrado. Incluem-se os casos que não se enquadram como menor (item g)."},{"n":"i","desc":"Material inerte (ex.: dessecante)","docs":[12,15,16],"rota":"hmp","nota":"HMP","expl":"Refere-se à alteração das características, inclusão, substituição ou exclusão de material inerte na embalagem de um medicamento registrado, como dessecantes."},{"n":"j","desc":"Diluente (características/inclusão/substituição/exclusão)","docs":[17,18,19,20,21,22],"rota":"aguarda","nota":"Maior","expl":"Refere-se à alteração das características, inclusão, substituição ou exclusão de um diluente/reconstituinte que acompanha um medicamento registrado."},{"n":"k","desc":"Acessório (dose/administração)","docs":[23,24],"rota":"aguarda","nota":"Maior","expl":"Refere-se à alteração das características, inclusão, substituição ou exclusão de um acessório para administração ou medida da dose requerida do medicamento, que não é parte da embalagem primária. Os acessórios deverão obrigatoriamente estar em quantidades e graduação adequadas considerando sua posologia, quando aplicável."},{"n":"l","desc":"CQ da embalagem (testes/limites/métodos)","docs":[25,26,27,28,29,30],"rota":"hmp","nota":"HMP","expl":"Refere-se à alteração dos testes, limites de especificações e métodos de controle de qualidade das embalagens primárias, embalagens secundárias funcionais, envoltórios intermediários funcionais e acessórios."}]},{"id":"med8","grupo":"Medicamento (RDC 73)","subgrupo":"Item 8 — Nova apresentação","cod":"8","desc":"Inclusão de nova apresentação","norma":"RDC 73/2016 · Item 8","expl":"Refere-se à inclusão de nova apresentação com diferente volume/peso ou número de unidades farmacotécnicas para um medicamento registrado, mantendo-se o tipo e composição do material de embalagem registrado. Caso não exista interesse em manter as apresentações anteriores, a detentora deverá solicitar o cancelamento de registro destas na justificativa técnica. A nova apresentação deverá ser condizente com a posologia do medicamento e duração do tratamento. Para a inclusão de nova apresentação fracionável aplica-se, além do disposto neste quadro, o disposto em norma específica. É permitida, concomitantemente, alteração menor da forma e dimensões da embalagem primária.","rota":"aguarda","tipoTxt":"Requer protocolo · aguarda manifestação favorável","cond":["Nova apresentação (diferente volume/peso ou nº de unidades; mantém tipo e composição do material)"],"provas":[{"n":"Justificativa (condizente com posologia/duração do tratamento)"},{"n":"Caracterização da embalagem + comparação"},{"n":"Equivalência de características"},{"n":"Estabilidade 2 lotes + HMP 3 lotes (se altera volume/peso/espaço morto)"},{"n":"Validação de processo/esterilização (estéreis)"}]},{"id":"med9","grupo":"Medicamento (RDC 73)","subgrupo":"Item 9 — Validade/conservação","cod":"9","desc":"Prazo de validade e conservação","norma":"RDC 73/2016 · Item 9","rota":"varia","docLeg":["Estabilidade de longa duração/acompanhamento de 1 lote demonstrando não estabilidade no prazo","Estabilidade de longa duração de 3 lotes (≥1 industrial)","Provas que suportam a alteração"],"variantes":[{"n":"a","desc":"Redução do prazo de validade","docs":[1],"rota":"imediata","expl":"Refere-se à redução do prazo de validade do produto acabado e do produto após aberto ou preparado."},{"n":"b","desc":"Ampliação do prazo de validade","docs":[2],"rota":"aguarda","nota":"Maior","expl":"Refere-se à ampliação do prazo de validade do produto acabado e do produto após aberto ou preparado."},{"n":"c","desc":"Mudança dos cuidados de conservação","docs":[2],"rota":"aguarda","nota":"Maior","expl":"Refere-se à alteração dos cuidados de conservação do produto acabado e do produto após aberto ou preparado. É permitida, concomitantemente, a alteração do prazo de validade do produto em função da alteração dos cuidados de conservação."},{"n":"d","desc":"Condição de armazenamento adicional","docs":[3],"rota":"imediata","expl":"Refere-se a mudanças de condições de armazenamento adicionais."}]},{"id":"med10","grupo":"Medicamento (RDC 73)","subgrupo":"Item 10 — Nova concentração","cod":"10","desc":"Inclusão de nova concentração","norma":"RDC 73/2016 · Item 10 (RDC 851/2024)","rota":"varia","docLeg":["Documentação de registro (RDC 753/2022) — Relatório Técnico substituído pelo PATE (dispensa parte se mesmo DIFA)","Racional clínico de desenvolvimento","Contextualização da condição clínica","Caracterização clínica biofarmacêutica/farmacológica/segurança/eficácia (biodisponibilidade/bioisenção RDC 742/749)","Avaliação benefício-risco","Plano de Gerenciamento de Risco (RDC 406/2020) quando necessário","Documentação de registro genérico/similar (RDC 753/2022; dispensa parte se mesmo DIFA)"],"variantes":[{"n":"a","desc":"Nova concentração — novos/inovadores","docs":[1,2,3,4,5,6],"rota":"aguarda","nota":"Maior","expl":"Refere-se à inclusão de nova concentração para um medicamento novo ou inovador registrado, na mesma forma farmacêutica. A alteração de inclusão de nova concentração aplica-se à empresa detentora do registro inicial."},{"n":"b","desc":"Nova concentração — genéricos/similares","docs":[7],"rota":"aguarda","nota":"Maior","expl":"Refere-se à inclusão de nova concentração já registrada no país para um medicamento genérico ou similar registrado, na mesma forma farmacêutica. A alteração de inclusão de nova concentração aplica-se à empresa detentora do registro inicial."}]},{"id":"med11","grupo":"Medicamento (RDC 73)","subgrupo":"Item 11 — Posologia/uso/via/indicação","cod":"11","desc":"Posologia, ampliação de uso, nova via e nova indicação (novos/inovadores)","norma":"RDC 73/2016 · Item 11 (RDC 851/2024)","rota":"varia","docLeg":["Racional clínico","Contextualização clínica","Caracterização clínica (segurança/eficácia; biodisponibilidade/bioisenção RDC 742/749)","Avaliação benefício-risco","Bula atualizada (RDC 47/2009) + layout (RDC 768/2022) quando aplicável","Plano de Gerenciamento de Risco (RDC 406/2020) quando necessário"],"variantes":[{"n":"a","desc":"Alteração de posologia","docs":[1,2,3,4,5,6],"rota":"aguarda","nota":"Maior","expl":"Refere-se à alteração de posologia para um medicamento novo ou inovador já registrado na mesma concentração, forma farmacêutica, indicação terapêutica e população alvo. A alteração de posologia aplica-se à empresa detentora do registro inicial."},{"n":"b","desc":"Ampliação de uso (população-alvo)","docs":[1,2,3,4,5,6],"rota":"aguarda","nota":"Maior","expl":"Refere-se ao aumento da população alvo para um medicamento novo ou inovador já registrado na mesma indicação terapêutica. A ampliação de uso aplica-se somente a empresa detentora do registro inicial."},{"n":"c","desc":"Nova via de administração","docs":[1,2,3,4,5,6],"rota":"aguarda","nota":"Maior","expl":"Refere-se à inclusão de nova via de administração no país para um medicamento novo ou inovador já registrado na mesma forma farmacêutica, mesma concentração e mesma indicação terapêutica. A inclusão de nova via de administração aplica-se à empresa detentora do registro inicial."},{"n":"d","desc":"Nova indicação terapêutica","docs":[1,2,3,4,5,6],"rota":"aguarda","nota":"Maior","expl":"Refere-se à inclusão de nova indicação terapêutica no país, para um medicamento novo ou inovador já registrado na mesma forma farmacêutica e mesma concentração. A inclusão de nova indicação terapêutica aplica-se à empresa detentora do registro inicial."}]},{"id":"med12","grupo":"Medicamento (RDC 73)","subgrupo":"Item 12 — Nome/cancelamento/exclusão","cod":"12","desc":"Nome, cancelamento e exclusão de locais","norma":"RDC 73/2016 · Item 12","rota":"varia","docLeg":["Declaração de não comercialização","Lista dos locais que permanecem vigentes (assinada pelo RT)"],"variantes":[{"n":"a","desc":"Mudança de nome comercial","docs":[1],"rota":"aguarda","nota":"Maior","expl":"Refere-se à alteração do nome comercial de medicamentos já registrados observadas outras regras específicas para esta petição."},{"n":"b","desc":"Cancelamento de registro da apresentação","docs":[],"rota":"aguarda","nota":"Maior","expl":"Refere-se ao cancelamento do registro de uma ou mais apresentações do medicamento."},{"n":"c","desc":"Cancelamento de registro (todas)","docs":[],"rota":"aguarda","nota":"Maior","expl":"Refere-se ao cancelamento do registro de todas as apresentações do medicamento."},{"n":"d","desc":"Exclusão de local (fármaco/emb. primária/secundária/fabricação)","docs":[2],"rota":"imediata"}]}];
+</script>
+<script>
+(function(){
+'use strict';
+const VERSAO_BASE='10/11/2026';
+const REPORT_EMAIL='';                      // e-mail que recebe os relatos (vazio = só GitHub/copiar)
+const REPORT_REPO='rodolfoortigara-gif/consultor-enquadramentos';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+
+/* ---------- metadados de exibição ---------- */
+const ROTA={
+  hmp:{label:'HMP / notificação anual', curto:'HMP', what:'Implementa sem esperar; registra no Histórico de Mudança do Produto (HMP).'},
+  imediata:{label:'Implementação imediata', curto:'Imediata', what:'Protocola/notifica e implementa já, sem aguardar manifestação.'},
+  aguarda:{label:'Aguarda deferimento', curto:'Aguarda', what:'Protocola e aguarda manifestação favorável da ANVISA antes de implementar.'},
+  varia:{label:'Varia — ver norma', curto:'Varia', what:'A classe depende da variante; ver a norma.'}
+};
+const NORMAS=[
+  {k:'73', label:'RDC 73', area:'Medicamento'},
+  {k:'443',label:'RDC 443',area:'Métodos/testes/limites'},
+  {k:'359',label:'RDC 359',area:'IFA/DIFA'}
+];
+const PORTES=[{k:'menor',label:'Menor'},{k:'intermediaria',label:'Intermediária'},{k:'maior',label:'Maior'},{k:'nd',label:'Não classificado'}];
+const STOP=new Set('a o as os de da do das dos e em no na nos nas com para por um uma ao aos que se sem ou eu mudei mudar mudanca mudancas troquei alterei alteracao qual quais'.split(' '));
+
+function normaKey(n){ n=n||''; if(n.indexOf('359')>=0) return '359'; if(n.indexOf('73/2016')>=0) return '73'; return '443'; }
+
+/* ---------- achatamento da matriz em "enquadramentos" consultáveis ---------- */
+function porteDe(nota,desc){
+  const t=norm((nota||'')+' '+(desc||''));
+  if(/^maior|\bmaior(es)?\b/.test(norm(nota||'')) || (!nota && /\bmaior(es)?\b/.test(t))) return 'maior';
+  if(/^menor/.test(norm(nota||'')) || (!nota && /\bmenor(es)?\b/.test(t))) return 'menor';
+  if(/intermediari/.test(t)) return 'intermediaria';
+  return 'nd';
+}
+function splitExpl(expl){
+  const out={concom:[],condic:[],resto:[]}; if(!expl) return out;
+  const parts=expl.match(/[^.]+(?:\.(?!\d)|$)/g)||[expl];   // não corta "1.2", "2.3"
+  parts.map(s=>s.trim()).filter(Boolean).forEach(s=>{
+    if(/concomitant/i.test(s)) out.concom.push(s);
+    else if(/condicionad/i.test(s)) out.condic.push(s);
+    else out.resto.push(s);
+  });
+  return out;
+}
+function codLabel(e,v){
+  const nk=normaKey(e.norma);
+  if(nk==='73') return 'Item '+e.cod+(v?' · '+v.n:'');
+  if(nk==='359') return e.cod+(v?' · '+v.n:'');
+  return e.cod;
+}
+const ENQ=[], BY={}, ITENS={};
+MATRIZ_ENQ.forEach(e=>{
+  const nk=normaKey(e.norma);
+  const base={item:e.id, grupo:e.grupo, subgrupo:e.subgrupo||'', normaK:nk, normaTxt:e.norma.replace(/ · .*$/,''), normaFull:e.norma};
+  if(e.variantes && e.variantes.length){
+    ITENS[e.id]={e, ids:[]};
+    e.variantes.forEach(v=>{
+      const id=e.id+'.'+v.n;
+      const rota=(v.rota&&ROTA[v.rota])?v.rota:'varia';
+      const x=Object.assign({},base,{
+        id, cod:codLabel(e,v), parentDesc:e.desc, desc:v.desc,
+        cond:(v.cond||[]).map(i=>(e.condLeg||[])[i-1]).filter(Boolean),
+        docs:(v.docs||[]).map(i=>(e.docLeg||[])[i-1]).filter(Boolean),
+        rota, nota:v.nota||'', tipoTxt:'',
+        expl:v.expl||'', porte:porteDe(v.nota,v.desc), variante:v.n
+      });
+      ENQ.push(x); BY[id]=x; ITENS[e.id].ids.push(id);
+    });
+  } else {
+    const rota=ROTA[e.rota]?e.rota:'varia';
+    const x=Object.assign({},base,{
+      id:e.id, cod:codLabel(e), parentDesc:'', desc:e.desc,
+      cond:e.cond||[], docs:(e.provas||[]).map(p=>p.n).filter(Boolean),
+      rota, nota:'', tipoTxt:e.tipoTxt||'',
+      expl:e.expl||e.detalhe||'', porte:porteDe('',e.desc), variante:null, info:!!e.detalhe
+    });
+    ENQ.push(x); BY[x.id]=x;
+  }
+});
+ENQ.forEach(x=>{
+  const ex=splitExpl(x.expl); x.concom=ex.concom; x.condic=ex.condic; x.obs=ex.resto;
+  x.hay=norm([x.cod,x.normaFull,x.grupo,x.subgrupo,x.parentDesc,x.desc,x.nota,x.tipoTxt,ROTA[x.rota].label,x.cond.join(' '),x.docs.join(' '),x.expl].join(' | '));
+  x.hayTop=norm([x.cod,x.parentDesc,x.desc,x.subgrupo,x.nota].join(' '));
+  x.hayDesc=norm(x.desc);
+});
+
+/* ---------- estado (filtros na URL não; favoritos/histórico no navegador) ---------- */
+const LS={get(k,d){try{const v=localStorage.getItem('consultorEnq.'+k);return v?JSON.parse(v):d}catch(_){return d}},set(k,v){try{localStorage.setItem('consultorEnq.'+k,JSON.stringify(v))}catch(_){}}};
+const S={q:'', normas:new Set(), rotas:new Set(), portes:new Set(), favOnly:false, sel:null,
+  favs:new Set(LS.get('favs',[]).filter(id=>BY[id])), hist:LS.get('hist',[]).filter(id=>BY[id]), cmp:[], closed:new Set()};
+
+/* ---------- busca ---------- */
+const ACC={a:'aáàâãä',e:'eéèêë',i:'iíìîï',o:'oóòôõö',u:'uúùûü',c:'cç',n:'nñ'};
+function tokens(q){
+  return norm(q).split(/[^a-z0-9§.]+/).map(t=>t.replace(/^\.+|\.+$/g,'')).filter(t=>t && !STOP.has(t)).map(t=>(t.length>4 && /[^s]s$/.test(t))?t.slice(0,-1):t);
+}
+function tokRe(t){ return t.split('').map(ch=>{ const k=ACC[ch]; return k?'['+k+k.toUpperCase()+']':ch.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/[a-z]/,m=>'['+m+m.toUpperCase()+']'); }).join(''); }
+let HL=null;
+function hl(s){ const h=esc(s); return HL?h.replace(HL,'<mark>$1</mark>'):h; }
+function score(x,toks){
+  let all=true, sc=0, hit=0;
+  toks.forEach(t=>{
+    const inTop=x.hayTop.indexOf(t)>=0, inAny=inTop||x.hay.indexOf(t)>=0;
+    if(!inAny){ all=false; return; }
+    hit++; sc+= inTop?10:3;
+    if(x.hayDesc.indexOf(t)>=0) sc+=8;                       // título da própria variante pesa mais que o item-pai
+    if(new RegExp('(^|[^a-z0-9])'+t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).test(x.hayTop)) sc+=4;
+  });
+  return {all, sc, hit};
+}
+function passFilters(x){
+  if(S.normas.size && !S.normas.has(x.normaK)) return false;
+  if(S.rotas.size && !S.rotas.has(x.rota)) return false;
+  if(S.portes.size && !S.portes.has(x.porte)) return false;
+  if(S.favOnly && !S.favs.has(x.id)) return false;
+  return true;
+}
+
+/* ---------- filtros (chips) ---------- */
+function chip(group,k,label,on,extra,n){ return `<button class="chip${on?' on':''}" data-g="${group}" data-k="${k}">${extra||''}${esc(label)}${n!=null?` <span class="n">${n}</span>`:''}</button>`; }
+function renderFilters(){
+  const cnt=(f)=>ENQ.filter(f).length;
+  const any=S.normas.size||S.rotas.size||S.portes.size||S.favOnly;
+  $('#filters').innerHTML=
+    `<div class="fgroup"><b>Norma</b>${NORMAS.map(n=>chip('normas',n.k,n.label+' · '+n.area,S.normas.has(n.k),'',cnt(x=>x.normaK===n.k))).join('')}</div>`+
+    `<div class="fgroup"><b>Rota</b>${['imediata','hmp','aguarda'].map(k=>chip('rotas',k,ROTA[k].label,S.rotas.has(k),`<span class="dot ${k}"></span>`,cnt(x=>x.rota===k))).join('')}</div>`+
+    `<div class="fgroup"><b>Porte</b>${PORTES.map(p=>chip('portes',p.k,p.label,S.portes.has(p.k),'',cnt(x=>x.porte===p.k))).join('')}</div>`+
+    `<div class="fgroup">${chip('fav','1','★ Favoritos',S.favOnly,'',S.favs.size)}${any?'<button class="chip reset" data-g="reset">limpar filtros</button>':''}</div>`;
+  const n=S.normas.size+S.rotas.size+S.portes.size+(S.favOnly?1:0), fc=$('#fcount');
+  fc.hidden=!n; fc.textContent=n;
+}
+$('#ftog').addEventListener('click',()=>{ const f=$('#filtersBox'), on=!f.classList.contains('open'); f.classList.toggle('open',on); $('#ftog').setAttribute('aria-expanded',on); syncHdr(); });
+$('#filters').addEventListener('click',ev=>{
+  const b=ev.target.closest('button.chip'); if(!b) return;
+  const g=b.dataset.g, k=b.dataset.k;
+  if(g==='reset'){ S.normas.clear(); S.rotas.clear(); S.portes.clear(); S.favOnly=false; }
+  else if(g==='fav') S.favOnly=!S.favOnly;
+  else { const set=S[g]; set.has(k)?set.delete(k):set.add(k); }
+  renderAll();
+});
+
+/* ---------- cards ---------- */
+function pillRota(r){ return `<span class="pill ${r}">${esc(ROTA[r].label)}</span>`; }
+function pillPorte(x){ const p=PORTES.find(p=>p.k===x.porte); return x.porte!=='nd'?`<span class="pill lite">${esc(p.label)}</span>`:''; }
+function snippet(x,toks){
+  if(!toks.length) return '';
+  // primeiro trecho (condição/documento/observação) onde algum termo aparece fora do título
+  const pools=[...x.cond,...x.docs,...(x.expl?[x.expl]:[])];
+  for(const s of pools){ const n=norm(s); if(toks.some(t=>n.indexOf(t)>=0) && !toks.every(t=>x.hayTop.indexOf(t)>=0)){
+    let txt=s; if(txt.length>180){ const i=Math.max(0,n.indexOf(toks.find(t=>n.indexOf(t)>=0))-60); txt=(i>0?'…':'')+txt.slice(i,i+180)+'…'; }
+    return `<div class="snip">${hl(txt)}</div>`; } }
+  return '';
+}
+function card(x,toks){
+  const fav=S.favs.has(x.id), inCmp=S.cmp.includes(x.id);
+  return `<div class="card r-${x.rota}${S.sel===x.id?' sel':''}" data-id="${x.id}" tabindex="0">
+    <div><div class="code">${esc(x.normaTxt)} · ${hl(x.cod)}</div>
+    <div class="ttl">${x.parentDesc?`<span class="parent">${hl(x.parentDesc)}</span>`:''}${hl(x.desc)}</div></div>
+    <div class="side"><button class="star${fav?' on':''}" data-star="${x.id}" title="${fav?'Remover dos':'Adicionar aos'} favoritos" aria-label="Favorito">${fav?'★':'☆'}</button>
+      <label class="cmpbox" title="Adicionar à comparação"><input type="checkbox" data-cmp="${x.id}" ${inCmp?'checked':''}>comparar</label></div>
+    <div class="tags">${pillRota(x.rota)}${pillPorte(x)}<span class="pill lite">${x.docs.length} doc${x.docs.length===1?'':'s'}</span>${x.concom.length?'<span class="pill lite">concomitâncias</span>':''}${x.info?'<span class="pill lite">remissão</span>':''}</div>
+    ${snippet(x,toks)}
+  </div>`;
+}
+
+/* ---------- lista / resultados ---------- */
+function renderList(){
+  const toks0=tokens(S.q);
+  // termos que não aparecem em lugar nenhum da base são ignorados (e avisados), para não zerar a busca
+  const ignored=toks0.filter(t=>!ENQ.some(x=>x.hay.indexOf(t)>=0));
+  const toks=toks0.length>ignored.length?toks0.filter(t=>!ignored.includes(t)):toks0;
+  HL=toks.length?new RegExp('('+toks.map(tokRe).sort((a,b)=>b.length-a.length).join('|')+')','g'):null;
+  const pool=ENQ.filter(passFilters);
+  let html='', info='';
+  if(toks.length){
+    let res=pool.map(x=>({x,...score(x,toks)}));
+    let full=res.filter(r=>r.all), partial=false;
+    if(!full.length){ full=res.filter(r=>r.hit>0); partial=true; }
+    full.sort((a,b)=>(b.hit-a.hit)||(b.sc-a.sc));
+    info=`<span><b>${full.length}</b> enquadramento${full.length===1?'':'s'} para “${esc(S.q)}”</span>`+(partial&&full.length?'<span class="warn">nenhum resultado com todos os termos — mostrando correspondências parciais</span>':'')
+      +(ignored.length&&toks.length<toks0.length?`<span class="warn">“${esc(ignored.join('”, “'))}” não consta na base — termo ignorado</span>`:'');
+    html=full.length?`<div class="cards">${full.map(r=>card(r.x,toks)).join('')}</div>`:`<div class="disclaimer">Nada encontrado. Tente termos mais curtos (ex.: “lote”, “embalagem”, “CADIFA”) ou limpe os filtros.</div>`;
+  } else {
+    // navegação agrupada por norma → item
+    const groups=[]; const gi={};
+    pool.forEach(x=>{ const key=x.item.startsWith('443')||x.item==='farmaco'?'RDC443':x.item.startsWith('ifa1')?'ifa1':x.item;
+      if(!gi[key]){ gi[key]={key,x,list:[]}; groups.push(gi[key]); } gi[key].list.push(x); });
+    info=`<span><b>${pool.length}</b> enquadramentos${(S.normas.size||S.rotas.size||S.portes.size||S.favOnly)?' (filtrados)':''} · clique num item para ver documentos, rota e condições</span>`;
+    let lastN='';
+    groups.forEach(g=>{
+      const n=g.x.normaK;
+      if(n!==lastN){ const N=NORMAS.find(z=>z.k===n); html+=`<div class="sec-h">${N.label} · ${N.area}</div>`; lastN=n; }
+      const title= g.key==='RDC443'?'Testes, limites e métodos analíticos (a–i, §13)': g.key==='ifa1'?'Mudanças administrativas (1.x)' : (g.x.normaK==='73'?g.x.subgrupo: g.x.cod.split(' ·')[0]+' — '+(g.x.parentDesc||g.x.desc));
+      const closed=S.closed.has(g.key);
+      html+=`<div class="grp${closed?' closed':''}"><div class="grp-h" data-grp="${esc(g.key)}"><span class="tg">${closed?'▸':'▾'}</span><h3>${esc(title)}</h3><span class="meta">${g.list.length} enquadramento${g.list.length===1?'':'s'}</span></div><div class="cards">${g.list.map(x=>card(x,[])).join('')}</div></div>`;
+    });
+    if(!pool.length) html='<div class="disclaimer">Nenhum enquadramento com estes filtros.</div>';
+  }
+  $('#resinfo').innerHTML=info;
+  $('#results').innerHTML=html;
+}
+$('#results').addEventListener('click',ev=>{
+  const st=ev.target.closest('[data-star]'); if(st){ ev.stopPropagation(); toggleFav(st.dataset.star); return; }
+  const cb=ev.target.closest('[data-cmp]'); if(cb){ ev.stopPropagation(); toggleCmp(cb.dataset.cmp, cb.checked); return; }
+  if(ev.target.closest('.cmpbox')) return;
+  const gh=ev.target.closest('[data-grp]'); if(gh){ const k=gh.dataset.grp; S.closed.has(k)?S.closed.delete(k):S.closed.add(k); renderList(); return; }
+  const c=ev.target.closest('.card'); if(c) open(c.dataset.id);
+});
+$('#results').addEventListener('keydown',ev=>{ if(ev.key==='Enter'){ const c=ev.target.closest('.card'); if(c) open(c.dataset.id); }});
+
+/* ---------- painel inicial: recentes + favoritos ---------- */
+function renderHome(){
+  if(S.q || S.sel){ $('#home').innerHTML=''; return; }
+  const lnk=id=>{ const x=BY[id]; return `<button class="lnk" data-open="${id}">${esc(x.normaTxt)} · ${esc(x.cod)} — ${esc(x.desc)}</button>`; };
+  const favs=[...S.favs].slice(0,8), hist=S.hist.slice(0,8);
+  if(!favs.length && !hist.length){ $('#home').innerHTML=''; return; }
+  $('#home').innerHTML=`<div class="home">
+    <div class="tile"><h5>★ Favoritos</h5>${favs.length?favs.map(lnk).join(''):'<div class="none">Marque ☆ num card para fixar aqui.</div>'}</div>
+    <div class="tile"><h5>Consultados recentemente</h5>${hist.length?hist.map(lnk).join(''):'<div class="none">Seu histórico aparece aqui.</div>'}</div>
+  </div>`;
+}
+$('#home').addEventListener('click',ev=>{ const b=ev.target.closest('[data-open]'); if(b) open(b.dataset.open); });
+
+/* ---------- detalhe ---------- */
+/* Histórico do navegador: abrir um enquadramento empilha um estado, assim o "voltar"
+   do Android / gesto do iOS fecha o detalhe em vez de sair do app. */
+let pushed=false;
+function open(id,noHist,fromPop){
+  if(!BY[id]) return;
+  const wasOpen=!!S.sel;
+  S.sel=id;
+  if(!noHist){ S.hist=[id,...S.hist.filter(h=>h!==id)].slice(0,20); LS.set('hist',S.hist); }
+  if(!fromPop && location.hash!=='#'+id){
+    if(wasOpen||noHist) history.replaceState({enq:id},'','#'+id); else { history.pushState({enq:id},'','#'+id); pushed=true; }
+  }
+  renderDetail(); renderList(); renderHome();
+  $('#detail').scrollTop=0;
+}
+function close(fromPop){
+  if(!fromPop && pushed){ pushed=false; history.back(); return; }   // popstate fará o resto
+  pushed=false; S.sel=null;
+  if(location.hash) history.replaceState(null,'',location.pathname+location.search);
+  renderDetail(); renderList(); renderHome();
+}
+window.addEventListener('popstate',()=>{ const id=decodeURIComponent(location.hash.slice(1)); if(BY[id]) open(id,true,true); else if(S.sel){ pushed=false; close(true); } });
+function renderDetail(){
+  const w=$('#wrap'), d=$('#detail');
+  document.body.classList.toggle('lock',!!S.sel);
+  if(!S.sel){ w.classList.remove('has-detail'); d.innerHTML=''; return; }
+  w.classList.add('has-detail');
+  const x=BY[S.sel], r=ROTA[x.rota], fav=S.favs.has(x.id);
+  const sibs=ITENS[x.item]?ITENS[x.item].ids.map(i=>BY[i]):[];
+  const condBlock=x.cond.length?`<div class="blk"><h4>Condições (gate) <span class="cnt">${x.cond.length}</span><span class="act" style="font-size:calc(11px*var(--fs,1));color:var(--muted)">marque para conferir</span></h4>
+      <ul class="chk">${x.cond.map((c,i)=>`<li><input type="checkbox" id="c${i}"><label for="c${i}"><span>${hl(c)}</span></label></li>`).join('')}</ul></div>`:'';
+  const docsBlock=`<div class="blk"><h4>Documentos necessários <span class="cnt">${x.docs.length}</span><span class="act"><button class="btn" data-act="copydocs">Copiar lista</button></span></h4>
+      ${x.docs.length?`<ol class="docs">${x.docs.map(t=>`<li><span>${hl(t)}</span></li>`).join('')}</ol>`:`<div class="empty-docs">A matriz não detalha os documentos desta variante. Consulte a redação da norma (${esc(x.normaFull)}).</div>`}</div>`;
+  d.innerHTML=`<div class="d-head">
+      <button class="d-close" data-act="close" title="Fechar (Esc)" aria-label="Fechar">×</button>
+      <button class="d-back" data-act="close" aria-label="Voltar para a lista">‹ Voltar</button>
+      <div class="code">${esc(x.normaFull.indexOf('·')>=0&&!x.variante?x.normaFull:x.normaTxt+' · '+x.cod)}</div>
+      ${x.parentDesc?`<div class="parent">${esc(x.parentDesc)}</div>`:''}
+      <h2>${hl(x.desc)}</h2>
+      <div class="d-actions">
+        <button class="btn${fav?' pri':''}" data-act="fav">${fav?'★ Favorito':'☆ Favoritar'}</button>
+        <button class="btn" data-act="cmp">${S.cmp.includes(x.id)?'✓ Na comparação':'+ Comparar'}</button>
+        <button class="btn" data-act="copymd">Copiar resumo</button>
+        <button class="btn" data-act="link">Copiar link</button>
+        <button class="btn" data-act="print">Imprimir / PDF</button>
+        <button class="btn" data-act="report">⚑ Reportar erro</button>
+      </div>
+    </div>
+    <div class="d-body">
+      <div class="rota-box ${x.rota}">
+        <div class="big">${esc(r.label)}</div>
+        <div class="what">${esc(r.what)}</div>
+        ${x.tipoTxt?`<div class="what" style="margin-top:4px"><b>${esc(x.tipoTxt)}</b></div>`:''}
+        ${x.obs.length?`<div class="desc">${x.obs.map(hl).join(' ')}</div>`:''}
+      </div>
+      ${condBlock}
+      ${docsBlock}
+      ${x.concom.length?`<div class="blk"><h4>Concomitâncias permitidas</h4><div class="note concom">${x.concom.map(hl).join('\n')}</div></div>`:''}
+      ${x.condic.length?`<div class="blk"><h4>Condicionantes</h4><div class="note condic">${x.condic.map(hl).join('\n')}</div></div>`:''}
+      ${sibs.length>1?`<div class="blk"><h4>Outras variantes deste item <span class="cnt">${sibs.length}</span></h4><div class="sibs">${sibs.map(s=>`<div class="sib${s.id===x.id?' cur':''}" data-open="${s.id}"><span class="l">${esc(s.variante)}</span><span class="t">${esc(s.desc)}</span>${pillRota(s.rota)}</div>`).join('')}</div></div>`:''}
+      <div class="d-foot">Fonte: ${esc(x.normaFull)} · grupo “${esc(x.grupo)}${x.subgrupo?' — '+esc(x.subgrupo):''}” · id <span style="font-family:var(--mono)">${esc(x.id)}</span> · base ${esc(VERSAO_BASE)}.<br>Orienta o enquadramento; a decisão regulatória é do analista. Confira sempre a norma vigente e a redação oficial.</div>
+    </div>`;
+}
+$('#detail').addEventListener('click',ev=>{
+  const o=ev.target.closest('[data-open]'); if(o){ open(o.dataset.open); return; }
+  const b=ev.target.closest('[data-act]'); if(!b) return;
+  const x=BY[S.sel];
+  switch(b.dataset.act){
+    case 'close': close(); break;
+    case 'fav': toggleFav(x.id); break;
+    case 'cmp': toggleCmp(x.id,!S.cmp.includes(x.id)); break;
+    case 'copydocs': copy(x.docs.map((t,i)=>(i+1)+'. '+t).join('\n'),'Lista de documentos copiada'); break;
+    case 'copymd': copy(md(x),'Resumo copiado (Markdown)'); break;
+    case 'link': copy(location.href.split('#')[0]+'#'+x.id,'Link copiado'); break;
+    case 'print': window.print(); break;
+    case 'report': window.__report(x.id); break;
+  }
+});
+$('#detail').addEventListener('change',ev=>{ const li=ev.target.closest('li'); if(li) li.classList.toggle('done',ev.target.checked); });
+function md(x){
+  const L=[`## ${x.normaTxt} · ${x.cod} — ${x.parentDesc?x.parentDesc+' — ':''}${x.desc}`,'',
+    `**Rota:** ${ROTA[x.rota].label}`+(x.porte!=='nd'?` · **Porte:** ${PORTES.find(p=>p.k===x.porte).label}`:'')];
+  if(x.obs.length){ L.push('','**Descrição:** '+x.obs.join(' ')); }
+  if(x.cond.length){ L.push('','**Condições:**'); x.cond.forEach(c=>L.push('- [ ] '+c)); }
+  L.push('','**Documentos:**'); if(x.docs.length) x.docs.forEach((d,i)=>L.push(`${i+1}. ${d}`)); else L.push('- (não detalhados na matriz — ver norma)');
+  if(x.concom.length){ L.push('','**Concomitâncias:** '+x.concom.join(' ')); }
+  if(x.condic.length){ L.push('','**Condicionantes:** '+x.condic.join(' ')); }
+  L.push('','_Fonte: '+x.normaFull+'. Orientação — a decisão regulatória é do analista; confira a norma vigente._','_Consultor de Enquadramentos · By: Rodolfo Ortigara_');
+  return L.join('\n');
+}
+
+/* ---------- favoritos / comparação ---------- */
+function toggleFav(id){ S.favs.has(id)?S.favs.delete(id):S.favs.add(id); LS.set('favs',[...S.favs]); renderAll(); }
+function toggleCmp(id,on){
+  S.cmp=S.cmp.filter(i=>i!==id); if(on){ if(S.cmp.length>=4){ toast('Compare até 4 enquadramentos'); } else S.cmp.push(id); }
+  renderTray(); renderList(); if(S.sel) renderDetail();
+}
+function renderTray(){
+  $('#tray').classList.toggle('on',S.cmp.length>0);
+  $('#trayIts').innerHTML=S.cmp.map(id=>`<span class="it">${esc(BY[id].normaTxt.replace('RDC ',''))}·${esc(BY[id].cod)}<button data-rm="${id}" aria-label="remover">×</button></span>`).join('');
+}
+$('#trayIts').addEventListener('click',ev=>{ const b=ev.target.closest('[data-rm]'); if(b) toggleCmp(b.dataset.rm,false); });
+$('#cmpClr').onclick=()=>{ S.cmp=[]; renderTray(); renderList(); if(S.sel) renderDetail(); };
+$('#cmpGo').onclick=()=>{
+  if(S.cmp.length<2){ toast('Selecione pelo menos 2 enquadramentos'); return; }
+  const xs=S.cmp.map(i=>BY[i]);
+  const common=d=>xs.every(x=>x.docs.includes(d));
+  const row=(h,f)=>`<tr><th>${h}</th>${xs.map(x=>`<td>${f(x)}</td>`).join('')}</tr>`;
+  $('#cmpBody').innerHTML=`<table class="cmpt">
+    ${row('Enquadramento',x=>`<b style="font-family:var(--mono);color:var(--navy)">${esc(x.normaTxt)} · ${esc(x.cod)}</b><br>${x.parentDesc?`<span style="color:var(--muted)">${esc(x.parentDesc)}</span><br>`:''}<b>${esc(x.desc)}</b>`)}
+    ${row('Rota',x=>pillRota(x.rota))}
+    ${row('Porte',x=>pillPorte(x)||'—')}
+    ${row('Condições',x=>x.cond.length?`<ul>${x.cond.map(c=>`<li>${esc(c)}</li>`).join('')}</ul>`:'—')}
+    ${row('Documentos',x=>x.docs.length?`<ul>${x.docs.map(d=>`<li class="${common(d)?'common':'diff'}">${esc(d)}</li>`).join('')}</ul>`:'<span class="empty-docs">ver norma</span>')}
+    ${row('Concomitâncias',x=>x.concom.length?esc(x.concom.join(' ')):'—')}
+    ${row('Condicionantes',x=>x.condic.length?esc(x.condic.join(' ')):'—')}
+    ${row('Descrição',x=>x.obs.length?esc(x.obs.join(' ')):'—')}
+  </table>`;
+  $('#ovl').classList.add('on');
+};
+$('#ovlClose').onclick=()=>$('#ovl').classList.remove('on');
+$('#ovl').addEventListener('click',ev=>{ if(ev.target.id==='ovl') $('#ovl').classList.remove('on'); });
+
+/* ---------- utilidades ---------- */
+function toast(t){ const el=$('#toast'); el.textContent=t; el.classList.add('on'); clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove('on'),1800); }
+function copy(t,msg){
+  const fb=()=>{ const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); toast(msg);}catch(_){toast('Não foi possível copiar');} ta.remove(); };
+  if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(t).then(()=>toast(msg),fb); else fb();
+}
+function syncHdr(){ document.documentElement.style.setProperty('--hdr',($('#hdr').offsetHeight+($('.filters').offsetHeight)+16)+'px'); }
+
+/* ---------- busca: eventos ---------- */
+let tmr=null;
+$('#q').addEventListener('input',ev=>{ clearTimeout(tmr); tmr=setTimeout(()=>{ S.q=ev.target.value.trim(); $('#clr').style.display=S.q?'block':'none'; $('#hdr').classList.toggle('typing',!!S.q); $('#kbd').style.display=S.q?'none':''; renderList(); renderHome(); if(S.sel) renderDetail(); },90); });
+$('#q').addEventListener('keydown',ev=>{ if(ev.key==='Enter'){ ev.preventDefault(); $('#q').blur(); if(!matchMedia('(max-width:700px)').matches){ const c=document.querySelector('#results .card'); if(c) open(c.dataset.id); } } });  // no celular, "Buscar" só fecha o teclado
+$('#clr').onclick=()=>{ $('#q').value=''; $('#q').dispatchEvent(new Event('input')); $('#q').focus(); };
+document.querySelectorAll('[data-ex]').forEach(b=>b.onclick=()=>{ $('#q').value=b.dataset.ex; $('#q').dispatchEvent(new Event('input')); });
+document.addEventListener('keydown',ev=>{
+  if(ev.key==='/' && document.activeElement!==$('#q') && !/input|textarea/i.test(document.activeElement.tagName)){ ev.preventDefault(); $('#q').focus(); }
+  if(ev.key==='Escape'){ if($('#ovl').classList.contains('on')) $('#ovl').classList.remove('on'); else if(S.sel) close(); }
+});
+window.addEventListener('resize',syncHdr);
+
+function renderAll(){ renderFilters(); renderList(); renderHome(); renderDetail(); renderTray(); syncHdr(); }
+
+/* ---------- start ---------- */
+const nIt=MATRIZ_ENQ.length;
+$('#stats').innerHTML=`<b>${ENQ.length}</b> enquadramentos<br>${nIt} itens · 3 normas`;
+$('#baseinfo').textContent=`${nIt} itens / ${ENQ.length} enquadramentos, atualizada em ${VERSAO_BASE}`;
+renderAll();
+const h=decodeURIComponent(location.hash.slice(1)); if(BY[h]) open(h,true);
+window.__ENQ=ENQ; // inspeção/depuração
+
+/* ---------- reportar erro ---------- */
+(function(){
+  const TIPOS=['Documento faltando/errado','Rota de implementação','Condição/concomitância','Texto desatualizado (RDC nova)','Busca não encontrou','Outro'];
+  let ctxId=null, tipo=TIPOS[0];
+  const tiposHtml=()=>TIPOS.map(t=>`<button class="chip${t===tipo?' on':''}" data-t="${esc(t)}">${esc(t)}</button>`).join('');
+  function texto(){
+    const x=ctxId&&BY[ctxId];
+    return [
+      'Tipo: '+tipo,
+      'Enquadramento: '+(x?`${x.normaTxt} · ${x.cod} — ${x.parentDesc?x.parentDesc+' — ':''}${x.desc} (id ${x.id})`:'(geral)'),
+      x?'Link: '+location.href.split('#')[0]+'#'+x.id:'',
+      S.q?'Busca usada: '+S.q:'',
+      '', 'Descrição:', $('#repTxt').value.trim()||'(descreva aqui)',
+      $('#repNome').value.trim()?'\nContato: '+$('#repNome').value.trim():'',
+      '', '— Base de '+VERSAO_BASE+' · '+navigator.userAgent.replace(/\s+/g,' ').slice(0,120)
+    ].filter((l,i,a)=>l!==''||a[i-1]!=='').join('\n');
+  }
+  const assunto=()=>{ const x=ctxId&&BY[ctxId]; return '[Consultor] '+tipo+(x?' — '+x.normaTxt+' · '+x.cod:''); };
+  function open(id){
+    ctxId=id||S.sel||null; const x=ctxId&&BY[ctxId];
+    $('#repCtx').innerHTML=x?`Sobre: <b>${esc(x.normaTxt)} · ${esc(x.cod)}</b> — ${esc(x.desc)}`:'Relato geral (abra um enquadramento antes para relatar sobre ele).';
+    $('#repTipos').innerHTML=tiposHtml();
+    $('#repMail').hidden=!REPORT_EMAIL || REPORT_EMAIL.indexOf('__')===0;
+    $('#rep').classList.add('on');
+  }
+  const close=()=>$('#rep').classList.remove('on');
+  window.__report=open;
+  $('#repTop').onclick=()=>open();
+  $('#repX').onclick=close;
+  $('#rep').addEventListener('click',ev=>{ if(ev.target.id==='rep') close(); });
+  $('#repTipos').addEventListener('click',ev=>{ const b=ev.target.closest('[data-t]'); if(!b) return; tipo=b.dataset.t; $('#repTipos').innerHTML=tiposHtml(); });
+  $('#repMail').onclick=()=>{ location.href='mailto:'+REPORT_EMAIL+'?subject='+encodeURIComponent(assunto())+'&body='+encodeURIComponent(texto()); };
+  $('#repGh').onclick=()=>{ window.open('https://github.com/'+REPORT_REPO+'/issues/new?title='+encodeURIComponent(assunto())+'&body='+encodeURIComponent(texto()),'_blank','noopener'); };
+  $('#repCopy').onclick=()=>copy(assunto()+'\n\n'+texto(),'Relato copiado — cole no e-mail ou mensagem');
+  document.addEventListener('keydown',ev=>{ if(ev.key==='Escape') close(); });
+})();
+
+/* ---------- convite para instalar na tela inicial ----------
+   Android/Chrome/Edge/Samsung: usa o pedido nativo (beforeinstallprompt).
+   iPhone/iPad: o iOS não deixa o site instalar sozinho — mostramos o passo a passo
+   (Compartilhar → Adicionar à Tela de Início). Aparece só no 1º acesso; depois fica
+   o link "Instalar no celular" no rodapé. Nunca aparece se já estiver instalado. */
+(function(){
+  const ua=navigator.userAgent||'';
+  const isIOS=/iPad|iPhone|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  const isMobile=isIOS||/Android|Mobi/i.test(ua);
+  const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+  const web=/^https?:$/.test(location.protocol);
+  if(standalone||!web||!isMobile) return;
+  let deferred=null;
+  const iosSafari=isIOS&&!/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
+  const share='<span class="k"><svg width="14" height="16" viewBox="0 0 14 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V1M3.5 4.5 7 1l3.5 3.5"/><path d="M4.5 7H2v10h10V7H9.5"/></svg>Compartilhar</span>';
+  function body(){
+    if(deferred) return '';
+    if(isIOS) return `<ol><li>Toque em ${share} ${iosSafari?'na barra do Safari':'(no menu ••• ou na barra de endereço)'}</li><li>Role e toque em <span class="k">Adicionar à Tela de Início</span></li><li>Toque em <span class="k">Adicionar</span></li></ol>`;
+    return `<ol><li>Toque no menu <span class="k">⋮</span> do navegador</li><li>Toque em <span class="k">Instalar app</span> ou <span class="k">Adicionar à tela inicial</span></li></ol>`;
+  }
+  function show(){
+    $('#instBody').innerHTML=body();
+    $('#instGo').textContent=deferred?'Instalar':'Entendi';
+    $('#inst').classList.add('on');
+  }
+  function hide(){ $('#inst').classList.remove('on'); LS.set('instVisto',1); }
+  $('#instNo').onclick=hide;
+  $('#inst').addEventListener('click',ev=>{ if(ev.target.id==='inst') hide(); });
+  $('#instGo').onclick=async()=>{
+    if(deferred){ deferred.prompt(); try{ await deferred.userChoice; }catch(_){} deferred=null; }
+    hide();
+  };
+  $('#instLink').hidden=false; $('#instLink').onclick=show;
+  window.addEventListener('beforeinstallprompt',ev=>{ ev.preventDefault(); deferred=ev; if($('#inst').classList.contains('on')) show(); });
+  window.addEventListener('appinstalled',()=>{ hide(); $('#instLink').hidden=true; toast('App instalado na tela inicial'); });
+  if(!LS.get('instVisto',0) && !location.hash) setTimeout(show,1200);   // 1º acesso (link direto p/ um item não é interrompido)
+})();
+// Modo app instalado (PWA): só quando servido por http(s) e existir o sw.js ao lado.
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register('sw.js').catch(()=>{});
+})();
+</script>
+</body>
+</html>
