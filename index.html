@@ -346,12 +346,13 @@
     </div>
     <div class="search">
       <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-      <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="O que mudou? Ex.: método de doseamento, fabricante do IFA com CADIFA, prazo de validade…">
+      <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="O que mudou? Ou o código: 6f, 2.3.1, 443a…">
       <span class="kbd" id="kbd">/</span>
       <button class="clear" id="clr" title="Limpar busca" aria-label="Limpar busca">×</button>
       <button class="ftoggle" id="ftog" aria-expanded="false" aria-controls="filtersBox">Filtros <span class="b" id="fcount" hidden></span></button>
     </div>
     <div class="examples"><span>Experimente:</span>
+      <button data-ex="6f">6f</button>
       <button data-ex="método">método</button>
       <button data-ex="fabricante IFA CADIFA">fabricante do IFA com CADIFA</button>
       <button data-ex="prazo de validade">prazo de validade</button>
@@ -406,7 +407,7 @@ const MATRIZ_ENQ = [{"id":"443a","grupo":"Métodos, testes e limites (RDC 443)",
 <script>
 (function(){
 'use strict';
-const VERSAO_BASE='10/11/2026';
+const VERSAO_BASE='10/11/2026 17:42';
 const SITE_URL='https://rodolfoortigara-gif.github.io/consultor-enquadramentos/';   // links copiados sempre apontam p/ o site público
 /* tamanho da fonte (por pessoa, guardado no navegador) */
 const FS_STEPS=[0.85,0.92,1,1.1,1.2,1.35,1.5];
@@ -462,7 +463,7 @@ function codLabel(e,v){
 const ENQ=[], BY={}, ITENS={};
 MATRIZ_ENQ.forEach(e=>{
   const nk=normaKey(e.norma);
-  const base={item:e.id, grupo:e.grupo, subgrupo:e.subgrupo||'', normaK:nk, normaTxt:e.norma.replace(/ · .*$/,''), normaFull:e.norma};
+  const base={item:e.id, rawCod:e.cod, grupo:e.grupo, subgrupo:e.subgrupo||'', normaK:nk, normaTxt:e.norma.replace(/ · .*$/,''), normaFull:e.norma};
   if(e.variantes && e.variantes.length){
     ITENS[e.id]={e, ids:[]};
     e.variantes.forEach(v=>{
@@ -493,6 +494,11 @@ ENQ.forEach(x=>{
   x.hay=norm([x.cod,x.normaFull,x.grupo,x.subgrupo,x.parentDesc,x.desc,x.nota,x.tipoTxt,ROTA[x.rota].label,x.cond.join(' '),x.docs.join(' '),x.expl].join(' | '));
   x.hayTop=norm([x.cod,x.parentDesc,x.desc,x.subgrupo,x.nota].join(' '));
   x.hayDesc=norm(x.desc);
+  // chaves de código p/ busca direta: "6f", "73 6f", "2.3.1", "443a", "443 §13"…
+  const d=s=>codeNorm(s), it=d(x.rawCod), full=it+(x.variante?d(x.variante):'');
+  const pre={'73':['73','732016'],'359':['359','3592020'],'443':['443','4432020']}[x.normaK];
+  x.codeKeys = x.normaK==='443' ? pre.map(p=>p+full) : [full,...pre.map(p=>p+full)];
+  x.itemKeys = (x.variante && x.normaK!=='443') ? [it,...pre.map(p=>p+it)] : [];
 });
 
 /* ---------- estado (filtros na URL não; favoritos/histórico no navegador) ---------- */
@@ -574,6 +580,18 @@ function card(x,toks){
   </div>`;
 }
 
+/* código digitado → forma canônica (sem espaços, pontos, "item", "rdc"…) */
+function codeNorm(s){ return norm(s).replace(/\b(rdc|item|itens|anexo|variante|letra|n[oº°]?)\b/g,'').replace(/[\s.·\-_\/§,:ºª°]/g,''); }
+function codeHits(q,pool){
+  const c=codeNorm(q); if(!c || c.length>10 || !/\d/.test(c) || !/^[0-9a-z]+$/.test(c)) return null;
+  // exatos primeiro; depois itens inteiros (ex.: "11" = RDC 359 · 1.1 e também RDC 73 · Item 11)
+  const exact=pool.filter(x=>x.codeKeys.includes(c)), item=pool.filter(x=>!exact.includes(x)&&x.itemKeys.includes(c));
+  const list=[...exact,...item]; if(!list.length) return null;
+  const alvos=[]; exact.forEach(x=>alvos.push(`${x.normaTxt} · ${x.cod}`));
+  const seen=new Set(); item.forEach(x=>{ const k=x.item; if(seen.has(k)) return; seen.add(k); alvos.push(`${x.normaTxt} · ${x.cod.split(' · ').slice(0,-1).join(' · ')} (todas as variantes)`); });
+  return {c,list,alvo:alvos.join(' e ')};
+}
+
 /* ---------- lista / resultados ---------- */
 function renderList(){
   const toks0=tokens(S.q);
@@ -583,7 +601,13 @@ function renderList(){
   HL=toks.length?new RegExp('('+toks.map(tokRe).sort((a,b)=>b.length-a.length).join('|')+')','g'):null;
   const pool=ENQ.filter(passFilters);
   let html='', info='';
-  if(toks.length){
+  const ch=S.q?codeHits(S.q,pool):null;
+  if(ch){
+    HL=null;
+    const alvo=ch.alvo;
+    info=`<span>Código <b>“${esc(S.q)}”</b> → <b>${esc(alvo)}</b> · ${ch.list.length} enquadramento${ch.list.length===1?'':'s'}</span>`;
+    html=`<div class="cards">${ch.list.map(x=>card(x,[])).join('')}</div>`;
+  } else if(toks.length){
     let res=pool.map(x=>({x,...score(x,toks)}));
     let full=res.filter(r=>r.all), partial=false;
     if(!full.length){ full=res.filter(r=>r.hit>0); partial=true; }
@@ -795,7 +819,7 @@ function renderAll(){ renderFilters(); renderList(); renderHome(); renderDetail(
 /* ---------- start ---------- */
 const nIt=MATRIZ_ENQ.length;
 $('#stats').innerHTML=`<b>${ENQ.length}</b> enquadramentos<br>${nIt} itens · 3 normas`;
-$('#baseinfo').textContent=`${nIt} itens / ${ENQ.length} enquadramentos, atualizada em ${VERSAO_BASE}`;
+$('#baseinfo').textContent=`${nIt} itens / ${ENQ.length} enquadramentos · versão de ${VERSAO_BASE}`;
 renderAll();
 const h=decodeURIComponent(location.hash.slice(1)); if(BY[h]) open(h,true);
 window.__ENQ=ENQ; // inspeção/depuração
