@@ -169,6 +169,49 @@
   /* ---------- bandeja de comparação ---------- */
   .tray{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:14px;padding:8px 10px 8px 14px;display:none;gap:10px;align-items:center;z-index:40;box-shadow:var(--shadow-lg);max-width:calc(100vw - 24px)}
   .tray.on{display:flex}
+  /* identificação das mudanças selecionadas: número + código + texto-chave */
+  .num{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:calc(11px*var(--fs,1));font-family:var(--font);padding:0 5px;flex:none}
+  .chipsel{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.14);border-radius:999px;padding:3px 10px 3px 4px;font-size:calc(12px*var(--fs,1));white-space:nowrap}
+  .chipsel .num{background:#fff;color:var(--navy)}
+  .chipsel .k{opacity:.85}
+  .chipsel button{background:none;border:0;color:#fff;opacity:.7;padding:0 0 0 2px;font-size:calc(14px*var(--fs,1))}
+  .selrow{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;max-width:100%}
+  .selrow::-webkit-scrollbar{display:none}
+  /* pacote de mudanças concomitantes */
+  .pacbar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);width:min(760px,calc(100vw - 24px));background:var(--navy);color:#fff;border-radius:14px;padding:8px 8px 8px 14px;display:none;gap:10px;align-items:center;z-index:41;box-shadow:var(--shadow-lg);max-width:calc(100vw - 24px)}
+  .pacbar.on{display:flex}
+  .pacbar .pt{flex:1}
+  .pacbar .pt{font-size:calc(13px*var(--fs,1));line-height:1.3;min-width:0}
+  .pacbar .selrow{margin-top:5px}
+  .pacbar .pt small{display:block;opacity:.85;font-size:calc(11.5px*var(--fs,1))}
+  .pacbar .btn{background:#fff;color:var(--navy);border-color:#fff}
+  .pacbar .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
+  .pick-b,.pac-b{padding:14px 18px 22px}
+  .pick-ctx{background:var(--soft);border-radius:12px;padding:10px 12px;font-size:calc(13px*var(--fs,1));margin-bottom:10px}
+  .pick-ctx .cc{margin-top:6px;color:var(--gray);font-size:calc(12.5px*var(--fs,1))}
+  #pickQ{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-family:inherit;font-size:max(16px,calc(15px*var(--fs,1)));margin-bottom:10px}
+  .pick-lbl{font-size:calc(11.5px*var(--fs,1));text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:4px 2px 8px;font-weight:700}
+  .pk{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px;background:#fff}
+  .pk .tx{flex:1;min-width:0;font-size:calc(13.5px*var(--fs,1))}
+  .pk .tx .c{font-family:var(--mono);font-weight:700;color:var(--navy);font-size:calc(12px*var(--fs,1))}
+  .pk .tx .pd{color:var(--muted);font-size:calc(12px*var(--fs,1))}
+  .pk .side2{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none}
+  .pk.in{background:var(--soft);border-color:var(--navy)}
+  .pac-acts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .pac-warn{background:#FFF6E5;border:1px solid #F3D9A4;border-radius:12px;padding:10px 12px;font-size:calc(13px*var(--fs,1));margin-bottom:14px}
+  .mud{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-left:5px solid var(--gray-bg);border-radius:12px;padding:10px 12px;margin-bottom:8px;background:#fff}
+  .mud.r-hmp{border-left-color:var(--green)} .mud.r-imediata{border-left-color:#D4A90F} .mud.r-aguarda{border-left-color:var(--orange)}
+  .mud .tx{flex:1;min-width:0;font-size:calc(13.5px*var(--fs,1));cursor:pointer}
+  .mud .c{font-family:var(--mono);font-weight:700;color:var(--navy);font-size:calc(12px*var(--fs,1))}
+  .mud .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center}
+  .mud .main{background:var(--navy);color:#fff;border-radius:999px;padding:1px 8px;font-size:calc(11px*var(--fs,1));font-weight:700}
+  .mud .lnkb{border:0;background:none;color:var(--navy);text-decoration:underline;font-size:calc(12px*var(--fs,1));padding:0}
+  .mud .rm{border:0;background:var(--soft);border-radius:50%;width:30px;height:30px;color:var(--navy);font-size:calc(16px*var(--fs,1));flex:none}
+  ol.docs li .who{display:inline-flex;gap:4px;flex-wrap:wrap;margin-left:6px;vertical-align:middle}
+  ol.docs li .who span{font-family:var(--mono);font-size:calc(10.5px*var(--fs,1));background:var(--soft);color:var(--navy);border-radius:6px;padding:0 5px}
+  .grpcond{margin:0 0 8px}
+  .grpcond b{font-family:var(--mono);color:var(--navy);font-size:calc(12px*var(--fs,1))}
+  .grpcond ul{margin:4px 0 0;padding-left:20px;font-size:calc(13px*var(--fs,1))}
   .tray .its{display:flex;gap:6px;flex-wrap:wrap}
   .tray .it{background:rgba(255,255,255,.12);border-radius:8px;padding:2px 8px;font-size:calc(12px*var(--fs,1));font-family:var(--mono)}
   .tray .it button{background:none;border:0;color:#fff;opacity:.6;padding:0 0 0 4px}
@@ -179,10 +222,16 @@
   .modal-h{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
   .modal-h h2{margin:0;font-size:calc(16px*var(--fs,1))}
   .modal-h .sp{flex:1}
-  .cmp{overflow:auto;padding:0 0 10px}
-  table.cmpt{border-collapse:collapse;width:100%;font-size:calc(13px*var(--fs,1))}
-  table.cmpt th,table.cmpt td{border-bottom:1px solid var(--line);padding:9px 12px;vertical-align:top;text-align:left;min-width:240px}
-  table.cmpt th:first-child{min-width:120px;width:120px;position:sticky;left:0;background:#FAFAFA;color:var(--muted);font-size:calc(11.5px*var(--fs,1));text-transform:uppercase;letter-spacing:.5px}
+  .cmp{overflow:auto;padding:0 0 10px;max-height:calc(100vh - 150px)}
+  table.cmpt{border-collapse:separate;border-spacing:0;width:100%;font-size:calc(13px*var(--fs,1))}
+  table.cmpt.n3{min-width:660px} table.cmpt.n4{min-width:880px}
+  table.cmpt td{border-bottom:1px solid var(--line);padding:9px 12px;vertical-align:top;text-align:left}
+  table.cmpt td+td{border-left:1px solid var(--line)}
+  table.cmpt thead th{position:sticky;top:0;z-index:1;background:#fff;text-align:left;vertical-align:top;padding:10px 12px;border-bottom:2px solid var(--navy)}
+  table.cmpt thead th+th{border-left:1px solid var(--line)}
+  table.cmpt thead .c{font-family:var(--mono);font-weight:700;color:var(--navy)}
+  table.cmpt thead .k{font-size:calc(12.5px*var(--fs,1));font-weight:600;margin-top:3px;color:var(--ink)}
+  table.cmpt tr.sec th{background:var(--soft);color:var(--navy);font-size:calc(11.5px*var(--fs,1));text-transform:uppercase;letter-spacing:.6px;text-align:left;padding:6px 12px;font-weight:700}
   table.cmpt ul{margin:0;padding-left:18px}
   table.cmpt li.common{color:var(--muted)}
   table.cmpt li.diff{font-weight:600}
@@ -307,11 +356,14 @@
     .home{grid-template-columns:1fr}
     .tray{bottom:calc(10px + env(safe-area-inset-bottom));left:10px;right:10px;transform:none;flex-wrap:wrap;max-width:none}
     .tray .its{flex:1 1 100%}
+    .pacbar{left:10px;right:10px;transform:none;max-width:none;bottom:calc(10px + env(safe-area-inset-bottom))}
+    .pacbar .pt{flex:1;min-width:0}
     .overlay{padding:0}
     .modal{border-radius:0;min-height:100%}
     .modal-h{position:sticky;top:0;background:#fff;z-index:2;padding-top:calc(12px + env(safe-area-inset-top))}
-    table.cmpt th,table.cmpt td{min-width:200px}
-    table.cmpt th:first-child{min-width:92px;width:92px}
+    table.cmpt td,table.cmpt thead th{min-width:0;padding:8px 10px}
+    table.cmpt.n3{min-width:500px} table.cmpt.n4{min-width:660px}
+    .cmp{overflow:auto;max-height:calc(100dvh - 120px)}
     .d-actions{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-right:-18px;padding-right:18px}
     .d-actions::-webkit-scrollbar{display:none}
     .d-actions .btn{flex:none}
@@ -320,7 +372,7 @@
   }
   /* ---------- impressão: só o detalhe ---------- */
   @media print{
-    header.top,.filters,.list,.tray,.d-actions,.d-close,footer.ft,.overlay{display:none!important}
+    header.top,.filters,.list,.tray,.pacbar,.d-actions,.d-close,footer.ft,.overlay{display:none!important}
     .wrap,.wrap.has-detail{display:block;padding:0}
     .detail{display:block;position:static;max-height:none;box-shadow:none;border:0}
     .d-head{position:static}
@@ -377,8 +429,11 @@
 
 <footer class="ft">Consultor de Enquadramentos · <b>By: Rodolfo Ortigara</b> · base: <span id="baseinfo"></span>. Não substitui a leitura da RDC. <button class="inst" id="instLink" hidden>Instalar no celular</button> Itens marcados como “porte” foram derivados da classificação indicada na matriz (Menor/Maior/HMP/notificação).</footer>
 
-<div class="tray" id="tray"><b style="font-size:calc(12px*var(--fs,1))">Comparar:</b><div class="its" id="trayIts"></div><button class="btn pri" id="cmpGo">Comparar lado a lado</button><button class="btn" id="cmpClr">Limpar</button></div>
-<div class="overlay" id="ovl"><div class="modal"><div class="modal-h"><h2>Comparação de enquadramentos</h2><span class="sp"></span><button class="btn" onclick="window.print()">Imprimir</button><button class="btn pri" id="ovlClose">Fechar</button></div><div class="legend">Nos documentos, <b>negrito</b> = exclusivo daquele enquadramento; cinza = comum a todos os comparados.</div><div class="cmp" id="cmpBody"></div></div></div>
+<div class="tray" id="tray"><b style="font-size:calc(12px*var(--fs,1))">Comparar:</b><div class="its selrow" id="trayIts"></div><button class="btn pri" id="cmpGo">Comparar lado a lado</button><button class="btn" id="cmpClr">Limpar</button></div>
+<div class="overlay" id="ovl"><div class="modal"><div class="modal-h"><h2>Comparação de enquadramentos</h2><span class="sp"></span><button class="btn pri" id="cmpShare">↗ Compartilhar</button><button class="btn" id="ovlClose">Fechar</button></div><div class="legend">Nos documentos, <b>negrito</b> = exclusivo daquele enquadramento; cinza = comum a todos os comparados.</div><div class="cmp" id="cmpBody"></div></div></div>
+<div class="pacbar" id="pacBar"><div class="pt"><b>Mudanças concomitantes: <span id="pacN"></span></b><small id="pacRotaTx"></small><div class="selrow" id="pacChips"></div></div><button class="btn ghost" id="pacAddBar">+ Adicionar</button><button class="btn" id="pacOpen">Ver pacote</button></div>
+<div class="overlay" id="pacPick"><div class="modal"><div class="modal-h"><h2>Adicionar mudança concomitante</h2><span class="sp"></span><button class="btn pri" id="pickClose">Concluir</button></div><div class="pick-b"><div class="pick-ctx" id="pickCtx"></div><input id="pickQ" type="search" autocomplete="off" placeholder="Busque por texto ou código (ex.: 6d, 2.5.1, 443e)"><div id="pickRes"></div></div></div></div>
+<div class="overlay" id="pacView"><div class="modal"><div class="modal-h"><h2>Petição com mudanças concomitantes</h2><span class="sp"></span><button class="btn pri" id="pacClose">Fechar</button></div><div class="pac-b" id="pacBody"></div></div></div>
 <div class="toast" id="toast"></div>
 <div class="install" id="rep" role="dialog" aria-modal="true" aria-labelledby="repT"><div class="sheet">
   <button class="x" id="repX" aria-label="Fechar">×</button>
@@ -407,7 +462,7 @@ const MATRIZ_ENQ = [{"id":"443a","grupo":"Métodos, testes e limites (RDC 443)",
 <script>
 (function(){
 'use strict';
-const VERSAO_BASE='10/11/2026 17:42';
+const VERSAO_BASE='10/11/2026 18:27';
 const SITE_URL='https://rodolfoortigara-gif.github.io/consultor-enquadramentos/';   // links copiados sempre apontam p/ o site público
 /* tamanho da fonte (por pessoa, guardado no navegador) */
 const FS_STEPS=[0.85,0.92,1,1.1,1.2,1.35,1.5];
@@ -702,7 +757,9 @@ function renderDetail(){
       <h2>${hl(x.desc)}</h2>
       <div class="d-actions">
         <button class="btn${fav?' pri':''}" data-act="fav">${fav?'★ Favorito':'☆ Favoritar'}</button>
+        <button class="btn pri" data-act="concom">${S.pac.includes(x.id)&&S.pac.length>1?'⊕ Concomitantes ('+S.pac.length+')':'⊕ Concomitante'}</button>
         <button class="btn" data-act="cmp">${S.cmp.includes(x.id)?'✓ Na comparação':'+ Comparar'}</button>
+        <button class="btn" data-act="share">↗ Compartilhar</button>
         <button class="btn" data-act="copymd">Copiar resumo</button>
         <button class="btn" data-act="link">Copiar link</button>
         <button class="btn" data-act="print">Imprimir / PDF</button>
@@ -732,6 +789,8 @@ $('#detail').addEventListener('click',ev=>{
     case 'close': close(); break;
     case 'fav': toggleFav(x.id); break;
     case 'cmp': toggleCmp(x.id,!S.cmp.includes(x.id)); break;
+    case 'concom': startConcom(x.id); break;
+    case 'share': compartilhar(`${x.normaTxt} · ${x.cod} — ${x.desc}`, textoEnq(x,true)); break;
     case 'copydocs': copy(textoEnq(x,false),'Lista copiada (com cabeçalho e link)'); break;
     case 'copymd': copy(textoEnq(x,true),'Resumo completo copiado'); break;
     case 'link': copy(linkDe(x),'Link copiado'); break;
@@ -769,30 +828,182 @@ function toggleCmp(id,on){
   renderTray(); renderList(); if(S.sel) renderDetail();
 }
 function renderTray(){
-  $('#tray').classList.toggle('on',S.cmp.length>0);
-  $('#trayIts').innerHTML=S.cmp.map(id=>`<span class="it">${esc(BY[id].normaTxt.replace('RDC ',''))}·${esc(BY[id].cod)}<button data-rm="${id}" aria-label="remover">×</button></span>`).join('');
+  $('#tray').classList.toggle('on',S.cmp.length>0); if(typeof renderPacBar==='function') setTimeout(renderPacBar,0);
+  $('#trayIts').innerHTML=S.cmp.map((id,i)=>chipSel(BY[id],i,'data-rm')).join('');
 }
 $('#trayIts').addEventListener('click',ev=>{ const b=ev.target.closest('[data-rm]'); if(b) toggleCmp(b.dataset.rm,false); });
 $('#cmpClr').onclick=()=>{ S.cmp=[]; renderTray(); renderList(); if(S.sel) renderDetail(); };
-$('#cmpGo').onclick=()=>{
+function openCmp(){
   if(S.cmp.length<2){ toast('Selecione pelo menos 2 enquadramentos'); return; }
   const xs=S.cmp.map(i=>BY[i]);
   const common=d=>xs.every(x=>x.docs.includes(d));
-  const row=(h,f)=>`<tr><th>${h}</th>${xs.map(x=>`<td>${f(x)}</td>`).join('')}</tr>`;
-  $('#cmpBody').innerHTML=`<table class="cmpt">
-    ${row('Enquadramento',x=>`<b style="font-family:var(--mono);color:var(--navy)">${esc(x.normaTxt)} · ${esc(x.cod)}</b><br>${x.parentDesc?`<span style="color:var(--muted)">${esc(x.parentDesc)}</span><br>`:''}<b>${esc(x.desc)}</b>`)}
-    ${row('Rota',x=>pillRota(x.rota))}
-    ${row('Porte',x=>pillPorte(x)||'—')}
-    ${row('Condições',x=>x.cond.length?`<ul>${x.cond.map(c=>`<li>${esc(c)}</li>`).join('')}</ul>`:'—')}
-    ${row('Documentos',x=>x.docs.length?`<ul>${x.docs.map(d=>`<li class="${common(d)?'common':'diff'}">${esc(d)}</li>`).join('')}</ul>`:'<span class="empty-docs">ver norma</span>')}
-    ${row('Concomitâncias',x=>x.concom.length?esc(x.concom.join(' ')):'—')}
-    ${row('Condicionantes',x=>x.condic.length?esc(x.condic.join(' ')):'—')}
-    ${row('Descrição',x=>x.obs.length?esc(x.obs.join(' ')):'—')}
+  // layout: cada mudança = uma coluna (cabeçalho fixo); cada tópico = faixa de título em toda a largura + linha de valores
+  const n=xs.length;
+  const sec=(h,f)=>`<tr class="sec"><th colspan="${n}">${h}</th></tr><tr>${xs.map(x=>`<td style="width:${(100/n).toFixed(2)}%">${f(x)}</td>`).join('')}</tr>`;
+  $('#cmpBody').innerHTML=`<table class="cmpt n${n}">
+    <thead><tr>${xs.map((x,i)=>`<th class="hd">${numB(i)} <span class="c">${esc(codCurto(x))}</span><div class="k">${esc(chave(x))}</div></th>`).join('')}</tr></thead>
+    <tbody>
+    ${sec('Enquadramento',x=>`<b style="font-family:var(--mono);color:var(--navy)">${esc(x.normaTxt)} · ${esc(x.cod)}</b><br>${x.parentDesc?`<span style="color:var(--muted)">${esc(x.parentDesc)}</span><br>`:''}<b>${esc(x.desc)}</b>`)}
+    ${sec('Rota',x=>pillRota(x.rota))}
+    ${sec('Porte',x=>pillPorte(x)||'—')}
+    ${sec('Condições',x=>x.cond.length?`<ul>${x.cond.map(c=>`<li>${esc(c)}</li>`).join('')}</ul>`:'—')}
+    ${sec('Documentos',x=>x.docs.length?`<ul>${x.docs.map(d=>`<li class="${common(d)?'common':'diff'}">${esc(d)}</li>`).join('')}</ul>`:'<span class="empty-docs">ver norma</span>')}
+    ${sec('Concomitâncias',x=>x.concom.length?esc(x.concom.join(' ')):'—')}
+    ${sec('Condicionantes',x=>x.condic.length?esc(x.condic.join(' ')):'—')}
+    ${sec('Descrição',x=>x.obs.length?esc(x.obs.join(' ')):'—')}
+    </tbody>
   </table>`;
   $('#ovl').classList.add('on');
-};
+}
+$('#cmpGo').onclick=openCmp;
 $('#ovlClose').onclick=()=>$('#ovl').classList.remove('on');
 $('#ovl').addEventListener('click',ev=>{ if(ev.target.id==='ovl') $('#ovl').classList.remove('on'); });
+
+/* ---------- mudanças concomitantes (pacote) ----------
+   S.pac = [principal, ...concomitantes]. Fica guardado no navegador e pode ser compartilhado por link (#pac=…).
+   A "rota mais exigente" é orientativa: a análise de concomitância continua sendo do analista. */
+const RANK={hmp:1,imediata:2,aguarda:3};
+/* texto-chave = descrição curta (até o primeiro parêntese/travessão, máx. ~34 caracteres) */
+function chave(x){ let s=x.desc.split(/\s*[(—]/)[0].trim(); if(s.length>34) s=s.slice(0,33).replace(/\s+\S*$/,'')+'…'; return s; }
+const numB=i=>`<span class="num">${i+1}</span>`;
+const chipSel=(x,i,rmAttr)=>`<span class="chipsel" title="${esc(x.normaTxt+' · '+x.cod+' — '+x.desc)}">${numB(i)}<b>${esc(codCurto(x))}</b><span class="k">${esc(chave(x))}</span>${rmAttr?`<button ${rmAttr}="${x.id}" aria-label="remover">×</button>`:''}</span>`;
+S.pac=LS.get('pac',[]).filter(id=>BY[id]);
+function savePac(){
+  LS.set('pac',S.pac); renderPacBar();
+  if(S.sel) renderDetail();
+  if($('#pacView').classList.contains('on')) renderPac();
+  if($('#pacPick').classList.contains('on')) renderPick();
+}
+function pacAdd(id){ if(!S.pac.includes(id)){ S.pac.push(id); toast('Adicionada ao pacote: '+BY[id].normaTxt.replace('RDC ','')+' · '+BY[id].cod); } savePac(); }
+function pacRm(id){ S.pac=S.pac.filter(i=>i!==id); savePac(); }
+function pacMain(id){ S.pac=[id,...S.pac.filter(i=>i!==id)]; savePac(); }
+function pacRota(){ let best=null; S.pac.forEach(id=>{ const r=BY[id].rota; if(RANK[r]&&(!best||RANK[r]>RANK[best])) best=r; }); return best; }
+const codTxt=x=>x.normaTxt+' · '+x.cod, codCurto=x=>x.normaTxt.replace(/^RDC (\d+)\/\d+$/,'$1')+' '+(x.normaK==='359'?x.cod.replace(' · ','.'):x.cod.replace(/^Item /,'').replace(' · ',''));
+function startConcom(id){ if(!S.pac.includes(id)) S.pac.push(id); savePac(); openPick(); }
+function renderPacBar(){
+  const on=S.pac.length>0, b=$('#pacBar'); b.classList.toggle('on',on); if(!on) return;
+  const r=pacRota();
+  $('#pacN').textContent=S.pac.length;
+  $('#pacChips').innerHTML=S.pac.map((id,i)=>chipSel(BY[id],i,'data-pbrm')).join('');
+  $('#pacRotaTx').textContent='Principal: '+codCurto(BY[S.pac[0]])+(r?' · rota mais exigente: '+ROTA[r].label:'');
+  const tr=$('#tray'); b.style.bottom=tr.classList.contains('on')?`calc(${tr.offsetHeight+22}px + env(safe-area-inset-bottom))`:'';
+}
+$('#pacOpen').onclick=()=>{ renderPac(); $('#pacView').classList.add('on'); };
+$('#pacAddBar').onclick=openPick;
+$('#pacChips').addEventListener('click',ev=>{ const b=ev.target.closest('[data-pbrm]'); if(b){ ev.stopPropagation(); pacRm(b.dataset.pbrm); return; } $('#pacOpen').click(); });
+$('#pacClose').onclick=()=>$('#pacView').classList.remove('on');
+$('#pacView').addEventListener('click',ev=>{ if(ev.target.id==='pacView') $('#pacView').classList.remove('on'); });
+
+/* seletor */
+function openPick(){ $('#pickQ').value=''; renderPick(); $('#pacPick').classList.add('on'); if(!matchMedia('(pointer:coarse)').matches) setTimeout(()=>$('#pickQ').focus(),50); }
+function closePick(){ $('#pacPick').classList.remove('on'); }
+$('#pickClose').onclick=closePick;
+$('#pacPick').addEventListener('click',ev=>{ if(ev.target.id==='pacPick') closePick(); });
+let ptm=null; $('#pickQ').addEventListener('input',()=>{ clearTimeout(ptm); ptm=setTimeout(renderPick,90); });
+function buscaPick(q){
+  const ch=codeHits(q,ENQ); if(ch) return ch.list;
+  const tk=tokens(q).filter(t=>ENQ.some(x=>x.hay.indexOf(t)>=0)); if(!tk.length) return [];
+  let res=ENQ.map(x=>({x,...score(x,tk)})); let full=res.filter(r=>r.all); if(!full.length) full=res.filter(r=>r.hit>0);
+  return full.sort((a,b)=>(b.hit-a.hit)||(b.sc-a.sc)).map(r=>r.x);
+}
+function renderPick(){
+  const main=S.pac[0]&&BY[S.pac[0]], q=$('#pickQ').value.trim();
+  $('#pickCtx').innerHTML=main?`Principal: <b style="font-family:var(--mono);color:var(--navy)">${esc(codTxt(main))}</b> — ${esc(main.desc)}${S.pac.length>1?` · <b>${S.pac.length}</b> no pacote`:''}
+    ${main.concom.length?`<div class="cc"><b>A norma permite concomitantemente:</b> ${esc(main.concom.join(' '))}</div>`:'<div class="cc">A matriz não traz texto de concomitância para a principal — confira a norma.</div>'}`:'Escolha as mudanças da petição.';
+  let list, lbl;
+  if(q){ list=buscaPick(q).slice(0,40); lbl=list.length?`${list.length} resultado${list.length===1?'':'s'}`:'Nada encontrado — tente outro termo ou código'; }
+  else { const sib=main&&ITENS[main.item]?ITENS[main.item].ids.map(i=>BY[i]).filter(x=>x.id!==main.id):[]; list=sib; lbl=sib.length?'Sugestão: outras variantes do mesmo item':'Digite para buscar'; }
+  $('#pickRes').innerHTML=`<div class="pick-lbl">${lbl}</div>`+list.map(x=>{ const inP=S.pac.includes(x.id);
+    return `<div class="pk${inP?' in':''}"><div class="tx"><div class="c">${esc(codTxt(x))}</div>${x.parentDesc?`<div class="pd">${esc(x.parentDesc)}</div>`:''}${esc(x.desc)}</div>
+      <div class="side2">${inP?numB(S.pac.indexOf(x.id)):''}${pillRota(x.rota)}${inP?(x.id===S.pac[0]?'<span class="pill lite">principal</span>':`<button class="btn" data-prm="${x.id}">✓ Remover</button>`):`<button class="btn pri" data-padd="${x.id}">+ Adicionar</button>`}</div></div>`; }).join('');
+}
+$('#pickRes').addEventListener('click',ev=>{ const a=ev.target.closest('[data-padd]'); if(a){ pacAdd(a.dataset.padd); return; } const r=ev.target.closest('[data-prm]'); if(r) pacRm(r.dataset.prm); });
+
+/* visão consolidada */
+function pacDocs(){
+  const m=new Map();
+  S.pac.forEach(id=>{ const x=BY[id]; x.docs.forEach(d=>{ const k=norm(d).replace(/\s+/g,' ').trim(); if(!m.has(k)) m.set(k,{t:d,who:[]}); const e=m.get(k); if(!e.who.includes(x)) e.who.push(x); }); });
+  return [...m.values()];
+}
+function renderPac(){
+  const xs=S.pac.map(i=>BY[i]);
+  if(!xs.length){ $('#pacBody').innerHTML='<div class="disclaimer">Pacote vazio. Abra um enquadramento e toque em <b>⊕ Concomitante</b>.</div>'; return; }
+  const r=pacRota(), de=r?xs.filter(x=>x.rota===r):[], docs=pacDocs(), soma=xs.reduce((a,x)=>a+x.docs.length,0), semDocs=xs.filter(x=>!x.docs.length);
+  $('#pacBody').innerHTML=`
+    <div class="pac-acts"><button class="btn pri" id="pacAdd2">+ Adicionar mudança</button><button class="btn pri" data-pa="share">↗ Compartilhar</button><button class="btn" data-pa="copy">Copiar pacote</button><button class="btn" data-pa="link">Copiar link do pacote</button><button class="btn" data-pa="clear">Limpar pacote</button></div>
+    <div class="rota-box ${r||'varia'}"><div class="big">${r?esc(ROTA[r].label):'Rota: ver norma'}</div>
+      <div class="what">${r?`Rota mais exigente entre as ${xs.length} mudanças (${de.map(x=>esc(codCurto(x))).join(', ')}). Em petição conjunta, prevalece a de maior exigência — confirme na norma.`:'Não foi possível definir a rota a partir da matriz.'}</div></div>
+    <div class="pac-warn">⚠ Confira se cada mudança adicional está prevista como <b>concomitante</b> na norma da principal (ou de cada assunto). O que não estiver previsto pode exigir petição separada.</div>
+    <div class="blk"><h4>Mudanças <span class="cnt">${xs.length}</span></h4>
+      ${xs.map((x,i)=>`<div class="mud r-${x.rota}">${numB(i)}<div class="tx" data-go="${x.id}"><div class="c">${esc(codTxt(x))}${chave(x)!==x.desc?` · <span style="font-family:var(--font);font-weight:600">${esc(chave(x))}</span>`:''}</div>${x.parentDesc?`<div class="pd" style="color:var(--muted);font-size:calc(12px*var(--fs,1))">${esc(x.parentDesc)}</div>`:''}<b>${esc(x.desc)}</b>
+        <div class="tags">${i===0?'<span class="main">PRINCIPAL</span>':`<button class="lnkb" data-pmain="${x.id}">tornar principal</button>`}${pillRota(x.rota)}${pillPorte(x)}<span class="pill lite">${x.docs.length} docs</span></div></div>
+        <button class="rm" data-prm2="${x.id}" aria-label="Remover do pacote">×</button></div>`).join('')}
+    </div>
+    <div class="blk"><h4>Concomitâncias previstas na norma</h4>
+      ${xs.map(x=>`<div class="grpcond">${numB(S.pac.indexOf(x.id))} <b>${esc(codCurto(x))}</b> <span style="color:var(--muted);font-size:calc(12px*var(--fs,1))">${esc(chave(x))}</span><div class="note concom" style="margin-top:4px">${x.concom.length?esc(x.concom.join(' ')):'<span style="color:var(--muted)">Sem texto de concomitância na matriz — confira a norma.</span>'}</div></div>`).join('')}
+    </div>
+    <div class="blk"><h4>Documentos consolidados <span class="cnt">${docs.length}</span><span class="act" style="font-size:calc(11px*var(--fs,1));color:var(--muted);text-transform:none;letter-spacing:0">${soma} no total · repetidos unidos</span></h4>
+      ${docs.length?`<ol class="docs">${docs.map(d=>`<li><span>${esc(d.t)}<span class="who">${d.who.map(x=>`<span title="${esc(chave(x))}">${S.pac.indexOf(x.id)+1}·${esc(codCurto(x))}</span>`).join('')}</span></span></li>`).join('')}</ol>`:''}
+      ${semDocs.length?`<div class="empty-docs" style="margin-top:8px">Sem documentos detalhados na matriz: ${semDocs.map(x=>esc(codCurto(x))).join(', ')} — consulte a norma.</div>`:''}
+    </div>
+    ${xs.some(x=>x.cond.length)?`<div class="blk"><h4>Condições (gate) por mudança</h4>${xs.filter(x=>x.cond.length).map(x=>`<div class="grpcond">${numB(S.pac.indexOf(x.id))} <b>${esc(codCurto(x))}</b> <span style="color:var(--muted);font-size:calc(12px*var(--fs,1))">${esc(chave(x))}</span><ul>${x.cond.map(c=>`<li>${esc(c)}</li>`).join('')}</ul></div>`).join('')}</div>`:''}
+    ${xs.some(x=>x.condic.length)?`<div class="blk"><h4>Condicionantes</h4>${xs.filter(x=>x.condic.length).map(x=>`<div class="grpcond">${numB(S.pac.indexOf(x.id))} <b>${esc(codCurto(x))}</b> <span style="color:var(--muted);font-size:calc(12px*var(--fs,1))">${esc(chave(x))}</span><div class="note condic" style="margin-top:4px">${esc(x.condic.join(' '))}</div></div>`).join('')}</div>`:''}
+    <div class="d-foot">Orientação — a decisão regulatória é do analista; confira sempre a norma vigente. Consultor de Enquadramentos · By: Rodolfo Ortigara</div>`;
+}
+function pacLink(){ return SITE_URL+'#pac='+S.pac.join(','); }
+function pacTexto(){
+  const xs=S.pac.map(i=>BY[i]), r=pacRota(), docs=pacDocs(), L=[];
+  L.push('📋 Petição com mudanças concomitantes','');
+  xs.forEach((x,i)=>L.push(`${i+1}. ${i===0?'★ Principal':'+ Concomitante'}: ${codTxt(x)} — ${x.parentDesc?x.parentDesc+' — ':''}${x.desc} [${ROTA[x.rota].label}]`));
+  L.push('', `Rota mais exigente: ${r?ROTA[r].label:'ver norma'} (orientativo — confirme na norma)`);
+  L.push('', `Documentos consolidados (${docs.length}):`);
+  docs.forEach((d,i)=>L.push(`${i+1}. ${d.t} [mudança ${d.who.map(x=>S.pac.indexOf(x.id)+1).join(', ')}]`));
+  const sd=xs.filter(x=>!x.docs.length); if(sd.length) L.push(`(sem documentos detalhados: ${sd.map(codCurto).join(', ')} — ver norma)`);
+  const cc=xs.filter(x=>x.concom.length); if(cc.length){ L.push('','Concomitâncias previstas na norma:'); cc.forEach(x=>L.push(`• (${S.pac.indexOf(x.id)+1}) ${codCurto(x)}: ${x.concom.join(' ')}`)); }
+  const cd=xs.filter(x=>x.cond.length); if(cd.length){ L.push('','Condições:'); cd.forEach(x=>x.cond.forEach(c=>L.push(`☐ (${S.pac.indexOf(x.id)+1}) ${c}`))); }
+  const cn=xs.filter(x=>x.condic.length); if(cn.length){ L.push('','Condicionantes:'); cn.forEach(x=>L.push(`• (${S.pac.indexOf(x.id)+1}) ${codCurto(x)}: ${x.condic.join(' ')}`)); }
+  L.push('','────────────────────','Orientação — a decisão regulatória é do analista; confira a norma vigente.','Consultor de Enquadramentos · By: Rodolfo Ortigara',pacLink());
+  return L.join('\n');
+}
+$('#pacBody').addEventListener('click',ev=>{
+  const t=ev.target;
+  if(t.closest('#pacAdd2')){ openPick(); return; }
+  const a=t.closest('[data-pa]'); if(a){ const k=a.dataset.pa;
+    if(k==='share') compartilhar('Petição com mudanças concomitantes', pacTexto());
+    if(k==='copy') copy(pacTexto(),'Pacote copiado');
+    if(k==='link') copy(pacLink(),'Link do pacote copiado');
+    if(k==='clear'){ if(confirm('Limpar o pacote de mudanças concomitantes?')){ S.pac=[]; savePac(); $('#pacView').classList.remove('on'); } }
+    return; }
+  const m=t.closest('[data-pmain]'); if(m){ pacMain(m.dataset.pmain); return; }
+  const rm=t.closest('[data-prm2]'); if(rm){ pacRm(rm.dataset.prm2); if(!S.pac.length) $('#pacView').classList.remove('on'); return; }
+  const go=t.closest('[data-go]'); if(go){ $('#pacView').classList.remove('on'); open(go.dataset.go); }
+});
+
+/* ---------- compartilhar ----------
+   Usa a janela de compartilhar do próprio celular (WhatsApp, Teams, e-mail…). O texto já termina com o
+   link que abre o app exatamente na mesma tela. Sem essa janela (ex.: alguns computadores) → copia. */
+function compartilhar(titulo,texto){
+  if(navigator.share){ navigator.share({title:titulo,text:texto}).catch(err=>{ if(err&&err.name!=='AbortError') copy(texto,'Texto e link copiados'); }); }
+  else copy(texto,'Texto e link copiados — cole onde quiser');
+}
+function cmpLink(){ return SITE_URL+'#cmp='+S.cmp.join(','); }
+function cmpTexto(){
+  const xs=S.cmp.map(i=>BY[i]), L=[], all=d=>xs.every(x=>x.docs.includes(d)), tag=x=>`(${xs.indexOf(x)+1})`;
+  L.push('📊 Comparação de enquadramentos','');
+  xs.forEach((x,i)=>L.push(`${i+1}. ${codTxt(x)} — ${x.parentDesc?x.parentDesc+' — ':''}${x.desc}`));
+  L.push('','ROTA'); xs.forEach(x=>L.push(`${tag(x)} ${ROTA[x.rota].label}`));
+  if(xs.some(x=>x.porte!=='nd')){ L.push('','PORTE'); xs.forEach(x=>L.push(`${tag(x)} ${x.porte!=='nd'?PORTES.find(p=>p.k===x.porte).label:'—'}`)); }
+  if(xs.some(x=>x.cond.length)){ L.push('','CONDIÇÕES'); xs.forEach(x=>{ if(x.cond.length) x.cond.forEach(c=>L.push(`${tag(x)} ☐ ${c}`)); }); }
+  const comuns=xs[0].docs.filter(all);
+  L.push('','DOCUMENTOS');
+  if(comuns.length){ L.push('Comuns a todos:'); comuns.forEach(d=>L.push('• '+d)); }
+  xs.forEach(x=>{ const so=x.docs.filter(d=>!all(d)); L.push(`${tag(x)} ${comuns.length?'Somente nesta':'Documentos'} (${so.length}):`); so.length?so.forEach(d=>L.push('• '+d)):L.push(x.docs.length?'• (nenhum além dos comuns)':'• (não detalhados — ver norma)'); });
+  if(xs.some(x=>x.concom.length)){ L.push('','CONCOMITÂNCIAS'); xs.forEach(x=>{ if(x.concom.length) L.push(`${tag(x)} ${x.concom.join(' ')}`); }); }
+  if(xs.some(x=>x.condic.length)){ L.push('','CONDICIONANTES'); xs.forEach(x=>{ if(x.condic.length) L.push(`${tag(x)} ${x.condic.join(' ')}`); }); }
+  L.push('','────────────────────','Orientação — a decisão regulatória é do analista; confira a norma vigente.','Consultor de Enquadramentos · By: Rodolfo Ortigara',cmpLink());
+  return L.join('\n');
+}
+$('#cmpShare').onclick=()=>compartilhar('Comparação de enquadramentos',cmpTexto());
 
 /* ---------- utilidades ---------- */
 function toast(t){ const el=$('#toast'); el.textContent=t; el.classList.add('on'); clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove('on'),1800); }
@@ -810,11 +1021,11 @@ $('#clr').onclick=()=>{ $('#q').value=''; $('#q').dispatchEvent(new Event('input
 document.querySelectorAll('[data-ex]').forEach(b=>b.onclick=()=>{ $('#q').value=b.dataset.ex; $('#q').dispatchEvent(new Event('input')); });
 document.addEventListener('keydown',ev=>{
   if(ev.key==='/' && document.activeElement!==$('#q') && !/input|textarea/i.test(document.activeElement.tagName)){ ev.preventDefault(); $('#q').focus(); }
-  if(ev.key==='Escape'){ if($('#ovl').classList.contains('on')) $('#ovl').classList.remove('on'); else if(S.sel) close(); }
+  if(ev.key==='Escape'){ if($('#pacPick').classList.contains('on')) closePick(); else if($('#pacView').classList.contains('on')) $('#pacView').classList.remove('on'); else if($('#ovl').classList.contains('on')) $('#ovl').classList.remove('on'); else if(S.sel) close(); }
 });
 window.addEventListener('resize',syncHdr);
 
-function renderAll(){ renderFilters(); renderList(); renderHome(); renderDetail(); renderTray(); syncHdr(); }
+function renderAll(){ renderFilters(); renderList(); renderHome(); renderDetail(); renderTray(); renderPacBar(); syncHdr(); }
 
 /* ---------- start ---------- */
 const nIt=MATRIZ_ENQ.length;
@@ -822,6 +1033,8 @@ $('#stats').innerHTML=`<b>${ENQ.length}</b> enquadramentos<br>${nIt} itens · 3 
 $('#baseinfo').textContent=`${nIt} itens / ${ENQ.length} enquadramentos · versão de ${VERSAO_BASE}`;
 renderAll();
 const h=decodeURIComponent(location.hash.slice(1)); if(BY[h]) open(h,true);
+else if(h.indexOf('cmp=')===0){ const ids=h.slice(4).split(',').filter(i=>BY[i]).slice(0,4); if(ids.length){ S.cmp=ids; renderTray(); renderList(); history.replaceState(null,'',location.pathname+location.search); if(ids.length>1) openCmp(); } }
+else if(h.indexOf('pac=')===0){ const ids=h.slice(4).split(',').filter(i=>BY[i]); if(ids.length){ S.pac=ids; savePac(); history.replaceState(null,'',location.pathname+location.search); $('#pacOpen').click(); } }
 window.__ENQ=ENQ; // inspeção/depuração
 
 /* ---------- tamanho da fonte ---------- */
