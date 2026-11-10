@@ -195,7 +195,16 @@
   /* ---------- convite para instalar (1º acesso no celular) ---------- */
   .install{position:fixed;inset:0;z-index:80;background:rgba(10,15,40,.5);display:none;align-items:flex-end;justify-content:center}
   .install.on{display:flex}
-  .rep{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;border-radius:999px;padding:6px 12px;font-size:calc(12.5px*var(--fs,1));font-weight:600}
+  .fsz{margin-left:auto;position:relative;flex:none}
+  .fsz > button{display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;border-radius:999px;min-width:40px;height:32px;padding:0 10px;font-weight:700;font-size:14px;font-family:Georgia,serif}
+  .fsz > button:hover,.fsz.on > button{background:rgba(255,255,255,.25)}
+  .fspop{position:absolute;right:0;top:calc(100% + 8px);background:#fff;color:var(--ink);border-radius:14px;box-shadow:var(--shadow-lg);padding:8px;display:none;align-items:center;gap:6px;z-index:70;white-space:nowrap}
+  .fsz.on .fspop{display:flex}
+  .fspop button{width:46px;height:42px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--navy);font-weight:700;font-family:Georgia,serif}
+  .fspop button:disabled{opacity:.35}
+  .fspop .a1{font-size:14px} .fspop .a2{font-size:20px}
+  .fspop .v{min-width:52px;text-align:center;font-size:13px;color:var(--gray);font-variant-numeric:tabular-nums;cursor:pointer}
+  .rep{margin-left:8px;flex:none;display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;border-radius:999px;padding:6px 12px;font-size:calc(12.5px*var(--fs,1));font-weight:600}
   .rep:hover{background:rgba(255,255,255,.22)}
   .rep-ctx{background:var(--soft);border-radius:10px;padding:8px 10px;font-size:calc(13px*var(--fs,1));margin:4px 0 12px}
   .rep-ctx b{font-family:var(--mono);color:var(--navy)}
@@ -317,6 +326,8 @@
         <div class="sub">Pós-registro ANVISA · RDC 73/2016 · RDC 443/2020 · RDC 359/2020</div>
         <div class="by">By: Rodolfo Ortigara</div>
       </div>
+      <div class="fsz" id="fsz"><button id="fsBtn" aria-label="Tamanho da fonte" aria-expanded="false" title="Tamanho da fonte">Aa</button>
+        <div class="fspop" role="group" aria-label="Tamanho da fonte"><button class="a1" id="fsDown" aria-label="Diminuir fonte">A−</button><span class="v" id="fsVal" title="Voltar ao padrão">100%</span><button class="a2" id="fsUp" aria-label="Aumentar fonte">A+</button></div></div>
       <button class="rep" id="repTop" aria-label="Reportar erro ou divergência">⚑ <span>Reportar erro</span></button>
       <div class="stats" id="stats"></div>
     </div>
@@ -383,6 +394,10 @@ const MATRIZ_ENQ = [{"id":"443a","grupo":"Métodos, testes e limites (RDC 443)",
 (function(){
 'use strict';
 const VERSAO_BASE='10/11/2026';
+/* tamanho da fonte (por pessoa, guardado no navegador) */
+const FS_STEPS=[0.85,0.92,1,1.1,1.2,1.35,1.5];
+function fsGet(){ try{ const v=parseFloat(localStorage.getItem('consultorEnq.fs')); return FS_STEPS.includes(v)?v:1; }catch(_){ return 1; } }
+document.documentElement.style.setProperty('--fs',fsGet());
 const REPORT_EMAIL='';                      // e-mail que recebe os relatos (vazio = só GitHub/copiar)
 const REPORT_REPO='rodolfoortigara-gif/consultor-enquadramentos';
 const $=s=>document.querySelector(s);
@@ -755,6 +770,25 @@ $('#baseinfo').textContent=`${nIt} itens / ${ENQ.length} enquadramentos, atualiz
 renderAll();
 const h=decodeURIComponent(location.hash.slice(1)); if(BY[h]) open(h,true);
 window.__ENQ=ENQ; // inspeção/depuração
+
+/* ---------- tamanho da fonte ---------- */
+(function(){
+  let fs=fsGet();
+  function apply(){
+    document.documentElement.style.setProperty('--fs',fs);
+    try{ localStorage.setItem('consultorEnq.fs',fs); }catch(_){}
+    $('#fsVal').textContent=Math.round(fs*100)+'%';
+    $('#fsDown').disabled=fs===FS_STEPS[0]; $('#fsUp').disabled=fs===FS_STEPS[FS_STEPS.length-1];
+    syncHdr();
+  }
+  const step=d=>{ const i=FS_STEPS.indexOf(fs); fs=FS_STEPS[Math.max(0,Math.min(FS_STEPS.length-1,i+d))]; apply(); };
+  $('#fsBtn').onclick=ev=>{ ev.stopPropagation(); const on=!$('#fsz').classList.contains('on'); $('#fsz').classList.toggle('on',on); $('#fsBtn').setAttribute('aria-expanded',on); };
+  $('#fsDown').onclick=ev=>{ ev.stopPropagation(); step(-1); };
+  $('#fsUp').onclick=ev=>{ ev.stopPropagation(); step(1); };
+  $('#fsVal').onclick=ev=>{ ev.stopPropagation(); fs=1; apply(); };
+  document.addEventListener('click',ev=>{ if(!ev.target.closest('#fsz')) $('#fsz').classList.remove('on'); });
+  apply();
+})();
 
 /* ---------- reportar erro ---------- */
 (function(){
