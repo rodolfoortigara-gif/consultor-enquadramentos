@@ -407,6 +407,7 @@ const MATRIZ_ENQ = [{"id":"443a","grupo":"Métodos, testes e limites (RDC 443)",
 (function(){
 'use strict';
 const VERSAO_BASE='10/11/2026';
+const SITE_URL='https://rodolfoortigara-gif.github.io/consultor-enquadramentos/';   // links copiados sempre apontam p/ o site público
 /* tamanho da fonte (por pessoa, guardado no navegador) */
 const FS_STEPS=[0.85,0.92,1,1.1,1.2,1.35,1.5];
 function fsGet(){ try{ const v=parseFloat(localStorage.getItem('consultorEnq.fs')); return FS_STEPS.includes(v)?v:1; }catch(_){ return 1; } }
@@ -707,23 +708,33 @@ $('#detail').addEventListener('click',ev=>{
     case 'close': close(); break;
     case 'fav': toggleFav(x.id); break;
     case 'cmp': toggleCmp(x.id,!S.cmp.includes(x.id)); break;
-    case 'copydocs': copy(x.docs.map((t,i)=>(i+1)+'. '+t).join('\n'),'Lista de documentos copiada'); break;
-    case 'copymd': copy(md(x),'Resumo copiado (Markdown)'); break;
-    case 'link': copy(location.href.split('#')[0]+'#'+x.id,'Link copiado'); break;
+    case 'copydocs': copy(textoEnq(x,false),'Lista copiada (com cabeçalho e link)'); break;
+    case 'copymd': copy(textoEnq(x,true),'Resumo completo copiado'); break;
+    case 'link': copy(linkDe(x),'Link copiado'); break;
     case 'print': window.print(); break;
     case 'report': window.__report(x.id); break;
   }
 });
 $('#detail').addEventListener('change',ev=>{ const li=ev.target.closest('li'); if(li) li.classList.toggle('done',ev.target.checked); });
-function md(x){
-  const L=[`## ${x.normaTxt} · ${x.cod} — ${x.parentDesc?x.parentDesc+' — ':''}${x.desc}`,'',
-    `**Rota:** ${ROTA[x.rota].label}`+(x.porte!=='nd'?` · **Porte:** ${PORTES.find(p=>p.k===x.porte).label}`:'')];
-  if(x.obs.length){ L.push('','**Descrição:** '+x.obs.join(' ')); }
-  if(x.cond.length){ L.push('','**Condições:**'); x.cond.forEach(c=>L.push('- [ ] '+c)); }
-  L.push('','**Documentos:**'); if(x.docs.length) x.docs.forEach((d,i)=>L.push(`${i+1}. ${d}`)); else L.push('- (não detalhados na matriz — ver norma)');
-  if(x.concom.length){ L.push('','**Concomitâncias:** '+x.concom.join(' ')); }
-  if(x.condic.length){ L.push('','**Condicionantes:** '+x.condic.join(' ')); }
-  L.push('','_Fonte: '+x.normaFull+'. Orientação — a decisão regulatória é do analista; confira a norma vigente._','_Consultor de Enquadramentos · By: Rodolfo Ortigara_');
+/* Texto para copiar/compartilhar (texto simples: cola bem no WhatsApp, Teams e e-mail).
+   completo=false → "Copiar lista" (cabeçalho + rota + documentos); true → "Copiar resumo" (tudo da tela). */
+function linkDe(x){ return SITE_URL+'#'+x.id; }
+function textoEnq(x,completo){
+  const L=[], hr='────────────────────';
+  L.push(`📋 ${x.normaTxt} · ${x.cod}`);
+  if(x.parentDesc) L.push(x.parentDesc);
+  L.push(`▶ ${x.desc}`, '');
+  L.push(`Rota: ${ROTA[x.rota].label}`+(x.porte!=='nd'?` · Porte: ${PORTES.find(p=>p.k===x.porte).label}`:''));
+  L.push(ROTA[x.rota].what);
+  if(x.tipoTxt) L.push(x.tipoTxt);
+  if(completo && x.obs.length) L.push('', 'Descrição (norma):', x.obs.join(' '));
+  if(completo && x.cond.length){ L.push('', 'Condições:'); x.cond.forEach(c=>L.push('☐ '+c)); }
+  L.push('', `Documentos necessários (${x.docs.length}):`);
+  if(x.docs.length) x.docs.forEach((d,i)=>L.push(`${i+1}. ${d}`)); else L.push('(não detalhados — consultar a norma)');
+  if(completo && x.concom.length) L.push('', 'Concomitâncias permitidas:', x.concom.join(' '));
+  if(completo && x.condic.length) L.push('', 'Condicionantes:', x.condic.join(' '));
+  L.push('', hr, `Fonte: ${x.normaFull}. Orientação — a decisão regulatória é do analista; confira a norma vigente.`,
+         'Consultor de Enquadramentos · By: Rodolfo Ortigara', linkDe(x));
   return L.join('\n');
 }
 
@@ -818,7 +829,7 @@ window.__ENQ=ENQ; // inspeção/depuração
     return [
       'Tipo: '+tipo,
       'Enquadramento: '+(x?`${x.normaTxt} · ${x.cod} — ${x.parentDesc?x.parentDesc+' — ':''}${x.desc} (id ${x.id})`:'(geral)'),
-      x?'Link: '+location.href.split('#')[0]+'#'+x.id:'',
+      x?'Link: '+linkDe(x):'',
       S.q?'Busca usada: '+S.q:'',
       '', 'Descrição:', $('#repTxt').value.trim()||'(descreva aqui)',
       $('#repNome').value.trim()?'\nContato: '+$('#repNome').value.trim():'',
