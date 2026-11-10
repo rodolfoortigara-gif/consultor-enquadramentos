@@ -215,7 +215,8 @@
   .tray .its{display:flex;gap:6px;flex-wrap:wrap}
   .tray .it{background:rgba(255,255,255,.12);border-radius:8px;padding:2px 8px;font-size:calc(12px*var(--fs,1));font-family:var(--mono)}
   .tray .it button{background:none;border:0;color:#fff;opacity:.6;padding:0 0 0 4px}
-  .tray .btn{background:#fff}
+  .tray .btn{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
+  .tray .btn.pri{background:#fff;color:var(--ink);border-color:#fff;font-weight:600}
   .overlay{position:fixed;inset:0;background:rgba(10,15,40,.45);z-index:60;display:none;align-items:flex-start;justify-content:center;padding:30px 14px;overflow:auto}
   .overlay.on{display:flex}
   .modal{background:#fff;border-radius:16px;max-width:1300px;width:100%;box-shadow:var(--shadow-lg)}
@@ -263,6 +264,7 @@
   .install textarea{min-height:110px}
   .install input.nm{margin-top:8px}
   .install .bt.col{flex-direction:column}
+  .install .bt button.wa{background:#1FA855;border-color:#1FA855;color:#fff}
   .install .hint{font-size:calc(12px*var(--fs,1));color:var(--muted);margin-top:10px}
   .install .x{position:absolute;right:14px;top:14px;border:0;background:var(--soft);border-radius:50%;width:32px;height:32px;font-size:calc(18px*var(--fs,1));color:var(--navy)}
   .install .sheet{position:relative;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow:auto}
@@ -430,7 +432,7 @@
 <footer class="ft">Consultor de Enquadramentos · <b>By: Rodolfo Ortigara</b> · base: <span id="baseinfo"></span>. Não substitui a leitura da RDC. <button class="inst" id="instLink" hidden>Instalar no celular</button> Itens marcados como “porte” foram derivados da classificação indicada na matriz (Menor/Maior/HMP/notificação).</footer>
 
 <div class="tray" id="tray"><b style="font-size:calc(12px*var(--fs,1))">Comparar:</b><div class="its selrow" id="trayIts"></div><button class="btn pri" id="cmpGo">Comparar lado a lado</button><button class="btn" id="cmpClr">Limpar</button></div>
-<div class="overlay" id="ovl"><div class="modal"><div class="modal-h"><h2>Comparação de enquadramentos</h2><span class="sp"></span><button class="btn pri" id="cmpShare">↗ Compartilhar</button><button class="btn" id="ovlClose">Fechar</button></div><div class="legend">Nos documentos, <b>negrito</b> = exclusivo daquele enquadramento; cinza = comum a todos os comparados.</div><div class="cmp" id="cmpBody"></div></div></div>
+<div class="overlay" id="ovl"><div class="modal"><div class="modal-h"><h2>Comparação de enquadramentos</h2><span class="sp"></span><button class="btn pri" id="cmpShare">↗ Compartilhar</button><button class="btn" id="cmpErr">⚑ Erro</button><button class="btn" id="ovlClose">Fechar</button></div><div class="legend">Nos documentos, <b>negrito</b> = exclusivo daquele enquadramento; cinza = comum a todos os comparados.</div><div class="cmp" id="cmpBody"></div></div></div>
 <div class="pacbar" id="pacBar"><div class="pt"><b>Mudanças concomitantes: <span id="pacN"></span></b><small id="pacRotaTx"></small><div class="selrow" id="pacChips"></div></div><button class="btn ghost" id="pacAddBar">+ Adicionar</button><button class="btn" id="pacOpen">Ver pacote</button></div>
 <div class="overlay" id="pacPick"><div class="modal"><div class="modal-h"><h2>Adicionar mudança concomitante</h2><span class="sp"></span><button class="btn pri" id="pickClose">Concluir</button></div><div class="pick-b"><div class="pick-ctx" id="pickCtx"></div><input id="pickQ" type="search" autocomplete="off" placeholder="Busque por texto ou código (ex.: 6d, 2.5.1, 443e)"><div id="pickRes"></div></div></div></div>
 <div class="overlay" id="pacView"><div class="modal"><div class="modal-h"><h2>Petição com mudanças concomitantes</h2><span class="sp"></span><button class="btn pri" id="pacClose">Fechar</button></div><div class="pac-b" id="pacBody"></div></div></div>
@@ -443,6 +445,7 @@
   <textarea id="repTxt" placeholder="Descreva o que está errado e, se possível, o trecho correto da norma (artigo/anexo)."></textarea>
   <input class="nm" id="repNome" placeholder="Seu nome ou contato (opcional)" autocomplete="name">
   <div class="bt col">
+    <button class="pri wa" id="repWa" hidden>Enviar pelo WhatsApp</button>
     <button class="pri" id="repMail" hidden>Enviar por e-mail</button>
     <button id="repGh">Enviar pelo GitHub</button>
     <button id="repCopy">Copiar texto do relato</button>
@@ -462,12 +465,13 @@ const MATRIZ_ENQ = [{"id":"443a","grupo":"Métodos, testes e limites (RDC 443)",
 <script>
 (function(){
 'use strict';
-const VERSAO_BASE='10/11/2026 18:27';
+const VERSAO_BASE='10/11/2026 18:32';
 const SITE_URL='https://rodolfoortigara-gif.github.io/consultor-enquadramentos/';   // links copiados sempre apontam p/ o site público
 /* tamanho da fonte (por pessoa, guardado no navegador) */
 const FS_STEPS=[0.85,0.92,1,1.1,1.2,1.35,1.5];
 function fsGet(){ try{ const v=parseFloat(localStorage.getItem('consultorEnq.fs')); return FS_STEPS.includes(v)?v:1; }catch(_){ return 1; } }
 document.documentElement.style.setProperty('--fs',fsGet());
+const REPORT_WHATSAPP='5545991561045';                // nº WhatsApp (só dígitos, com 55+DDD) que recebe os relatos
 const REPORT_EMAIL='';                      // e-mail que recebe os relatos (vazio = só GitHub/copiar)
 const REPORT_REPO='rodolfoortigara-gif/consultor-enquadramentos';
 const $=s=>document.querySelector(s);
@@ -930,7 +934,7 @@ function renderPac(){
   if(!xs.length){ $('#pacBody').innerHTML='<div class="disclaimer">Pacote vazio. Abra um enquadramento e toque em <b>⊕ Concomitante</b>.</div>'; return; }
   const r=pacRota(), de=r?xs.filter(x=>x.rota===r):[], docs=pacDocs(), soma=xs.reduce((a,x)=>a+x.docs.length,0), semDocs=xs.filter(x=>!x.docs.length);
   $('#pacBody').innerHTML=`
-    <div class="pac-acts"><button class="btn pri" id="pacAdd2">+ Adicionar mudança</button><button class="btn pri" data-pa="share">↗ Compartilhar</button><button class="btn" data-pa="copy">Copiar pacote</button><button class="btn" data-pa="link">Copiar link do pacote</button><button class="btn" data-pa="clear">Limpar pacote</button></div>
+    <div class="pac-acts"><button class="btn pri" id="pacAdd2">+ Adicionar mudança</button><button class="btn pri" data-pa="share">↗ Compartilhar</button><button class="btn" data-pa="copy">Copiar pacote</button><button class="btn" data-pa="link">Copiar link do pacote</button><button class="btn" data-pa="clear">Limpar pacote</button><button class="btn" data-pa="err">⚑ Reportar erro</button></div>
     <div class="rota-box ${r||'varia'}"><div class="big">${r?esc(ROTA[r].label):'Rota: ver norma'}</div>
       <div class="what">${r?`Rota mais exigente entre as ${xs.length} mudanças (${de.map(x=>esc(codCurto(x))).join(', ')}). Em petição conjunta, prevalece a de maior exigência — confirme na norma.`:'Não foi possível definir a rota a partir da matriz.'}</div></div>
     <div class="pac-warn">⚠ Confira se cada mudança adicional está prevista como <b>concomitante</b> na norma da principal (ou de cada assunto). O que não estiver previsto pode exigir petição separada.</div>
@@ -969,6 +973,7 @@ $('#pacBody').addEventListener('click',ev=>{
   const t=ev.target;
   if(t.closest('#pacAdd2')){ openPick(); return; }
   const a=t.closest('[data-pa]'); if(a){ const k=a.dataset.pa;
+    if(k==='err'){ window.__report(); return; }
     if(k==='share') compartilhar('Petição com mudanças concomitantes', pacTexto());
     if(k==='copy') copy(pacTexto(),'Pacote copiado');
     if(k==='link') copy(pacLink(),'Link do pacote copiado');
@@ -1003,6 +1008,7 @@ function cmpTexto(){
   L.push('','────────────────────','Orientação — a decisão regulatória é do analista; confira a norma vigente.','Consultor de Enquadramentos · By: Rodolfo Ortigara',cmpLink());
   return L.join('\n');
 }
+$('#cmpErr').onclick=()=>window.__report();
 $('#cmpShare').onclick=()=>compartilhar('Comparação de enquadramentos',cmpTexto());
 
 /* ---------- utilidades ---------- */
@@ -1059,34 +1065,50 @@ window.__ENQ=ENQ; // inspeção/depuração
 /* ---------- reportar erro ---------- */
 (function(){
   const TIPOS=['Documento faltando/errado','Rota de implementação','Condição/concomitância','Texto desatualizado (RDC nova)','Busca não encontrou','Outro'];
-  let ctxId=null, tipo=TIPOS[0];
+  let tipo=TIPOS[0], tela=null;
   const tiposHtml=()=>TIPOS.map(t=>`<button class="chip${t===tipo?' on':''}" data-t="${esc(t)}">${esc(t)}</button>`).join('');
+  const ua=navigator.userAgent||'';
+  const aparelho=()=>(/iPhone|iPad|iPod/.test(ua)?'iPhone/iPad':/Android/.test(ua)?'Android':'Computador')+' · '+
+    (/EdgA|EdgiOS|Edg\//.test(ua)?'Edge':/SamsungBrowser/.test(ua)?'Samsung Internet':/Firefox|FxiOS/.test(ua)?'Firefox':/CriOS|Chrome/.test(ua)?'Chrome':/Safari/.test(ua)?'Safari':'navegador')+
+    (matchMedia('(display-mode: standalone)').matches||navigator.standalone?' (app instalado)':'');
+  /* captura a tela em que a pessoa estava quando tocou em "Erro" */
+  function telaAtual(id){
+    const lst=ids=>ids.map((i,n)=>`${n+1}. ${codTxt(BY[i])} — ${BY[i].desc}`);
+    if($('#pacView').classList.contains('on')&&S.pac.length) return {nome:'Pacote de mudanças concomitantes', curto:'Pacote ('+S.pac.map(i=>codCurto(BY[i])).join(' + ')+')', linhas:lst(S.pac), link:pacLink()};
+    if($('#ovl').classList.contains('on')&&S.cmp.length) return {nome:'Comparação de enquadramentos', curto:'Comparação ('+S.cmp.map(i=>codCurto(BY[i])).join(' × ')+')', linhas:lst(S.cmp), link:cmpLink()};
+    const x=BY[id||S.sel];
+    if(x) return {nome:'Enquadramento', curto:`${x.normaTxt} · ${x.cod}`, linhas:[`${codTxt(x)} — ${x.parentDesc?x.parentDesc+' — ':''}${x.desc}`, `Rota mostrada: ${ROTA[x.rota].label} · ${x.docs.length} documento${x.docs.length===1?'':'s'}`], link:linkDe(x)};
+    if(S.q){ const n=document.querySelectorAll('#results .card').length; return {nome:'Busca', curto:'Busca “'+S.q+'”', linhas:[`Termo buscado: “${S.q}” → ${n} resultado${n===1?'':'s'}`], link:SITE_URL}; }
+    return {nome:'Geral', curto:'Geral', linhas:[], link:SITE_URL};
+  }
   function texto(){
-    const x=ctxId&&BY[ctxId];
     return [
+      '⚑ Relato de erro — Consultor de Enquadramentos','',
       'Tipo: '+tipo,
-      'Enquadramento: '+(x?`${x.normaTxt} · ${x.cod} — ${x.parentDesc?x.parentDesc+' — ':''}${x.desc} (id ${x.id})`:'(geral)'),
-      x?'Link: '+linkDe(x):'',
-      S.q?'Busca usada: '+S.q:'',
-      '', 'Descrição:', $('#repTxt').value.trim()||'(descreva aqui)',
-      $('#repNome').value.trim()?'\nContato: '+$('#repNome').value.trim():'',
-      '', '— Base de '+VERSAO_BASE+' · '+navigator.userAgent.replace(/\s+/g,' ').slice(0,120)
+      'Tela: '+tela.nome, ...tela.linhas,
+      'Link: '+tela.link,
+      '', 'O que está errado:', $('#repTxt').value.trim()||'(descreva aqui)',
+      $('#repNome').value.trim()?'\nEnviado por: '+$('#repNome').value.trim():'',
+      '', '— versão '+VERSAO_BASE+' · '+aparelho()
     ].filter((l,i,a)=>l!==''||a[i-1]!=='').join('\n');
   }
-  const assunto=()=>{ const x=ctxId&&BY[ctxId]; return '[Consultor] '+tipo+(x?' — '+x.normaTxt+' · '+x.cod:''); };
+  const assunto=()=>'[Consultor] '+tipo+' — '+tela.curto;
+  const temCfg=v=>v && v.indexOf('__')!==0;
   function open(id){
-    ctxId=id||S.sel||null; const x=ctxId&&BY[ctxId];
-    $('#repCtx').innerHTML=x?`Sobre: <b>${esc(x.normaTxt)} · ${esc(x.cod)}</b> — ${esc(x.desc)}`:'Relato geral (abra um enquadramento antes para relatar sobre ele).';
+    tela=telaAtual(id);
+    $('#repCtx').innerHTML=`Tela: <b>${esc(tela.curto)}</b>${tela.linhas.length?`<div style="margin-top:4px;color:var(--gray);font-size:calc(12.5px*var(--fs,1))">${tela.linhas.map(esc).join('<br>')}</div>`:''}`;
     $('#repTipos').innerHTML=tiposHtml();
-    $('#repMail').hidden=!REPORT_EMAIL || REPORT_EMAIL.indexOf('__')===0;
+    $('#repWa').hidden=!temCfg(REPORT_WHATSAPP);
+    $('#repMail').hidden=!temCfg(REPORT_EMAIL);
     $('#rep').classList.add('on');
   }
   const close=()=>$('#rep').classList.remove('on');
   window.__report=open;
-  $('#repTop').onclick=()=>open();
+  $('#repTop').onclick=()=>open();  // (dentro do detalhe: botão próprio passa o id)
   $('#repX').onclick=close;
   $('#rep').addEventListener('click',ev=>{ if(ev.target.id==='rep') close(); });
   $('#repTipos').addEventListener('click',ev=>{ const b=ev.target.closest('[data-t]'); if(!b) return; tipo=b.dataset.t; $('#repTipos').innerHTML=tiposHtml(); });
+  $('#repWa').onclick=()=>{ window.open('https://wa.me/'+REPORT_WHATSAPP.replace(/\D/g,'')+'?text='+encodeURIComponent(texto()),'_blank','noopener'); };
   $('#repMail').onclick=()=>{ location.href='mailto:'+REPORT_EMAIL+'?subject='+encodeURIComponent(assunto())+'&body='+encodeURIComponent(texto()); };
   $('#repGh').onclick=()=>{ window.open('https://github.com/'+REPORT_REPO+'/issues/new?title='+encodeURIComponent(assunto())+'&body='+encodeURIComponent(texto()),'_blank','noopener'); };
   $('#repCopy').onclick=()=>copy(assunto()+'\n\n'+texto(),'Relato copiado — cole no e-mail ou mensagem');
