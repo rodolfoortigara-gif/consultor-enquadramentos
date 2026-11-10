@@ -260,12 +260,14 @@
   /* ---------- responsivo ---------- */
   @media (max-width:1000px){
     .wrap.has-detail{grid-template-columns:minmax(0,1fr)}
-    .detail{position:fixed;inset:0;max-height:none;border-radius:0;z-index:50;top:0;align-self:stretch;justify-self:stretch;height:100vh;height:100dvh;border:0;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;animation:slideUp .18s ease-out}
+    /* celular/tablet: o detalhe vira uma PÁGINA normal (lista some) e rola com a rolagem nativa do navegador */
+    .detail{position:static;max-height:none;height:auto;overflow:visible;border-radius:0;border:0;box-shadow:none;animation:slideUp .18s ease-out}
     .d-head{padding-top:calc(12px + env(safe-area-inset-top))}
     .d-body{padding-bottom:calc(40px + env(safe-area-inset-bottom))}
     .d-close{display:none}
     .d-back{display:inline-flex;align-items:center;gap:4px;border:0;background:none;color:var(--navy);font-size:calc(16px*var(--fs,1));font-weight:600;padding:6px 0;margin:0 0 4px -2px}
-    body.lock{overflow:hidden}
+    body.lock header.top,body.lock .filters,body.lock .list,body.lock footer.ft{display:none!important}
+    body.lock .wrap{padding:0 0 calc(40px + env(safe-area-inset-bottom))}
     .brand .stats{display:none}
     .rep{padding:7px 11px;font-size:calc(12px*var(--fs,1))}
     .brand > div:nth-child(2){min-width:0}
@@ -633,9 +635,11 @@ $('#home').addEventListener('click',ev=>{ const b=ev.target.closest('[data-open]
 /* Histórico do navegador: abrir um enquadramento empilha um estado, assim o "voltar"
    do Android / gesto do iOS fecha o detalhe em vez de sair do app. */
 let pushed=false;
+try{ history.scrollRestoration='manual'; }catch(_){}
 function open(id,noHist,fromPop){
   if(!BY[id]) return;
   const wasOpen=!!S.sel;
+  if(!wasOpen) S.listY=window.scrollY||0;
   S.sel=id;
   if(!noHist){ S.hist=[id,...S.hist.filter(h=>h!==id)].slice(0,20); LS.set('hist',S.hist); }
   if(!fromPop && location.hash!=='#'+id){
@@ -643,12 +647,15 @@ function open(id,noHist,fromPop){
   }
   renderDetail(); renderList(); renderHome();
   $('#detail').scrollTop=0;
+  if(isNarrow()) window.scrollTo(0,0);
 }
+const isNarrow=()=>matchMedia('(max-width:1000px)').matches;
 function close(fromPop){
   if(!fromPop && pushed){ pushed=false; history.back(); return; }   // popstate fará o resto
   pushed=false; S.sel=null;
   if(location.hash) history.replaceState(null,'',location.pathname+location.search);
   renderDetail(); renderList(); renderHome();
+  if(isNarrow()) requestAnimationFrame(()=>window.scrollTo(0,S.listY||0));
 }
 window.addEventListener('popstate',()=>{ const id=decodeURIComponent(location.hash.slice(1)); if(BY[id]) open(id,true,true); else if(S.sel){ pushed=false; close(true); } });
 function renderDetail(){
