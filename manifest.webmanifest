@@ -3,7 +3,14 @@
   "short_name": "Enquadramentos",
   "description": "Consulta de enquadramentos de pós-registro ANVISA. By: Rodolfo Ortigara.",
   "lang": "pt-BR",
+  "id": "./",
   "start_url": "./",
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://rodolfoortigara-gif.github.io/consultor-enquadramentos/manifest.webmanifest"
+    }
+  ],
   "scope": "./",
   "display": "standalone",
   "orientation": "any",

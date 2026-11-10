@@ -193,7 +193,7 @@
   footer.ft{max-width:1400px;margin:0 auto;padding:0 20px 30px;font-size:calc(11.5px*var(--fs,1));color:var(--muted)}
   footer.ft .inst{border:0;background:none;color:var(--navy);text-decoration:underline;font-size:inherit;padding:0}
   /* ---------- convite para instalar (1º acesso no celular) ---------- */
-  .install{position:fixed;inset:0;z-index:80;background:rgba(10,15,40,.5);display:none;align-items:flex-end;justify-content:center}
+  .install{position:fixed;inset:0;z-index:80;background:rgba(10,15,40,.55);display:none;align-items:center;justify-content:center;padding:16px}
   .install.on{display:flex}
   .fsz{margin-left:auto;position:relative;flex:none}
   .fsz > button{display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;border-radius:999px;min-width:40px;height:32px;padding:0 10px;font-weight:700;font-size:14px;font-family:Georgia,serif}
@@ -216,8 +216,9 @@
   .install .bt.col{flex-direction:column}
   .install .hint{font-size:calc(12px*var(--fs,1));color:var(--muted);margin-top:10px}
   .install .x{position:absolute;right:14px;top:14px;border:0;background:var(--soft);border-radius:50%;width:32px;height:32px;font-size:calc(18px*var(--fs,1));color:var(--navy)}
-  .install .sheet{position:relative;max-height:92vh;overflow:auto}
-  .install .sheet{background:#fff;width:100%;max-width:480px;border-radius:20px 20px 0 0;padding:22px 20px calc(20px + env(safe-area-inset-bottom));box-shadow:var(--shadow-lg);animation:slideUp .22s ease-out}
+  .install .sheet{position:relative;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow:auto}
+  .install .sheet{background:#fff;width:100%;max-width:460px;border-radius:22px;padding:24px 22px 22px;box-shadow:0 20px 60px rgba(0,0,0,.35);animation:popIn .2s ease-out}
+  @keyframes popIn{from{transform:scale(.94);opacity:0}to{transform:none;opacity:1}}
   .install .hd{display:flex;gap:14px;align-items:center;margin-bottom:12px}
   .install .hd img{width:60px;height:60px;border-radius:14px}
   .install h3{margin:0;font-size:calc(18px*var(--fs,1))}
@@ -227,6 +228,15 @@
   .install .bt{display:flex;gap:10px;margin-top:16px}
   .install .bt button{flex:1;border-radius:12px;padding:13px;font-size:calc(15px*var(--fs,1));font-weight:600;border:1px solid var(--line);background:#fff;color:var(--ink)}
   .install .bt button.pri{background:var(--navy);border-color:var(--navy);color:#fff}
+  #inst .sheet{text-align:center;padding:30px 24px 24px}
+  #inst .hd{flex-direction:column;gap:12px;margin-bottom:6px}
+  #inst .hd img{width:88px;height:88px;border-radius:22px;box-shadow:0 6px 18px rgba(30,58,138,.35)}
+  #inst h3{font-size:calc(23px*var(--fs,1))}
+  #inst p{font-size:calc(16px*var(--fs,1));line-height:1.45}
+  #inst ol{text-align:left;font-size:calc(16.5px*var(--fs,1));line-height:1.8;background:var(--soft);border-radius:14px;padding:12px 14px 12px 34px;margin:16px 0 4px}
+  #inst .bt{flex-direction:column-reverse;gap:8px;margin-top:20px}
+  #inst .bt button{padding:16px;font-size:calc(17px*var(--fs,1))}
+  #inst .bt button#instNo{border:0;background:none;color:var(--muted);padding:10px;font-weight:500}
 
   /* ---------- toque (iOS/Android) ---------- */
   html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -249,7 +259,7 @@
   /* ---------- responsivo ---------- */
   @media (max-width:1000px){
     .wrap.has-detail{grid-template-columns:minmax(0,1fr)}
-    .detail{position:fixed;inset:0;max-height:none;border-radius:0;z-index:50;top:0;border:0;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;animation:slideUp .18s ease-out}
+    .detail{position:fixed;inset:0;max-height:none;border-radius:0;z-index:50;top:0;align-self:stretch;justify-self:stretch;height:100vh;height:100dvh;border:0;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;animation:slideUp .18s ease-out}
     .d-head{padding-top:calc(12px + env(safe-area-inset-top))}
     .d-body{padding-bottom:calc(40px + env(safe-area-inset-bottom))}
     .d-close{display:none}
@@ -852,17 +862,25 @@ window.__ENQ=ENQ; // inspeção/depuração
     $('#instGo').textContent=deferred?'Instalar':'Entendi';
     $('#inst').classList.add('on');
   }
-  function hide(){ $('#inst').classList.remove('on'); LS.set('instVisto',1); }
+  function hide(){ $('#inst').classList.remove('on'); try{ sessionStorage.setItem('consultorEnq.instAgoraNao','1'); }catch(_){} }
+  const marcaInstalado=()=>{ LS.set('instalado',1); $('#instLink').hidden=true; };
   $('#instNo').onclick=hide;
   $('#inst').addEventListener('click',ev=>{ if(ev.target.id==='inst') hide(); });
   $('#instGo').onclick=async()=>{
-    if(deferred){ deferred.prompt(); try{ await deferred.userChoice; }catch(_){} deferred=null; }
+    if(deferred){ deferred.prompt(); try{ const c=await deferred.userChoice; if(c&&c.outcome==='accepted') marcaInstalado(); }catch(_){} deferred=null; }
     hide();
   };
   $('#instLink').hidden=false; $('#instLink').onclick=show;
   window.addEventListener('beforeinstallprompt',ev=>{ ev.preventDefault(); deferred=ev; if($('#inst').classList.contains('on')) show(); });
-  window.addEventListener('appinstalled',()=>{ hide(); $('#instLink').hidden=true; toast('App instalado na tela inicial'); });
-  if(!LS.get('instVisto',0) && !location.hash) setTimeout(show,1200);   // 1º acesso (link direto p/ um item não é interrompido)
+  window.addEventListener('appinstalled',()=>{ hide(); marcaInstalado(); toast('App instalado na tela inicial'); });
+  // Aparece em TODO acesso pelo navegador enquanto o app não estiver instalado.
+  // "Agora não" só esconde até fechar o navegador (sessão). Já instalado = não aparece.
+  (async()=>{
+    if(LS.get('instalado',0)){ $('#instLink').hidden=true; return; }
+    try{ if(navigator.getInstalledRelatedApps){ const apps=await navigator.getInstalledRelatedApps(); if(apps&&apps.length){ marcaInstalado(); return; } } }catch(_){}
+    let agoraNao=false; try{ agoraNao=!!sessionStorage.getItem('consultorEnq.instAgoraNao'); }catch(_){}
+    if(!agoraNao) setTimeout(show,1000);
+  })();
 })();
 // Modo app instalado (PWA): só quando servido por http(s) e existir o sw.js ao lado.
 if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register('sw.js').catch(()=>{});
