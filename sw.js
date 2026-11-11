@@ -1,5 +1,5 @@
-// Service worker: cache offline. Versão 455a21c3d9 (10/11/2026 18:32)
-const CACHE='enq-455a21c3d9';
+// Service worker: cache offline. Versão c0f8322603 (11/11/2026 11:38)
+const CACHE='enq-c0f8322603';
 const FILES=['./','index.html','manifest.webmanifest','icon-180.png','icon-192.png','icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
