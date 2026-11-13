@@ -1,0 +1,22 @@
+Consultor de Enquadramentos — Pós-registro ANVISA
+© 2026 Rodolfo Ortigara. Todos os direitos reservados.
+
+PERMITIDO
+- Acessar e usar o app pelo endereço oficial:
+  https://rodolfoortigara-gif.github.io/consultor-enquadramentos/
+- Instalar o app no celular a partir desse endereço.
+- Compartilhar livremente o link do app, inclusive trechos e resumos gerados
+  pelos botões "Compartilhar", "Copiar resumo" e "Copiar link".
+
+NÃO PERMITIDO, sem autorização prévia e por escrito do autor
+- Copiar, reproduzir, modificar, adaptar, traduzir ou criar versões derivadas
+  do código-fonte, do design ou da base organizada (matriz de enquadramentos,
+  resumos, textos e ícones), no todo ou em parte.
+- Redistribuir, vender, sublicenciar ou hospedar o app ou partes dele em outro
+  endereço, sistema ou aplicativo.
+
+O texto das normas publicadas pela ANVISA é de domínio público; esta reserva de
+direitos se aplica ao código, à organização, aos resumos e à apresentação do app
+(Lei nº 9.609/1998 e Lei nº 9.610/1998).
+
+Pedidos de autorização: pelo botão "⚑ Erro / sugestão" dentro do app.
